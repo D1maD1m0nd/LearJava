@@ -117,8 +117,8 @@ public class Task {
         if(arrLen == 0){
             return false;
         }
-        int sumRight = 0;
-        int sumLeft = 0;
+        int sumRight;
+        int sumLeft;
         for (int i = 0; i < arrLen; i++) {
             sumRight = sumArrRight(arr, i);
             sumLeft = sumArrLeft(arr,i);
