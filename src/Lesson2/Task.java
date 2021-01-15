@@ -128,6 +128,13 @@ public class Task {
         }
         return false;
     }
+
+    /**
+     * Вычисление правой части массива с смещением
+     * @param arr целочисленный массив смещение
+     * @param bias смещение
+     * @return сумма правой части
+     */
     static int sumArrRight(int[] arr, int bias){
         int arrLen = arr.length;
         int sumRight = 0;
@@ -136,6 +143,12 @@ public class Task {
         }
         return sumRight;
     }
+    /**
+     * Вычисление левой части массива с смещением
+     * @param arr целочисленный массив смещение
+     * @param bias смещение
+     * @return сумма левой части
+     */
     static  int sumArrLeft(int[] arr, int bias){
         int arrLen = arr.length;
         int sumLeft = 0;
