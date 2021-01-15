@@ -17,6 +17,10 @@ public class Task {
         //4.Создать квадратный двумерный целочисленный массив (количество строк и столбцов одинаковое), и с помощью цикла(-ов) заполнить его диагональные элементы единицами;
         int[][] arr4 = new int[][]{{0,0,0,0,0,0}, {0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0}};
         writeOneDiagDataIntoArray(arr4);
+
+        //
+        int[] arr5 = new int[]{ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        searchMinMaxIntoArr(arr5);
     }
 
     /**
@@ -47,6 +51,10 @@ public class Task {
         }
     }
 
+    /**
+     * Умножает элементы на 2 , которые соответствуют условия arr[i] > 5(элементы меньше 6)
+     * @param arr целочисленный массив
+     */
     static void multiplyValueIntoArray(int[] arr){
         int arrLen = arr.length;
         for (int i = 0; i < arrLen; i++) {
@@ -57,6 +65,10 @@ public class Task {
         }
     }
 
+    /**
+     * Заполняет Квадратный массив по двум диагоналям
+     * @param arr двуммерный квадратный массив
+     */
     static void writeOneDiagDataIntoArray(int[][] arr){
         int arrLen1 = arr.length;
         int arrLen2 = arr[0].length;
@@ -71,5 +83,23 @@ public class Task {
 
             }
         }
+    }
+
+    /**
+     * Ищет минимальный и максимальный элемент массив
+     * @param arr массив целых чисел
+     */
+    static void searchMinMaxIntoArr(int[] arr){
+        int max = arr[0];
+        int min = arr[0];
+        for (int j : arr) {
+            if (j >= max) {
+                max = j;
+            }
+            if (j <= min) {
+                min = j;
+            }
+        }
+        System.out.println("Минимальный элемент массива: " + min + ", Максимальный элемент массива: " + max);
     }
 }
