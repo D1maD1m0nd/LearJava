@@ -19,8 +19,11 @@ public class Task {
         writeOneDiagDataIntoArray(arr4);
 
         //
-        int[] arr5 = new int[]{ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        int[] arr5 = new int[]{ 1, 1, 1, 2, 1};
         searchMinMaxIntoArr(arr5);
+
+        //
+        boolean b = checkBalance(arr5);
     }
 
     /**
@@ -101,5 +104,44 @@ public class Task {
             }
         }
         System.out.println("Минимальный элемент массива: " + min + ", Максимальный элемент массива: " + max);
+    }
+
+    /**
+     * Проверяет эквивалентность правой и левой части массива
+     * @param arr - целочисленный массив
+     * @return true для случая если сумма правой и левой части равны
+     */
+    static boolean checkBalance(int[] arr){
+        int arrLen = arr.length;
+        //Проверка на пустой массив
+        if(arrLen == 0){
+            return false;
+        }
+        int sumRight = 0;
+        int sumLeft = 0;
+        for (int i = 0; i < arrLen; i++) {
+            sumRight = sumArrRight(arr, i);
+            sumLeft = sumArrLeft(arr,i);
+            if(sumLeft == sumRight){
+                return true;
+            }
+        }
+        return false;
+    }
+    static int sumArrRight(int[] arr, int bias){
+        int arrLen = arr.length;
+        int sumRight = 0;
+        for (int i = 0; i < arrLen - bias; i++) {
+            sumRight += arr[i];
+        }
+        return sumRight;
+    }
+    static  int sumArrLeft(int[] arr, int bias){
+        int arrLen = arr.length;
+        int sumLeft = 0;
+        for (int i = arrLen - bias; i < arrLen; i++) {
+            sumLeft += arr[i];
+        }
+        return sumLeft;
     }
 }
