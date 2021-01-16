@@ -18,12 +18,22 @@ public class Task {
         int[][] arr4 = new int[][]{{0,0,0,0,0,0}, {0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0}};
         writeOneDiagDataIntoArray(arr4);
 
-        //
+        //5. ** Задать одномерный массив и найти в нем минимальный и максимальный элементы (без помощи интернета);
         int[] arr5 = new int[]{ 1, 1, 1, 2, 1};
         searchMinMaxIntoArr(arr5);
 
-        //
+        //6. Написать метод, в который передается не пустой одномерный целочисленный массив, метод должен вернуть true, если в массиве есть место, в котором сумма левой и правой части массива равны. Примеры: checkBalance([2, 2, 2, 1, 2, 2, || 10, 1]) → true, checkBalance([1, 1, 1, || 2, 1]) → true, граница показана символами ||, эти символы в массив не входят.
         boolean b = checkBalance(arr5);
+
+        //7.
+        int[] arr6 = new int[]{ 6, 1, 3, 5};
+
+        biasElemArr(arr6,-2);
+        //biasElemArr(arr7,-2);
+        //biasElemArr(arr8,2);
+
+
+
     }
 
     /**
@@ -156,5 +166,56 @@ public class Task {
             sumLeft += arr[i];
         }
         return sumLeft;
+    }
+
+    static void biasElemArr(int[] arr, int n){
+       if(n > 0){
+           biasRight(arr,n);
+       }
+       else{
+           biasLeft(arr,n);
+       }
+
+    }
+    static void biasRight(int[] arr,int n){
+        int arrLen = arr.length;
+        int buf;
+        if(n > arrLen - 1){
+            return;
+        }
+        for (int i = 0; i < arrLen-1; i++) {
+            buf = arr[0];
+            if(i+n < arrLen){
+
+                arr[0] = arr[i + n];
+                arr[i + n] = buf;
+            }
+            if(i+n == arrLen){
+
+                arr[0] = arr[arrLen - n];
+                arr[arrLen - n] = buf;
+            }
+        }
+    }
+
+    static void biasLeft(int[] arr, int n) {
+        int arrLen = arr.length;
+        int buf;
+        if (n > arrLen - 1) {
+            return;
+        }
+        for (int i = 0; i > arrLen - 1; i--) {
+            buf = arr[arrLen - 1];
+            if (i + n < arrLen) {
+
+                arr[arrLen - 1] = arr[i - n];
+                arr[i - n] = buf;
+            }
+            if (i + n == arrLen) {
+
+                arr[arrLen - 1] = arr[arrLen - n];
+                arr[arrLen - n] = buf;
+            }
+        }
     }
 }
