@@ -26,9 +26,13 @@ public class Task {
         boolean b = checkBalance(arr5);
 
         //7.
-        int[] arr6 = new int[]{ 6, 1, 3, 5};
-
+        int[] arr6 = new int[]{3, 5, 6, 1};
+        // крч это старый метод и он не рабочий, так как я наконец-то догал
+        // что циклический сдвиг это каждый раз двигать все элементы на 1, а не сразу на n-_- ШОК
         biasElemArr(arr6,-2);
+
+        int[]arr7 = new int[]{1,2,3};
+        biasRightNew(arr7,1);
         //biasElemArr(arr7,-2);
         //biasElemArr(arr8,2);
 
@@ -168,6 +172,10 @@ public class Task {
         return sumLeft;
     }
 
+    /**
+     *
+     * старый метод вычисления сдвига
+     */
     static void biasElemArr(int[] arr, int n){
        if(n > 0){
            biasRight(arr,n);
@@ -204,18 +212,41 @@ public class Task {
         if (n > arrLen - 1) {
             return;
         }
-        for (int i = 0; i > arrLen - 1; i--) {
+        for (int i = arrLen -1; i >= 0; i--) {
             buf = arr[arrLen - 1];
-            if (i + n < arrLen) {
+            if (i + n >= 0) {
 
-                arr[arrLen - 1] = arr[i - n];
-                arr[i - n] = buf;
+                arr[arrLen - 1] = arr[i + n];
+                arr[i + n] = buf;
             }
-            if (i + n == arrLen) {
+            if (i + n  < 0) {
 
-                arr[arrLen - 1] = arr[arrLen - n];
-                arr[arrLen - n] = buf;
+                arr[arrLen - 1] = arr[arrLen + n];
+                arr[arrLen + n] = buf;
             }
         }
+    }
+
+    static void biasElemArrNew(int[] arr, int n){
+
+    }
+    static void biasRightNew(int[] arr,int n){
+        int buf = 0;
+        int arrLen = arr.length;
+
+        for (int i = 0; i < n; i++) {
+            // убираем первый элемент в буфер, а на его место ставим хвостовой элемент
+            buf = arr[0];
+            arr[0] = arr[arr.length - 1];
+
+            // циклично сдвигаем весь массив
+            for (int j = 1; j < arr.length - 1; j++) {
+                arr[arr.length - j] = arr[arr.length - j - 1];
+            }
+
+            // ставим буферный элемент в 1 ячейку
+            arr[1] = buf;
+        }
+
     }
 }
