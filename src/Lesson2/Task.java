@@ -25,14 +25,17 @@ public class Task {
         //6. Написать метод, в который передается не пустой одномерный целочисленный массив, метод должен вернуть true, если в массиве есть место, в котором сумма левой и правой части массива равны. Примеры: checkBalance([2, 2, 2, 1, 2, 2, || 10, 1]) → true, checkBalance([1, 1, 1, || 2, 1]) → true, граница показана символами ||, эти символы в массив не входят.
         boolean b = checkBalance(arr5);
 
-        //7.
+        //7. Я не осилил, ниже реализован мой тетод, но работает нормально, только по длинна меньше сдвига плюс текущий индекс
         int[] arr6 = new int[]{3, 5, 6, 1};
-        // крч это старый метод и он не рабочий, так как я наконец-то догал
-        // что циклический сдвиг это каждый раз двигать все элементы на 1, а не сразу на n-_- ШОК
+        // это моя реализация метода, но он нормально работает для сдвига вправо, но и то не всегда
         biasElemArr(arr6,-2);
 
+
+        //эти методы я нашел в интернете, как до них дошли люди я не понимаю
         int[]arr7 = new int[]{1,2,3};
         biasRightNew(arr7,1);
+        int[]arr8 = new int[]{ 3, 5, 6, 1};
+        biasLeftNew(arr8, -2);
         //biasElemArr(arr7,-2);
         //biasElemArr(arr8,2);
 
@@ -227,9 +230,6 @@ public class Task {
         }
     }
 
-    static void biasElemArrNew(int[] arr, int n){
-
-    }
     static void biasRightNew(int[] arr,int n){
         int buf = 0;
         int arrLen = arr.length;
@@ -248,5 +248,19 @@ public class Task {
             arr[1] = buf;
         }
 
+    }
+    static void biasLeftNew(int[] arr,int n){
+        int buf = 0;
+        int arrLen = arr.length;
+        for (int i = 0; i > n; i--) {
+            buf = arr[arr.length - 1];
+            arr[arr.length - 1] = arr[0];
+
+            for (int j = 1; j < arr.length - 1; j++) {
+                arr[j - 1] = arr[j];
+            }
+
+            arr[arr.length - 2] = buf;
+        }
     }
 }
