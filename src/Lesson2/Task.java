@@ -31,9 +31,9 @@ public class Task {
         biasElemArr(arr6,-2);
 
 
-        int[]arr7 = new int[]{1,2,3};
+        int[]arr7 = new int[]{ 1, 2, 3, 4, 5, 6, 7};
         biasRightNew(arr7,1);
-        int[]arr8 = new int[]{ 3, 5, 6, 1};
+        int[]arr8 = new int[]{  1, 2, 3, 4, 5, 6, 7};
         biasLeftNew(arr8, -2);
         //biasElemArr(arr7,-2);
         //biasElemArr(arr8,2);
