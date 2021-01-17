@@ -31,7 +31,6 @@ public class Task {
         biasElemArr(arr6,-2);
 
 
-        //эти методы я нашел в интернете, как до них дошли люди я не понимаю
         int[]arr7 = new int[]{1,2,3};
         biasRightNew(arr7,1);
         int[]arr8 = new int[]{ 3, 5, 6, 1};
