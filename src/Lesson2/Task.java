@@ -236,11 +236,11 @@ public class Task {
         for (int i = 0; i < n; i++) {
             // убираем первый элемент в буфер, а на его место ставим хвостовой элемент
             buf = arr[0];
-            arr[0] = arr[arr.length - 1];
+            arr[0] = arr[arrLen - 1];
 
             // циклично сдвигаем весь массив
-            for (int j = 1; j < arr.length - 1; j++) {
-                arr[arr.length - j] = arr[arr.length - j - 1];
+            for (int j = 1; j < arrLen - 1; j++) {
+                arr[arrLen - j] = arr[arrLen - j - 1];
             }
 
             // ставим буферный элемент в 1 ячейку
@@ -252,14 +252,14 @@ public class Task {
         int buf = 0;
         int arrLen = arr.length;
         for (int i = 0; i > n; i--) {
-            buf = arr[arr.length - 1];
-            arr[arr.length - 1] = arr[0];
+            buf = arr[arrLen - 1];
+            arr[arrLen - 1] = arr[0];
 
-            for (int j = 1; j < arr.length - 1; j++) {
+            for (int j = 1; j < arrLen - 1; j++) {
                 arr[j - 1] = arr[j];
             }
 
-            arr[arr.length - 2] = buf;
+            arr[arrLen - 2] = buf;
         }
     }
 }
