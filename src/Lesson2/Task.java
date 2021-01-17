@@ -15,7 +15,7 @@ public class Task {
         multiplyValueIntoArray(arr3);
 
         //4.Создать квадратный двумерный целочисленный массив (количество строк и столбцов одинаковое), и с помощью цикла(-ов) заполнить его диагональные элементы единицами;
-        int[][] arr4 = new int[][]{{0,0,0,0,0,0}, {0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0}};
+        int[][] arr4 = new int[6][6];
         writeOneDiagDataIntoArray(arr4);
 
         //5. ** Задать одномерный массив и найти в нем минимальный и максимальный элементы (без помощи интернета);
@@ -89,15 +89,14 @@ public class Task {
      * @param arr двуммерный квадратный массив
      */
     static void writeOneDiagDataIntoArray(int[][] arr){
-        int arrLen1 = arr.length;
-        int arrLen2 = arr[0].length;
-        for (int i = 0; i < arrLen1; i++) {
-            for (int j = 0; j < arrLen2; j++) {
+        int arrLen = arr.length;
+        for (int i = 0; i < arrLen; i++) {
+            for (int j = 0; j < arrLen ; j++) {
                 if(i == j){
                     arr[i][j] = 1;
                 }
-                if(arrLen2 -1  - i == j){
-                    arr[i][arrLen2 - 1 - i] = 1;
+                if(arrLen -1  - i == j){
+                    arr[i][arrLen - 1 - i] = 1;
                 }
 
             }
@@ -234,16 +233,16 @@ public class Task {
         int arrLen = arr.length;
 
         for (int i = 0; i < n; i++) {
-            // убираем первый элемент в буфер, а на его место ставим хвостовой элемент
+
             buf = arr[0];
             arr[0] = arr[arrLen - 1];
 
-            // циклично сдвигаем весь массив
+
             for (int j = 1; j < arrLen - 1; j++) {
                 arr[arrLen - j] = arr[arrLen - j - 1];
             }
 
-            // ставим буферный элемент в 1 ячейку
+
             arr[1] = buf;
         }
 
