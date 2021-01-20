@@ -1,6 +1,7 @@
 package Lesson3;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Lesson3Task2 {
     public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class Lesson3Task2 {
         String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli",
                 "carrot","cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom",
                 "nut", "olive", "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
-        System.out.println(getRandomWordIntoArray(words));
+        startGameGuessWord(words);
     }
     public static String getRandomWordIntoArray(String[] arr){
         if(arr.length == 0){
@@ -26,13 +27,15 @@ public class Lesson3Task2 {
         }
         return arr[new Random().nextInt(arr.length - 1)];
     }
-    public static int equalsWords(String usrWord, String guessWord){
+    public static boolean equalsWords(String usrWord, String guessWord){
         if(usrWord.equals(guessWord)){
-            return 0;
+            return true;
         }
-        return -1;
+        return false;
     }
     public static void printMaskArray(char[] arr){
+        System.out.println();
+        System.out.println("Буквы, которые удалось сопоставить");
         for (char val:
              arr) {
             System.out.print(val);
@@ -44,7 +47,25 @@ public class Lesson3Task2 {
         for (int i = 0; i < usrWordLen; i++) {
             if(usrWord.charAt(i) == guessWord.charAt(i)){
                 mask[i] = usrWord.charAt(i);
+                printMaskArray(mask);
             }
         }
+    }
+    public static void startGameGuessWord(String[] arr){
+        String randomWord = getRandomWordIntoArray(arr);
+        Scanner scan = new Scanner(System.in);
+        String usrAnswer;
+        boolean gameOn;
+        do {
+            System.out.print("Введите загаданное слово: ");
+            usrAnswer = scan.next();
+            gameOn = equalsWords(usrAnswer,randomWord);
+            if(gameOn){
+                System.out.println("Поздравляю вы победили");
+                break;
+            }
+            System.out.println("Увы, но вы не угадали");
+            printPartGuessWord(usrAnswer,randomWord);
+        }while (true);
     }
 }
