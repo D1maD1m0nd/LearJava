@@ -1,5 +1,6 @@
 package Lesson3;
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,13 +13,9 @@ public class Lesson3Task {
 
     }
     public static int getRandomNum(int period){
-        if(period < 0){
-            System.out.println("конец периода не может быть отрицательным значением");
-            return -1;
-        }
         return new Random().nextInt(period);
     }
-    public static int getUserAnswers(int period){
+    public static int getUserAnswerGuessNum(int period){
         int usrNum;
         do{
             System.out.printf("Введите число от %d до %d или введите -1 для выхода: ", 0,period);
@@ -28,6 +25,14 @@ public class Lesson3Task {
         }while(usrNum > period || usrNum < 0 );
         System.out.println(usrNum);
         return usrNum;
+    }
+    public static int getUserAnswerContinueGame(){
+        Scanner usr = new Scanner(System.in);
+        String usrAnswer = usr.next();
+        if(usrAnswer.toLowerCase(Locale.ROOT) == "да"){
+            return 0;
+        }
+        return -1;
     }
     public static int checkLessMoreNum(int numUsr, int numHide){
         if(numUsr == numHide) {
@@ -40,6 +45,27 @@ public class Lesson3Task {
         }
         System.out.println("Введенное число меньше загаданного");
         return -1;
+    }
+    public static void startGameGuessNumber(int period){
+        if(period < 0){
+            System.out.println("период не может быть отрицательным значением");
+            return;
+        }
+        int tryCount = 0;
+        int result;
+        int guessNum = getRandomNum(period);
+        do {
+            tryCount++;
+            int usrAnswer = getUserAnswerGuessNum(period);
+            result = (checkLessMoreNum(usrAnswer,guessNum) == 0) ? 0 : -1 ;
+            if(result == 0){
+                System.out.printf("Поздравляю вы справились за %d попыток, если желаете поиграть снова, то введите ДА, в ином случае введите НЕТ или любые символы", tryCount);
+            }
+            if(tryCount == 3){
+                System.out.println("К сожалению вы проиграли, если желаете поиграть снова, то введите ДА, в ином случае введите НЕТ или любые символы");
+            }
+        }while (true);
+
     }
 
 }
