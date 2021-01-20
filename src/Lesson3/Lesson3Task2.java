@@ -26,4 +26,10 @@ public class Lesson3Task2 {
         }
         return arr[new Random().nextInt(arr.length - 1)];
     }
+    public static int equalsWords(String usrWord, String guessWord){
+        if(usrWord == guessWord){
+            return 0;
+        }
+        return -1;
+    }
 }
