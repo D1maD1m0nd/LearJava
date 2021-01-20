@@ -13,6 +13,7 @@ public class Lesson3Task1 {
 
     }
     public static int getRandomNum(int period){
+
         return new Random().nextInt(period);
     }
     public static int getUserAnswerGuessNum(int period){
@@ -26,29 +27,29 @@ public class Lesson3Task1 {
         System.out.println(usrNum);
         return usrNum;
     }
-    public static int getUserAnswerContinueGame(){
+    public static boolean getUserAnswerContinueGame(){
         Scanner usr = new Scanner(System.in);
         int usrAnswer = usr.nextInt();
         if(usrAnswer == 1){
-            return 0;
+            return true;
         }
         if(usrAnswer == 0){
-            return -1;
+            return false;
         }
-        return -1;
+        return false;
 
     }
-    public static int checkLessMoreNum(int numUsr, int numHide){
+    public static boolean checkLessMoreNum(int numUsr, int numHide){
         if(numUsr == numHide) {
             System.out.println("Вы победили ");
-            return 0;
+            return true;
         }
         if(numUsr > numHide){
             System.out.println("Введенное число больше загаднного");
-            return -1;
+            return false;
         }
         System.out.println("Введенное число меньше загаданного");
-        return -1;
+        return false;
     }
     public static void startGameGuessNumber(int period){
         if(period < 0){
@@ -56,7 +57,7 @@ public class Lesson3Task1 {
             return;
         }
         int tryCount = 0;
-        int result;
+        boolean result;
         boolean gameContinue = false;
         int guessNum = getRandomNum(period);
         do {
@@ -64,20 +65,20 @@ public class Lesson3Task1 {
 
             int usrAnswer = getUserAnswerGuessNum(period);
             result = checkLessMoreNum(usrAnswer,guessNum);
-            if(tryCount == 3 && result != 0){
+            if(tryCount == 3 && !result){
                 System.out.printf("К сожалению вы проиграли.\nЗагаданное число было %d если желаете поиграть снова," +
                         " то введите 1, в ином случае введите 0 ", guessNum);
 
                 gameContinue = true;
             }
-            if(result == 0){
+            if(result){
                 System.out.printf("Поздравляю вы справились за %d попыток, если желаете поиграть снова, то введите 1, в ином случае введите 0 ", tryCount);
 
                 gameContinue = true;
             }
 
             if(gameContinue){
-                if(getUserAnswerContinueGame() == -1){
+                if(!getUserAnswerContinueGame()){
                     System.out.println("Игра окончена!");
                     break;
                 }
