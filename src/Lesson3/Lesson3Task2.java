@@ -27,9 +27,24 @@ public class Lesson3Task2 {
         return arr[new Random().nextInt(arr.length - 1)];
     }
     public static int equalsWords(String usrWord, String guessWord){
-        if(usrWord == guessWord){
+        if(usrWord.equals(guessWord)){
             return 0;
         }
         return -1;
+    }
+    public static void printMaskArray(char[] arr){
+        for (char val:
+             arr) {
+            System.out.print(val);
+        }
+    }
+    public static void printPartGuessWord(String usrWord, String guessWord){
+        char[] mask = {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'};
+        int usrWordLen = usrWord.length();
+        for (int i = 0; i < usrWordLen; i++) {
+            if(usrWord.charAt(i) == guessWord.charAt(i)){
+                mask[i] = usrWord.charAt(i);
+            }
+        }
     }
 }
