@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Lesson3Task {
+public class Lesson3Task1 {
     public static void main(String[] args) {
         //Написать программу, которая загадывает случайное число от 0 до 9 и пользователю дается 3 попытки угадать это число. При каждой попытке компьютер должен сообщить,
         // больше ли указанное пользователем число, чем загаданное, или меньше.
