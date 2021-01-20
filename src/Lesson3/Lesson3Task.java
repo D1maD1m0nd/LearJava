@@ -29,7 +29,7 @@ public class Lesson3Task {
     public static int getUserAnswerContinueGame(){
         Scanner usr = new Scanner(System.in);
         String usrAnswer = usr.next();
-        if(usrAnswer.toLowerCase(Locale.ROOT) == "да"){
+        if(usrAnswer.toLowerCase(Locale.ROOT).equals("да")){
             return 0;
         }
         return -1;
@@ -53,16 +53,33 @@ public class Lesson3Task {
         }
         int tryCount = 0;
         int result;
+        boolean gameContinue = false;
         int guessNum = getRandomNum(period);
         do {
             tryCount++;
             int usrAnswer = getUserAnswerGuessNum(period);
-            result = (checkLessMoreNum(usrAnswer,guessNum) == 0) ? 0 : -1 ;
+            result = checkLessMoreNum(usrAnswer,guessNum);
             if(result == 0){
                 System.out.printf("Поздравляю вы справились за %d попыток, если желаете поиграть снова, то введите ДА, в ином случае введите НЕТ или любые символы", tryCount);
+                if(getUserAnswerContinueGame() == -1){
+                    System.out.println("Игра окончена!");
+                    break;
+                }
+                gameContinue = true;
+                guessNum = getRandomNum(period);
             }
             if(tryCount == 3){
                 System.out.println("К сожалению вы проиграли, если желаете поиграть снова, то введите ДА, в ином случае введите НЕТ или любые символы");
+                if(getUserAnswerContinueGame() == -1){
+                    System.out.println("Игра окончена!");
+                    break;
+                }
+                gameContinue = true;
+            }
+            if(gameContinue){
+                guessNum = getRandomNum(period);
+                tryCount = 0;
+                gameContinue = false;
             }
         }while (true);
 
