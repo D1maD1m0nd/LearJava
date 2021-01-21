@@ -9,17 +9,17 @@ public class Lesson3Task1 {
         //Написать программу, которая загадывает случайное число от 0 до 9 и пользователю дается 3 попытки угадать это число. При каждой попытке компьютер должен сообщить,
         // больше ли указанное пользователем число, чем загаданное, или меньше.
         // После победы или проигрыша выводится запрос – «Повторить игру еще раз? 1 – да / 0 – нет»(1 – повторить, 0 – нет).
-        startGameGuessNumber(10);
+        startGameGuessNumber(9);
 
     }
     public static int getRandomNum(int period){
 
-        return new Random().nextInt(period);
+        return new Random().nextInt(period + 1);
     }
     public static int getUserAnswerGuessNum(int period){
         int usrNum;
         do{
-            System.out.printf("Введите число от %d до %d или введите -1 для выхода: ", 0,period - 1);
+            System.out.printf("Введите число от %d до %d или введите -1 для выхода: ", 0,period);
             Scanner usr = new Scanner(System.in);
             usrNum = usr.nextInt();
             if(usrNum == -1) return -1;
@@ -32,9 +32,6 @@ public class Lesson3Task1 {
         int usrAnswer = usr.nextInt();
         if(usrAnswer == 1){
             return true;
-        }
-        if(usrAnswer == 0){
-            return false;
         }
         return false;
 
@@ -67,12 +64,12 @@ public class Lesson3Task1 {
             result = checkLessMoreNum(usrAnswer,guessNum);
             if(tryCount == 3 && !result){
                 System.out.printf("К сожалению вы проиграли.\nЗагаданное число было %d если желаете поиграть снова," +
-                        " то введите 1, в ином случае введите 0 ", guessNum);
+                        " то введите 1, в ином случае введите любой символ отличный от 1  ", guessNum);
 
                 gameContinue = true;
             }
             if(result){
-                System.out.printf("Поздравляю вы справились за %d попыток, если желаете поиграть снова, то введите 1, в ином случае введите 0 ", tryCount);
+                System.out.printf("Поздравляю вы справились за %d попыток, если желаете поиграть снова, то введите 1, в ином случае введите любой символ отличный от 1 ", tryCount);
 
                 gameContinue = true;
             }

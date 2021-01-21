@@ -28,28 +28,28 @@ public class Lesson3Task2 {
         return arr[new Random().nextInt(arr.length - 1)];
     }
     public static boolean equalsWords(String usrWord, String guessWord){
-        if(usrWord.equals(guessWord)){
-            return true;
-        }
-        return false;
+        return usrWord.equals(guessWord);
     }
     public static void printMaskArray(char[] arr){
-        System.out.println();
+
         System.out.println("Буквы, которые удалось сопоставить");
         for (char val:
              arr) {
             System.out.print(val);
         }
+        System.out.println();
     }
     public static void printPartGuessWord(String usrWord, String guessWord){
         char[] mask = {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'};
-        int usrWordLen = usrWord.length();
+        String min = usrWord.length() > guessWord.length() ? guessWord : usrWord;
+        int usrWordLen = min.length();
         for (int i = 0; i < usrWordLen; i++) {
             if(usrWord.charAt(i) == guessWord.charAt(i)){
                 mask[i] = usrWord.charAt(i);
-                printMaskArray(mask);
+
             }
         }
+        printMaskArray(mask);
     }
     public static void startGameGuessWord(String[] arr){
         String randomWord = getRandomWordIntoArray(arr);
