@@ -20,9 +20,10 @@ public class Lesson3Task1 {
     }
     public static int getUserAnswerGuessNum(int period){
         int usrNum;
+        Scanner usr = new Scanner(System.in);
         do{
             System.out.printf("Введите число от %d до %d или введите -1 для выхода: ", 0,period);
-            Scanner usr = new Scanner(System.in);
+
             usrNum = usr.nextInt();
             if(usrNum == -1) return -1;
         }while(usrNum > period || usrNum < 0 );
