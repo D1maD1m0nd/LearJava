@@ -22,46 +22,52 @@ public class Lesson3Task2 {
 
         startGameGuessWord(words);
     }
+
+    /**
+     *Выбирает случайное слово из коллекции
+     * @param arr массив слов
+     * @return возвращает строку содержащую слово из массива, который был передан в парметре, в случае пустого массива возвращает -1
+     */
     public static String getRandomWordIntoArray(String[] arr){
         if(arr.length == 0){
             return "-1";
         }
         return arr[new Random().nextInt(arr.length)];
     }
-    public static boolean equalsWords(String usrWord, String guessWord){
-        return usrWord.equals(guessWord);
-    }
-    public static void printMaskArray(char[] arr){
 
-        System.out.println("Буквы, которые удалось сопоставить");
-        for (char val:
-             arr) {
-            System.out.print(val);
-        }
-        System.out.println();
-    }
+    /**
+     * Производит сопоставление букв в загаданном и пользовательском слове
+     * @param usrWord слово пользователя
+     * @param guessWord загаданное слово
+     */
     public static void printPartGuessWord(String usrWord, String guessWord){
-        char[] mask = {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'};
-        String min = usrWord.length() > guessWord.length() ? guessWord : usrWord;
-        int usrWordLen = min.length();
+        char[] mask = new char[]{'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'};
+        int usrWordLen = Math.min(usrWord.length(),guessWord.length());
+        char usrSymbol;
         for (int i = 0; i < usrWordLen; i++) {
-            if(usrWord.charAt(i) == guessWord.charAt(i)){
-                mask[i] = usrWord.charAt(i);
+            usrSymbol = guessWord.charAt(i);
+            if(usrWord.charAt(i) == usrSymbol){
+                mask[i] = usrSymbol;
 
             }
         }
-        printMaskArray(mask);
+        System.out.printf("Буквы, которые удалось сопоставить %s \n", new String(mask));
     }
+
+    /**
+     * Метод начала игры
+     * @param arr массив слов
+     */
     public static void startGameGuessWord(String[] arr){
         String randomWord = getRandomWordIntoArray(arr);
         Scanner scan = new Scanner(System.in);
         String usrAnswer;
-        boolean gameOn;
+
         do {
             System.out.print("Введите загаданное слово: ");
             usrAnswer = scan.next();
-            gameOn = equalsWords(usrAnswer,randomWord);
-            if(gameOn){
+
+            if( usrAnswer.equals(randomWord)){
                 System.out.println("Поздравляю вы победили");
                 break;
             }
