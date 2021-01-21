@@ -14,10 +14,22 @@ public class Lesson3Task1 {
         startGameGuessNumber(9);
 
     }
+
+    /**
+     *
+     * @param period максимальное значение до которого необходимо сгенерировать число
+     * @return возвращает число из заданногов параметре диапазона
+     */
     public static int getRandomNum(int period){
 
         return new Random().nextInt(period + 1);
     }
+
+    /**
+     *
+     * @param period число больше которого нельзя ввести значение действует как ограничитель
+     * @return введенное число пользователем в заданном диапазоне
+     */
     public static int getUserAnswerGuessNum(int period){
         int usrNum;
         Scanner usr = new Scanner(System.in);
@@ -30,12 +42,24 @@ public class Lesson3Task1 {
         System.out.println(usrNum);
         return usrNum;
     }
+
+    /**
+     *
+     * @return возвращает тру в случае, если пользователь ввел 1 для продолжения игры
+     */
     public static boolean getUserAnswerContinueGame(){
         Scanner usr = new Scanner(System.in);
         int usrAnswer = usr.nextInt();
         return usrAnswer == 1;
 
     }
+
+    /**
+     *
+     * @param numUsr число пользователя
+     * @param numHide загаданное число
+     * @return возвращает true в случае если два параметра равны
+     */
     public static boolean checkLessMoreNum(int numUsr, int numHide){
         if(numUsr == numHide) {
             System.out.println("Вы победили ");
@@ -48,11 +72,22 @@ public class Lesson3Task1 {
         System.out.println("Введенное число меньше загаданного");
         return false;
     }
+
+    /**
+     *
+     * @param period максимально возможное число
+     */
     public static void startGameGuessNumber(int period){
         if(period < 0){
             System.out.println("период не может быть отрицательным значением");
             return;
         }
+        /*
+        @tryCount - счетчик попыток
+        @result - переменная показывающая победил игрок или нет
+        @gameContinue - флаг продолжения игры
+        @guessNum переменная для хранения случайного числа
+         */
         int tryCount = 0;
         boolean result;
         boolean gameContinue = false;
