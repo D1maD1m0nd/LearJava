@@ -19,13 +19,14 @@ public class Lesson3Task2 {
         String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli",
                 "carrot","cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom",
                 "nut", "olive", "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
+
         startGameGuessWord(words);
     }
     public static String getRandomWordIntoArray(String[] arr){
         if(arr.length == 0){
             return "-1";
         }
-        return arr[new Random().nextInt(arr.length - 1)];
+        return arr[new Random().nextInt(arr.length)];
     }
     public static boolean equalsWords(String usrWord, String guessWord){
         return usrWord.equals(guessWord);

@@ -9,6 +9,8 @@ public class Lesson3Task1 {
         //Написать программу, которая загадывает случайное число от 0 до 9 и пользователю дается 3 попытки угадать это число. При каждой попытке компьютер должен сообщить,
         // больше ли указанное пользователем число, чем загаданное, или меньше.
         // После победы или проигрыша выводится запрос – «Повторить игру еще раз? 1 – да / 0 – нет»(1 – повторить, 0 – нет).
+
+
         startGameGuessNumber(9);
 
     }
@@ -30,10 +32,7 @@ public class Lesson3Task1 {
     public static boolean getUserAnswerContinueGame(){
         Scanner usr = new Scanner(System.in);
         int usrAnswer = usr.nextInt();
-        if(usrAnswer == 1){
-            return true;
-        }
-        return false;
+        return usrAnswer == 1;
 
     }
     public static boolean checkLessMoreNum(int numUsr, int numHide){
