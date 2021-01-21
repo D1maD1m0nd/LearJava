@@ -55,7 +55,7 @@ public class Lesson3Task1 {
     }
 
     /**
-     *
+     *Проверка результата введенного числа
      * @param numUsr число пользователя
      * @param numHide загаданное число
      * @return возвращает true в случае если два параметра равны
@@ -74,7 +74,7 @@ public class Lesson3Task1 {
     }
 
     /**
-     *
+     *начало игры
      * @param period максимально возможное число
      */
     public static void startGameGuessNumber(int period){
