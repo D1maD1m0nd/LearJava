@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Lesson3Task1 {
+    public static final Scanner SCANNER = new Scanner(System.in);
     public static void main(String[] args) {
         //Написать программу, которая загадывает случайное число от 0 до 9 и пользователю дается 3 попытки угадать это число. При каждой попытке компьютер должен сообщить,
         // больше ли указанное пользователем число, чем загаданное, или меньше.
@@ -30,11 +31,11 @@ public class Lesson3Task1 {
      */
     public static int getUserAnswerGuessNum(int period) {
         int usrNum;
-        Scanner usr = new Scanner(System.in);
+
         do {
             System.out.printf("Введите число от %d до %d или введите -1 для выхода: ", 0, period);
 
-            usrNum = usr.nextInt();
+            usrNum = SCANNER.nextInt();
             if (usrNum == -1) return -1;
         } while (usrNum > period || usrNum < 0);
         System.out.println(usrNum);
