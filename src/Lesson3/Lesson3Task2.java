@@ -4,6 +4,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Lesson3Task2 {
+    public static final String[] WORDS = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot",
+             "cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea",
+            "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
+    public static final Scanner SCANNER = new Scanner(System.in);
     public static void main(String[] args) {
         /*
          *Создать массив из слов
@@ -16,24 +20,19 @@ public class Lesson3Task2 {
          * String str = "apple"; char a = str.charAt(0); - метод, вернет char,
          * который стоит в слове str на первой позиции Играем до тех пор, пока игрок не отгадает слово. Используем только маленькие буквы.
          */
-        String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli",
-                "carrot", "cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom",
-                "nut", "olive", "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
 
-        startGameGuessWord(words);
+
+        startGameGuessWord();
     }
 
     /**
      * Выбирает случайное слово из коллекции
      *
-     * @param arr массив слов
+     *
      * @return возвращает строку содержащую слово из массива, который был передан в парметре, в случае пустого массива возвращает -1
      */
-    public static String getRandomWordIntoArray(String[] arr) {
-        if (arr.length == 0) {
-            return "-1";
-        }
-        return arr[new Random().nextInt(arr.length)];
+    public static String getRandomWordIntoArray() {
+        return WORDS[new Random().nextInt(WORDS.length)];
     }
 
     /**
@@ -58,17 +57,15 @@ public class Lesson3Task2 {
 
     /**
      * Метод начала игры
-     *
-     * @param arr массив слов
      */
-    public static void startGameGuessWord(String[] arr) {
-        String randomWord = getRandomWordIntoArray(arr);
-        Scanner scan = new Scanner(System.in);
+    public static void startGameGuessWord() {
+        String randomWord = getRandomWordIntoArray();
+
         String usrAnswer;
 
         do {
             System.out.print("Введите загаданное слово: ");
-            usrAnswer = scan.next();
+            usrAnswer = SCANNER.next();
 
             if (usrAnswer.equals(randomWord)) {
                 System.out.println("Поздравляю вы победили");
