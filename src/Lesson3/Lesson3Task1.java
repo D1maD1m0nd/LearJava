@@ -16,38 +16,35 @@ public class Lesson3Task1 {
     }
 
     /**
-     *
      * @param period максимальное значение до которого необходимо сгенерировать число
      * @return возвращает число из заданногов параметре диапазона
      */
-    public static int getRandomNum(int period){
+    public static int getRandomNum(int period) {
 
         return new Random().nextInt(period + 1);
     }
 
     /**
-     *
      * @param period число больше которого нельзя ввести значение действует как ограничитель
      * @return введенное число пользователем в заданном диапазоне
      */
-    public static int getUserAnswerGuessNum(int period){
+    public static int getUserAnswerGuessNum(int period) {
         int usrNum;
         Scanner usr = new Scanner(System.in);
-        do{
-            System.out.printf("Введите число от %d до %d или введите -1 для выхода: ", 0,period);
+        do {
+            System.out.printf("Введите число от %d до %d или введите -1 для выхода: ", 0, period);
 
             usrNum = usr.nextInt();
-            if(usrNum == -1) return -1;
-        }while(usrNum > period || usrNum < 0 );
+            if (usrNum == -1) return -1;
+        } while (usrNum > period || usrNum < 0);
         System.out.println(usrNum);
         return usrNum;
     }
 
     /**
-     *
      * @return возвращает тру в случае, если пользователь ввел 1 для продолжения игры
      */
-    public static boolean getUserAnswerContinueGame(){
+    public static boolean getUserAnswerContinueGame() {
         Scanner usr = new Scanner(System.in);
         int usrAnswer = usr.nextInt();
         return usrAnswer == 1;
@@ -55,17 +52,18 @@ public class Lesson3Task1 {
     }
 
     /**
-     *Проверка результата введенного числа
-     * @param numUsr число пользователя
+     * Проверка результата введенного числа
+     *
+     * @param numUsr  число пользователя
      * @param numHide загаданное число
      * @return возвращает true в случае если два параметра равны
      */
-    public static boolean checkLessMoreNum(int numUsr, int numHide){
-        if(numUsr == numHide) {
+    public static boolean checkLessMoreNum(int numUsr, int numHide) {
+        if (numUsr == numHide) {
             System.out.println("Вы победили ");
             return true;
         }
-        if(numUsr > numHide){
+        if (numUsr > numHide) {
             System.out.println("Введенное число больше загаднного");
             return false;
         }
@@ -74,11 +72,12 @@ public class Lesson3Task1 {
     }
 
     /**
-     *начало игры
+     * начало игры
+     *
      * @param period максимально возможное число
      */
-    public static void startGameGuessNumber(int period){
-        if(period < 0){
+    public static void startGameGuessNumber(int period) {
+        if (period < 0) {
             System.out.println("период не может быть отрицательным значением");
             return;
         }
@@ -96,21 +95,21 @@ public class Lesson3Task1 {
             tryCount++;
 
             int usrAnswer = getUserAnswerGuessNum(period);
-            result = checkLessMoreNum(usrAnswer,guessNum);
-            if(tryCount == 3 && !result){
+            result = checkLessMoreNum(usrAnswer, guessNum);
+            if (tryCount == 3 && !result) {
                 System.out.printf("К сожалению вы проиграли.\nЗагаданное число было %d если желаете поиграть снова," +
                         " то введите 1, в ином случае введите любой символ отличный от 1  ", guessNum);
 
                 gameContinue = true;
             }
-            if(result){
+            if (result) {
                 System.out.printf("Поздравляю вы справились за %d попыток, если желаете поиграть снова, то введите 1, в ином случае введите любой символ отличный от 1 ", tryCount);
 
                 gameContinue = true;
             }
 
-            if(gameContinue){
-                if(!getUserAnswerContinueGame()){
+            if (gameContinue) {
+                if (!getUserAnswerContinueGame()) {
                     System.out.println("Игра окончена!");
                     break;
                 }
@@ -118,7 +117,7 @@ public class Lesson3Task1 {
                 tryCount = 0;
                 gameContinue = false;
             }
-        }while (true);
+        } while (true);
 
     }
 
