@@ -5,6 +5,8 @@ public class test2 {
     public static final int[][] Arr1;
     public static final int SIZE_TO_WIN;
     public static final int ARR_LEN;
+    //arr^2 * 2 ARR_LEN
+    public static int [][][] ArrDiag;
 
     static {
 
@@ -14,37 +16,47 @@ public class test2 {
                             {16, 17, 18, 19, 20},
                             {21, 22, 23, 4, 5}};
         Arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
-        SIZE_TO_WIN = 3;
+
+        SIZE_TO_WIN = 4;
+        ArrDiag = new int[SIZE_TO_WIN * 2][SIZE_TO_WIN][2];
         ARR_LEN = Arr1.length;
     }
 
     public static void main(String[] args) {
        // checkAllVerticalVaiable();
-        collectingVerticalSequences();
-       // collectingMainDiagonalSequences();
+        //collectingVerticalSequences();
+       collectingMainDiagonalSequences();
     }
     public static void collectingMainDiagonalSequences(){
-        int start, end;
+        int start, end, rows = 0;
         for (int l = 0; l < ARR_LEN; l++) {
             if(SIZE_TO_WIN + l > ARR_LEN){
                 break;
             }
             for (int k = 0; k < ARR_LEN; k++) {
+
                 start = l;
                 end = ARR_LEN - 1 - l;
                 if(SIZE_TO_WIN + k > ARR_LEN){
                     break;
                 }
+                System.out.print("Основная ");
                 for (int i = 0; i < SIZE_TO_WIN; i++) {
-                    System.out.print(Arr1[start][i+k]);
+                    System.out.print(Arr1[start][i+k] + ",");
+                    ArrDiag[rows][i][0] = start;
+                    ArrDiag[rows][i][1] = i+k;
                     start++;
                 }
-                System.out.print("        ");
+                rows++;
+                System.out.print("Побочная ");
                 for (int i = 0; i < SIZE_TO_WIN; i++) {
-                    System.out.print(Arr1[1][end]);
+                    System.out.print(Arr1[i+k][end] + ",");
+                    ArrDiag[rows][i][0] = i+k;
+                    ArrDiag[rows][i][1] = end;
                     end--;
                 }
                 System.out.println();
+                rows++;
             }
         }
 
