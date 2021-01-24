@@ -15,20 +15,23 @@ public class TikTakToe {
 
     //массивы для направлений
     //Дагонали, дорого по памяти, но я не смог вывести более оптимальную формулу
-    public static final int[][][] ARR_DIAG = new int[SIZE * SIZE * 2][DOTS_TO_WIN][2];
+    public static int lenArrDiag = collectingMainDiagonalSequences(false);
+    public static final int[][][] ARR_DIAG = new int[lenArrDiag][DOTS_TO_WIN][2];
     //Вертикаль
-    public static final int[][][] ARR_VERTICAL = new int[SIZE * SIZE * 2][DOTS_TO_WIN][2];
+    public static int lenArrVertical = collectingVerticalSequences(false);
+    public static final int[][][] ARR_VERTICAL = new int[lenArrVertical][DOTS_TO_WIN][2];
     //Горизонталь
-    public static final int[][] ARR_HORIZONTAL = new int[SIZE * SIZE * 2][DOTS_TO_WIN];
+    public static int lenArrHorizontal = collectingHorizontalSequences(false);
+    public static final int[][] ARR_HORIZONTAL = new int[lenArrHorizontal][DOTS_TO_WIN];
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         //Собираем коордианты всех диагональных значений
-        collectingMainDiagonalSequences();
+        collectingMainDiagonalSequences(true);
         //Собираем координаты всех  вертикальных
-        collectingVerticalSequences();
+        collectingVerticalSequences(true);
         //Собираем координаты всех горизонтальных
-        collectingHorizontalSequences();
+        collectingHorizontalSequences(true);
         initMap();
         printMap();
         boolean humanWin;
@@ -66,10 +69,7 @@ public class TikTakToe {
             for (int i = 0; i < SIZE; i++) {
                 if(row[i] == symbol){
                     for (int[]ints: ARR_HORIZONTAL) {
-                        //это баг из-за размерности массива
-                        if(ints[1] == 0 && ints[0] == 0 ){
-                            break;
-                        }
+
                         int countQuanity = 0;
 
                         for (int index : ints) {
@@ -83,8 +83,6 @@ public class TikTakToe {
                                 return true;
                             }
                         }
-
-
                     }
                 }
             }
@@ -92,10 +90,7 @@ public class TikTakToe {
 
 
             for (int[][] intsArr1:ARR_VERTICAL) {
-                //это баг из-за размерности массива
-                if(intsArr1[1][0] == 0 && intsArr1[1][1] == 0){
-                    break;
-                }
+
                 int countQuanity = 0;
                 for (int[] intsArr2 : intsArr1) {
 
@@ -112,10 +107,7 @@ public class TikTakToe {
                 }
             }
         for (int[][] intsArr1:ARR_DIAG) {
-            //это баг из-за размерности массива
-            if(intsArr1[1][0] == 0 && intsArr1[1][1] == 0){
-                break;
-            }
+
             int countQuanity = 0;
             for (int[] intsArr2 : intsArr1) {
 
@@ -133,7 +125,7 @@ public class TikTakToe {
         }
         return false;
     }
-    public static void collectingVerticalSequences(){
+    public static int collectingVerticalSequences(boolean writeMode){
         int start, end, row = 0;
         for (int i = 0; i < SIZE; i++) {
 
@@ -144,25 +136,30 @@ public class TikTakToe {
                     break;
                 }
                 for (int k = 0; k < DOTS_TO_WIN; k++) {
-                    ARR_VERTICAL[row][k][0] = start;
-                    ARR_VERTICAL[row][k][1] = i;
+                    if(writeMode){
+                        ARR_VERTICAL[row][k][0] = start;
+                        ARR_VERTICAL[row][k][1] = i;
+                    }
+
                     start++;
 
                 }
                 row++;
                 for (int k = 0; k < DOTS_TO_WIN; k++) {
-                    ARR_VERTICAL[row][k][0] = end;
-                    ARR_VERTICAL[row][k][1] = i;
+                    if(writeMode){
+                        ARR_VERTICAL[row][k][0] = end;
+                        ARR_VERTICAL[row][k][1] = i;
+                    }
+
                     end--;
 
                 }
                 row++;
             }
-
-
         }
+        return row;
     }
-    public  static void collectingHorizontalSequences(){
+    public  static int collectingHorizontalSequences(boolean writeMode){
         int start, end, row = 0;
         for (int i = 0; i < SIZE; i++) {
             start = i;
@@ -171,21 +168,26 @@ public class TikTakToe {
                 break;
             }
             for (int j = 0; j < DOTS_TO_WIN; j++) {
-                ARR_HORIZONTAL[row][j] = start;
+                if(writeMode){
+                    ARR_HORIZONTAL[row][j] = start;
+                }
+
 
                 start++;
             }
             row++;
-            System.out.print("   ");
             for (int j = 0; j < DOTS_TO_WIN; j++) {
-                ARR_HORIZONTAL[row][j] = end;
+                if(writeMode){
+                    ARR_HORIZONTAL[row][j] = end;
+                }
                 end--;
             }
             row++;
-            System.out.println();
+
         }
+        return row;
     }
-    public static void collectingMainDiagonalSequences(){
+    public static int collectingMainDiagonalSequences(boolean writeMode){
         int start, end, rows = 0;
         for (int l = 0; l < SIZE; l++) {
             if(DOTS_TO_WIN + l > SIZE){
@@ -199,19 +201,26 @@ public class TikTakToe {
                     break;
                 }
                 for (int i = 0; i < DOTS_TO_WIN; i++) {
-                    ARR_DIAG[rows][i][0] = start;
-                    ARR_DIAG[rows][i][1] = i+k;
+                    if(writeMode){
+                        ARR_DIAG[rows][i][0] = start;
+                        ARR_DIAG[rows][i][1] = i+k;
+                    }
+
                     start++;
                 }
                 rows++;
                 for (int i = 0; i < DOTS_TO_WIN; i++) {
-                    ARR_DIAG[rows][i][0] = i+k;
-                    ARR_DIAG[rows][i][1] = end;
+                    if(writeMode){
+                        ARR_DIAG[rows][i][0] = i+k;
+                        ARR_DIAG[rows][i][1] = end;
+                    }
+
                     end--;
                 }
                 rows++;
             }
         }
+        return rows;
     }
     private static boolean mapIsFull() {
         for (int i = 0; i < SIZE; i++) {

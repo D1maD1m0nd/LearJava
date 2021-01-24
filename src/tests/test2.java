@@ -5,6 +5,7 @@ public class test2 {
     public static final int[][] Arr1;
     public static final int SIZE_TO_WIN;
     public static final int ARR_LEN;
+    public static int diagArrLen;
     //arr^2 * 2 ARR_LEN
     public static int [][][] ArrDiag;
     public static int [][][] ArrVertical;
@@ -19,53 +20,62 @@ public class test2 {
                             {21, 22, 23, 4, 5}};
         Arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-        SIZE_TO_WIN = 5;
+        SIZE_TO_WIN = 3;
 
         ARR_LEN = Arr1.length;
-        ArrDiag = new int[ARR_LEN * ARR_LEN * 2][SIZE_TO_WIN][2];
+        diagArrLen = collectingMainDiagonalSequences(false);;
+        ArrDiag = new int[diagArrLen][SIZE_TO_WIN][2];
         ArrVertical = new int[ARR_LEN * ARR_LEN * 2][SIZE_TO_WIN][2];
         ArrHorizontal = new int[ARR_LEN * ARR_LEN * 2][SIZE_TO_WIN];
     }
 
     public static void main(String[] args) {
        // checkAllVerticalVaiable();
-       collectingVerticalSequences();
-       collectingMainDiagonalSequences();
+     //  collectingVerticalSequences();
+       collectingMainDiagonalSequences(true);
+        collectingHorizontalSequences();
     }
-    public static void collectingMainDiagonalSequences(){
+    public static int collectingMainDiagonalSequences(boolean writeMode){
         int start, end, rows = 0;
-        for (int l = 0; l < ARR_LEN; l++) {
-            if(SIZE_TO_WIN + l > ARR_LEN){
-                break;
-            }
-            for (int k = 0; k < ARR_LEN; k++) {
-
-                start = l;
-                end = ARR_LEN - 1 - l;
-                if(SIZE_TO_WIN + k > ARR_LEN){
+            for (int l = 0; l < ARR_LEN; l++) {
+                if(SIZE_TO_WIN + l > ARR_LEN){
                     break;
                 }
-                System.out.print("Основная ");
-                for (int i = 0; i < SIZE_TO_WIN; i++) {
-                    System.out.print(Arr1[start][i+k] + ",");
-                    ArrDiag[rows][i][0] = start;
-                    ArrDiag[rows][i][1] = i+k;
-                    start++;
+                for (int k = 0; k < ARR_LEN; k++) {
+
+                    start = l;
+                    end = ARR_LEN - 1 - l;
+                    if(SIZE_TO_WIN + k > ARR_LEN){
+                        break;
+                    }
+                    System.out.print("Основная ");
+                    for (int i = 0; i < SIZE_TO_WIN; i++) {
+                        System.out.print(Arr1[start][i+k] + ",");
+                        if(writeMode){
+                            ArrDiag[rows][i][0] = start;
+                            ArrDiag[rows][i][1] = i+k;
+
+                        }
+
+                        start++;
+                    }
+                    rows++;
+                    System.out.print("Побочная ");
+                    for (int i = 0; i < SIZE_TO_WIN; i++) {
+                        System.out.print(Arr1[i+k][end] + ",");
+                        if(writeMode){
+                            ArrDiag[rows][i][0] = i+k;
+                            ArrDiag[rows][i][1] = end;
+                        }
+
+                        end--;
+
+                    }
+                    System.out.println();
+                    rows++;
                 }
-                rows++;
-                System.out.print("Побочная ");
-                for (int i = 0; i < SIZE_TO_WIN; i++) {
-                    System.out.print(Arr1[i+k][end] + ",");
-                    ArrDiag[rows][i][0] = i+k;
-                    ArrDiag[rows][i][1] = end;
-                    end--;
-                }
-                System.out.println();
-                rows++;
-            }
         }
-
-
+        return rows;
     }
     public static void collectingVerticalSequences(){
         int start, end, row = 0;
@@ -113,6 +123,7 @@ public class test2 {
             }
             for (int j = 0; j < SIZE_TO_WIN; j++) {
                 System.out.print(Arr[start]);
+                ArrHorizontal[row][j] = start;
 
                 start++;
             }
@@ -120,6 +131,7 @@ public class test2 {
             System.out.print("   ");
             for (int j = 0; j < SIZE_TO_WIN; j++) {
                 System.out.print(Arr[end]);
+                ArrHorizontal[row][j] = end;
                 end--;
             }
             row++;
