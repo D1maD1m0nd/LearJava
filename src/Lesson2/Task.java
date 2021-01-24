@@ -81,6 +81,7 @@ public class Task {
                 continue;
             }
             arr[i] *= 2;
+
         }
     }
 

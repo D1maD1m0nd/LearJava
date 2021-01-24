@@ -17,9 +17,10 @@ public class test2 {
     public static void checkAllHorizlontalVariable(){
         int start, end;
         for (int i = 0; i < Arr1.length; i++) {
-            end = Arr1.length - 1 - i;
+
             for (int j = 0; j < Arr1.length; j++) {
                 start = j;
+                end = Arr1.length - 1 - j;
                 if(j + SIZE_TO_WIN > Arr1.length){
                     break;
                 }
@@ -29,6 +30,11 @@ public class test2 {
 
                 }
                 System.out.print(" ");
+                for (int k = 0; k < SIZE_TO_WIN; k++) {
+                    System.out.print(Arr1[end][i]);
+                    end--;
+
+                }
             }
 
             System.out.println();
