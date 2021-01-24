@@ -14,19 +14,19 @@ public class TikTakToe {
     public static final char DOT_O = 'O';
 
     //массивы для направлений
-    //Дагонали
-    public static final int[][][] ARR_DIAG = new int[SIZE * 2][DOTS_TO_WIN][2];
+    //Дагонали, дорого по памяти, но я не смог вывести более оптимальную формулу
+    public static final int[][][] ARR_DIAG = new int[SIZE * SIZE * 2][DOTS_TO_WIN][2];
     //Вертикаль
-    public static final int[][][] ARR_VERTICAL = new int[SIZE * 2][DOTS_TO_WIN][2];
+    public static final int[][][] ARR_VERTICAL = new int[SIZE * SIZE * 2][DOTS_TO_WIN][2];
     //Горизонталь
-    public static final int[][][] ARR_HORIZONTAL = new int[SIZE * 2][DOTS_TO_WIN][2];
+    public static final int[][][] ARR_HORIZONTAL = new int[SIZE * SIZE * 2][DOTS_TO_WIN][2];
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         //Собираем коордианты всех диагональных значений
         collectingMainDiagonalSequences();
         //Собираем координаты всех  вертикальных
-
+        collectingVerticalSequences();
         //Собираем координаты всех горизонтальных
         initMap();
         printMap();
@@ -110,6 +110,36 @@ public class TikTakToe {
             }
         }
         return false;
+    }
+    public static void collectingVerticalSequences(){
+        int start, end, row = 0;
+        for (int i = 0; i < SIZE; i++) {
+
+            for (int j = 0; j < SIZE; j++) {
+                start = j;
+                end = SIZE - 1 - j;
+                if(j + DOTS_TO_WIN > SIZE){
+                    break;
+                }
+                for (int k = 0; k < DOTS_TO_WIN; k++) {
+                    ARR_VERTICAL[row][k][0] = start;
+                    ARR_VERTICAL[row][k][1] = i;
+                    start++;
+
+                }
+                row++;
+                System.out.print("С конца ");
+                for (int k = 0; k < DOTS_TO_WIN; k++) {
+                    ARR_VERTICAL[row][k][0] = end;
+                    ARR_VERTICAL[row][k][1] = i;
+                    end--;
+
+                }
+                row++;
+            }
+
+
+        }
     }
     public static void collectingMainDiagonalSequences(){
         int start, end, rows = 0;
