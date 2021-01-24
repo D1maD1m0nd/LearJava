@@ -8,10 +8,11 @@ public class test2 {
 
     static {
 
-        Arr1 = new int[][]{ {1, 2, 3, 4},
-                            {1, 2, 3, 4},
-                            {1, 2, 3, 4},
-                            {1, 2, 3, 4}};
+        Arr1 = new int[][]{ {1, 2, 3, 4, 5},
+                            {6, 7, 8, 9, 10},
+                            {11, 12, 13, 14, 15},
+                            {16, 17, 18, 19, 20},
+                            {21, 22, 23, 4, 5}};
         Arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
         SIZE_TO_WIN = 3;
         ARR_LEN = Arr1.length;
@@ -19,26 +20,34 @@ public class test2 {
 
     public static void main(String[] args) {
        // checkAllVerticalVaiable();
-        // collectingVerticalSequences();
-        collectingMainDiagonalSequences();
+        collectingVerticalSequences();
+       // collectingMainDiagonalSequences();
     }
     public static void collectingMainDiagonalSequences(){
-        for (int l = 0; l <ARR_LEN; l++) {
-
-        }
-        for (int k = 0; k < ARR_LEN; k++) {
-            if(SIZE_TO_WIN + k > ARR_LEN){
+        int start, end;
+        for (int l = 0; l < ARR_LEN; l++) {
+            if(SIZE_TO_WIN + l > ARR_LEN){
                 break;
             }
-            for (int i = 0; i < SIZE_TO_WIN; i++) {
-                System.out.print(Arr1[i + k][i + k]);
+            for (int k = 0; k < ARR_LEN; k++) {
+                start = l;
+                end = ARR_LEN - 1 - l;
+                if(SIZE_TO_WIN + k > ARR_LEN){
+                    break;
+                }
+                for (int i = 0; i < SIZE_TO_WIN; i++) {
+                    System.out.print(Arr1[start][i+k]);
+                    start++;
+                }
+                System.out.print("        ");
+                for (int i = 0; i < SIZE_TO_WIN; i++) {
+                    System.out.print(Arr1[1][end]);
+                    end--;
+                }
+                System.out.println();
             }
-            System.out.print(" ");
-            for (int i = 0; i < SIZE_TO_WIN; i++) {
-                System.out.print(Arr1[ARR_LEN - 1  - i][ARR_LEN - 1 - i]);
-            }
-            System.out.println();
         }
+
 
     }
     public static void collectingVerticalSequences(){
@@ -51,14 +60,15 @@ public class test2 {
                 if(j + SIZE_TO_WIN > ARR_LEN){
                     break;
                 }
+                System.out.print("С начала ");
                 for (int k = 0; k < SIZE_TO_WIN; k++) {
-                    System.out.print(Arr1[start][i]);
+                    System.out.print(Arr1[start][i] + " ");
                     start++;
 
                 }
-                System.out.print(" ");
+                System.out.print("С конца ");
                 for (int k = 0; k < SIZE_TO_WIN; k++) {
-                    System.out.print(Arr1[end][i]);
+                    System.out.print(Arr1[end][i] + " ");
                     end--;
 
                 }
