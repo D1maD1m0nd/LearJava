@@ -7,7 +7,8 @@ public class test2 {
     public static final int ARR_LEN;
     //arr^2 * 2 ARR_LEN
     public static int [][][] ArrDiag;
-    public static int [][][] HorizontalDiag;
+    public static int [][][] ArrVertical;
+    public static int [][] ArrHorizontal;
 
     static {
 
@@ -18,16 +19,18 @@ public class test2 {
                             {21, 22, 23, 4, 5}};
         Arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-        SIZE_TO_WIN = 4;
+        SIZE_TO_WIN = 5;
 
         ARR_LEN = Arr1.length;
-        ArrDiag = new int[SIZE_TO_WIN * 2][SIZE_TO_WIN][2];
+        ArrDiag = new int[ARR_LEN * ARR_LEN * 2][SIZE_TO_WIN][2];
+        ArrVertical = new int[ARR_LEN * ARR_LEN * 2][SIZE_TO_WIN][2];
+        ArrHorizontal = new int[ARR_LEN * ARR_LEN * 2][SIZE_TO_WIN];
     }
 
     public static void main(String[] args) {
        // checkAllVerticalVaiable();
-        collectingVerticalSequences();
-      // collectingMainDiagonalSequences();
+       collectingVerticalSequences();
+       collectingMainDiagonalSequences();
     }
     public static void collectingMainDiagonalSequences(){
         int start, end, rows = 0;
@@ -65,7 +68,7 @@ public class test2 {
 
     }
     public static void collectingVerticalSequences(){
-        int start, end;
+        int start, end, row = 0;
         for (int i = 0; i < ARR_LEN; i++) {
 
             for (int j = 0; j < ARR_LEN; j++) {
@@ -77,15 +80,21 @@ public class test2 {
                 System.out.print("С начала ");
                 for (int k = 0; k < SIZE_TO_WIN; k++) {
                     System.out.print(Arr1[start][i] + " ");
+                    ArrVertical[row][k][0] = start;
+                    ArrVertical[row][k][1] = i;
                     start++;
 
                 }
+                row++;
                 System.out.print("С конца ");
                 for (int k = 0; k < SIZE_TO_WIN; k++) {
                     System.out.print(Arr1[end][i] + " ");
+                    ArrVertical[row][k][0] = end;
+                    ArrVertical[row][k][1] = i;
                     end--;
 
                 }
+                row++;
             }
 
             System.out.println();
@@ -95,7 +104,7 @@ public class test2 {
         }
 
     public  static void collectingHorizontalSequences(){
-        int start, end;
+        int start, end, row = 0;
         for (int i = 0; i < ARR_LEN; i++) {
             start = i;
             end = ARR_LEN - 1 - i;
@@ -107,11 +116,13 @@ public class test2 {
 
                 start++;
             }
+            row++;
             System.out.print("   ");
             for (int j = 0; j < SIZE_TO_WIN; j++) {
                 System.out.print(Arr[end]);
                 end--;
             }
+            row++;
             System.out.println();
         }
     }
