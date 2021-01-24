@@ -19,7 +19,7 @@ public class TikTakToe {
     //Вертикаль
     public static final int[][][] ARR_VERTICAL = new int[SIZE * SIZE * 2][DOTS_TO_WIN][2];
     //Горизонталь
-    public static final int[][][] ARR_HORIZONTAL = new int[SIZE * SIZE * 2][DOTS_TO_WIN][2];
+    public static final int[][] ARR_HORIZONTAL = new int[SIZE * SIZE * 2][DOTS_TO_WIN];
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -139,6 +139,29 @@ public class TikTakToe {
             }
 
 
+        }
+    }
+    public  static void collectingHorizontalSequences(){
+        int start, end, row = 0;
+        for (int i = 0; i < SIZE; i++) {
+            start = i;
+            end = SIZE - 1 - i;
+            if(start + DOTS_TO_WIN > SIZE){
+                break;
+            }
+            for (int j = 0; j < DOTS_TO_WIN; j++) {
+                ARR_HORIZONTAL[row][j] = start;
+
+                start++;
+            }
+            row++;
+            System.out.print("   ");
+            for (int j = 0; j < DOTS_TO_WIN; j++) {
+                ARR_HORIZONTAL[row][j] = end;
+                end--;
+            }
+            row++;
+            System.out.println();
         }
     }
     public static void collectingMainDiagonalSequences(){
