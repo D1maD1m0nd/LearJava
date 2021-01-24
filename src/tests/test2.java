@@ -1,27 +1,54 @@
 package tests;
 
 public class test2 {
-    public static int[] Arr;
-    public static int[][] Arr1 = {{1,2,3,4},{1,2,3,4}, {1,2,3,4},{1,2,3,4}};
+    public static final int[] Arr;
+    public static final int[][] Arr1;
     public static final int SIZE_TO_WIN;
+    public static final int ARR_LEN;
 
     static {
+
+        Arr1 = new int[][]{ {1, 2, 3, 4},
+                            {1, 2, 3, 4},
+                            {1, 2, 3, 4},
+                            {1, 2, 3, 4}};
         Arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
         SIZE_TO_WIN = 3;
+        ARR_LEN = Arr1.length;
     }
 
     public static void main(String[] args) {
        // checkAllVerticalVaiable();
-        checkAllHorizlontalVariable();
+        // collectingVerticalSequences();
+        collectingMainDiagonalSequences();
     }
-    public static void checkAllHorizlontalVariable(){
-        int start, end;
-        for (int i = 0; i < Arr1.length; i++) {
+    public static void collectingMainDiagonalSequences(){
+        for (int l = 0; l <ARR_LEN; l++) {
 
-            for (int j = 0; j < Arr1.length; j++) {
+        }
+        for (int k = 0; k < ARR_LEN; k++) {
+            if(SIZE_TO_WIN + k > ARR_LEN){
+                break;
+            }
+            for (int i = 0; i < SIZE_TO_WIN; i++) {
+                System.out.print(Arr1[i + k][i + k]);
+            }
+            System.out.print(" ");
+            for (int i = 0; i < SIZE_TO_WIN; i++) {
+                System.out.print(Arr1[ARR_LEN - 1  - i][ARR_LEN - 1 - i]);
+            }
+            System.out.println();
+        }
+
+    }
+    public static void collectingVerticalSequences(){
+        int start, end;
+        for (int i = 0; i < ARR_LEN; i++) {
+
+            for (int j = 0; j < ARR_LEN; j++) {
                 start = j;
-                end = Arr1.length - 1 - j;
-                if(j + SIZE_TO_WIN > Arr1.length){
+                end = ARR_LEN - 1 - j;
+                if(j + SIZE_TO_WIN > ARR_LEN){
                     break;
                 }
                 for (int k = 0; k < SIZE_TO_WIN; k++) {
@@ -40,19 +67,15 @@ public class test2 {
             System.out.println();
 
         }
-//            System.out.print(" ");
-//            for (int[] ints : Arr1) {
-//                System.out.print(ints[Arr1.length - 1  - i]);
-//            }
             System.out.println();
         }
 
-    public  static void checkAllVerticalVaiable(){
+    public  static void collectingHorizontalSequences(){
         int start, end;
-        for (int i = 0; i < Arr.length; i++) {
+        for (int i = 0; i < ARR_LEN; i++) {
             start = i;
-            end = Arr.length - 1 - i;
-            if(start + SIZE_TO_WIN > Arr.length){
+            end = ARR_LEN - 1 - i;
+            if(start + SIZE_TO_WIN > ARR_LEN){
                 break;
             }
             for (int j = 0; j < SIZE_TO_WIN; j++) {
