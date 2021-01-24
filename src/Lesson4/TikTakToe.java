@@ -111,28 +111,24 @@ public class TikTakToe {
                    }
                 }
             }
+        for (int[][] intsArr1:ARR_DIAG) {
+            //это баг из-за размерности массива
+            if(intsArr1[1][0] == 0 && intsArr1[1][1] == 0){
+                break;
+            }
+            int countQuanity = 0;
+            for (int[] intsArr2 : intsArr1) {
 
-        //что в диагоналях есть нужное количество символов подряд
-        int quantitySymbolInRow = 0;
-        for (int i = 0; i < SIZE; i++) {
-            if (map[i][i] == symbol) {
-                quantitySymbolInRow++;
-            } else if (quantitySymbolInRow > 0) {
-                quantitySymbolInRow = 0;
-            }
-            if (quantitySymbolInRow == DOTS_TO_WIN) {
-                return true;
-            }
-        }
-        quantitySymbolInRow = 0;
-        for (int i = 0; i < SIZE; i++) {
-            if (map[i][SIZE-i-1] == symbol) {
-                quantitySymbolInRow++;
-            } else if (quantitySymbolInRow > 0) {
-                quantitySymbolInRow = 0;
-            }
-            if (quantitySymbolInRow == DOTS_TO_WIN) {
-                return true;
+                int row = intsArr2[0];
+                int column = intsArr2[1];
+                if(map[row][column] == symbol){
+                    countQuanity++;
+                }else{
+                    break;
+                }
+                if(countQuanity == DOTS_TO_WIN){
+                    return true;
+                }
             }
         }
         return false;
