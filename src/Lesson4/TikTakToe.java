@@ -66,6 +66,7 @@ public class TikTakToe {
             for (int i = 0; i < SIZE; i++) {
                 if(row[i] == symbol){
                     for (int[]ints: ARR_HORIZONTAL) {
+                        //это баг из-за размерности массива
                         if(ints[1] == 0 && ints[0] == 0 ){
                             break;
                         }
@@ -88,34 +89,29 @@ public class TikTakToe {
                 }
             }
         }
-//        //что в строке есть нужное количество символов подряд
-//        for (char[] row : map) {
-//            int quantitySymbolInRow = 0;
-//            for (int i = 0; i < SIZE; i++) {
-//                if (row[i] == symbol) {
-//                    quantitySymbolInRow++;
-//                } else if (quantitySymbolInRow > 0) {
-//                    quantitySymbolInRow = 0;
-//                }
-//                if (quantitySymbolInRow == DOTS_TO_WIN) {
-//                    return true;
-//                }
-//            }
-//        }
-        //что в столбце есть нужное количество символов подряд
-        for (int i = 0; i < SIZE; i++) {
-            int quantitySymbolInRow = 0;
-            for (int j = 0; j < SIZE; j++) {
-                if (map[j][i] == symbol) {
-                    quantitySymbolInRow++;
-                } else if (quantitySymbolInRow > 0) {
-                    quantitySymbolInRow = 0;
+
+
+            for (int[][] intsArr1:ARR_VERTICAL) {
+                //это баг из-за размерности массива
+                if(intsArr1[1][0] == 0 && intsArr1[1][1] == 0){
+                    break;
                 }
-                if (quantitySymbolInRow == DOTS_TO_WIN) {
-                    return true;
+                int countQuanity = 0;
+                for (int[] intsArr2 : intsArr1) {
+
+                   int row = intsArr2[0];
+                   int column = intsArr2[1];
+                   if(map[row][column] == symbol){
+                       countQuanity++;
+                   }else{
+                       break;
+                   }
+                   if(countQuanity == DOTS_TO_WIN){
+                       return true;
+                   }
                 }
             }
-        }
+
         //что в диагоналях есть нужное количество символов подряд
         int quantitySymbolInRow = 0;
         for (int i = 0; i < SIZE; i++) {
