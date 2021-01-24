@@ -5,16 +5,15 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class TikTakToe {
-    public static char[][] map;
     public static final int SIZE = 3;
     public static final int DOTS_TO_WIN = 3;
-
     public static final char DOT_EMPTY = '•';
     public static final char DOT_X = 'X';
     public static final char DOT_O = 'O';
-
+    public static char[][] map;
     //массивы для направлений
-    //Дагонали, дорого по памяти, но я не смог вывести более оптимальную формулу
+    //Дагонали
+
     public static int lenArrDiag = collectingMainDiagonalSequences(false);
     public static final int[][][] ARR_DIAG = new int[lenArrDiag][DOTS_TO_WIN][2];
     //Вертикаль
@@ -65,21 +64,20 @@ public class TikTakToe {
 
     private static boolean checkWin(char symbol) {
         //        //что в строке есть нужное количество символов подряд
-        for(char[] row : map){
+        for (char[] row : map) {
             for (int i = 0; i < SIZE; i++) {
-                if(row[i] == symbol){
-                    for (int[]ints: ARR_HORIZONTAL) {
+                if (row[i] == symbol) {
+                    for (int[] ints : ARR_HORIZONTAL) {
 
                         int countQuanity = 0;
 
                         for (int index : ints) {
-                            if(row[index] == symbol){
+                            if (row[index] == symbol) {
                                 countQuanity++;
-                            }
-                            else{
+                            } else {
                                 break;
                             }
-                            if(countQuanity == DOTS_TO_WIN){
+                            if (countQuanity == DOTS_TO_WIN) {
                                 return true;
                             }
                         }
@@ -89,54 +87,57 @@ public class TikTakToe {
         }
 
 
-            for (int[][] intsArr1:ARR_VERTICAL) {
-
-                int countQuanity = 0;
-                for (int[] intsArr2 : intsArr1) {
-
-                   int row = intsArr2[0];
-                   int column = intsArr2[1];
-                   if(map[row][column] == symbol){
-                       countQuanity++;
-                   }else{
-                       break;
-                   }
-                   if(countQuanity == DOTS_TO_WIN){
-                       return true;
-                   }
-                }
-            }
-        for (int[][] intsArr1:ARR_DIAG) {
+        for (int[][] intsArr1 : ARR_VERTICAL) {
 
             int countQuanity = 0;
             for (int[] intsArr2 : intsArr1) {
 
                 int row = intsArr2[0];
                 int column = intsArr2[1];
-                if(map[row][column] == symbol){
+                if (map[row][column] == symbol) {
                     countQuanity++;
-                }else{
+                } else {
                     break;
                 }
-                if(countQuanity == DOTS_TO_WIN){
+                if (countQuanity == DOTS_TO_WIN) {
+                    return true;
+                }
+            }
+        }
+        for (int[][] intsArr1 : ARR_DIAG) {
+
+            int countQuanity = 0;
+            for (int[] intsArr2 : intsArr1) {
+
+                int row = intsArr2[0];
+                int column = intsArr2[1];
+                if (map[row][column] == symbol) {
+                    countQuanity++;
+                } else {
+                    break;
+                }
+                if (countQuanity == DOTS_TO_WIN) {
                     return true;
                 }
             }
         }
         return false;
     }
-    public static int collectingVerticalSequences(boolean writeMode){
+
+    public static int collectingVerticalSequences(boolean writeMode) {
         int start, end, row = 0;
         for (int i = 0; i < SIZE; i++) {
-
+            if(DOTS_TO_WIN + i > SIZE){
+                break;
+            }
             for (int j = 0; j < SIZE; j++) {
                 start = j;
                 end = SIZE - 1 - j;
-                if(j + DOTS_TO_WIN > SIZE){
+                if (j + DOTS_TO_WIN > SIZE) {
                     break;
                 }
                 for (int k = 0; k < DOTS_TO_WIN; k++) {
-                    if(writeMode){
+                    if (writeMode) {
                         ARR_VERTICAL[row][k][0] = start;
                         ARR_VERTICAL[row][k][1] = i;
                     }
@@ -146,7 +147,7 @@ public class TikTakToe {
                 }
                 row++;
                 for (int k = 0; k < DOTS_TO_WIN; k++) {
-                    if(writeMode){
+                    if (writeMode) {
                         ARR_VERTICAL[row][k][0] = end;
                         ARR_VERTICAL[row][k][1] = i;
                     }
@@ -159,16 +160,17 @@ public class TikTakToe {
         }
         return row;
     }
-    public  static int collectingHorizontalSequences(boolean writeMode){
+
+    public static int collectingHorizontalSequences(boolean writeMode) {
         int start, end, row = 0;
         for (int i = 0; i < SIZE; i++) {
             start = i;
             end = SIZE - 1 - i;
-            if(start + DOTS_TO_WIN > SIZE){
+            if (start + DOTS_TO_WIN > SIZE) {
                 break;
             }
             for (int j = 0; j < DOTS_TO_WIN; j++) {
-                if(writeMode){
+                if (writeMode) {
                     ARR_HORIZONTAL[row][j] = start;
                 }
 
@@ -177,7 +179,7 @@ public class TikTakToe {
             }
             row++;
             for (int j = 0; j < DOTS_TO_WIN; j++) {
-                if(writeMode){
+                if (writeMode) {
                     ARR_HORIZONTAL[row][j] = end;
                 }
                 end--;
@@ -187,31 +189,32 @@ public class TikTakToe {
         }
         return row;
     }
-    public static int collectingMainDiagonalSequences(boolean writeMode){
+
+    public static int collectingMainDiagonalSequences(boolean writeMode) {
         int start, end, rows = 0;
         for (int l = 0; l < SIZE; l++) {
-            if(DOTS_TO_WIN + l > SIZE){
+            if (DOTS_TO_WIN + l > SIZE) {
                 break;
             }
             for (int k = 0; k < SIZE; k++) {
 
                 start = l;
                 end = SIZE - 1 - l;
-                if(DOTS_TO_WIN + k > SIZE){
+                if (DOTS_TO_WIN + k > SIZE) {
                     break;
                 }
                 for (int i = 0; i < DOTS_TO_WIN; i++) {
-                    if(writeMode){
+                    if (writeMode) {
                         ARR_DIAG[rows][i][0] = start;
-                        ARR_DIAG[rows][i][1] = i+k;
+                        ARR_DIAG[rows][i][1] = i + k;
                     }
 
                     start++;
                 }
                 rows++;
                 for (int i = 0; i < DOTS_TO_WIN; i++) {
-                    if(writeMode){
-                        ARR_DIAG[rows][i][0] = i+k;
+                    if (writeMode) {
+                        ARR_DIAG[rows][i][0] = i + k;
                         ARR_DIAG[rows][i][1] = end;
                     }
 
@@ -222,6 +225,7 @@ public class TikTakToe {
         }
         return rows;
     }
+
     private static boolean mapIsFull() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
