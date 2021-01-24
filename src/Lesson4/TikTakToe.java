@@ -28,6 +28,7 @@ public class TikTakToe {
         //Собираем координаты всех  вертикальных
         collectingVerticalSequences();
         //Собираем координаты всех горизонтальных
+        collectingHorizontalSequences();
         initMap();
         printMap();
         boolean humanWin;
@@ -36,16 +37,18 @@ public class TikTakToe {
             humanTurn();
             printMap();
             humanWin = checkWin(DOT_X);
+
             if (humanWin) {
                 break;
             }
             aiTurn();
             printMap();
             aiWin = checkWin(DOT_O);
-            if (aiWin) {
+
+            if (aiWin || mapIsFull()) {
                 break;
             }
-        } while (!mapIsFull());
+        } while (true);
         if (humanWin) {
             System.out.println("Победил человек");
         }
@@ -58,20 +61,47 @@ public class TikTakToe {
     }
 
     private static boolean checkWin(char symbol) {
-        //что в строке есть нужное количество символов подряд
-        for (char[] row : map) {
-            int quantitySymbolInRow = 0;
+        //        //что в строке есть нужное количество символов подряд
+        for(char[] row : map){
             for (int i = 0; i < SIZE; i++) {
-                if (row[i] == symbol) {
-                    quantitySymbolInRow++;
-                } else if (quantitySymbolInRow > 0) {
-                    quantitySymbolInRow = 0;
-                }
-                if (quantitySymbolInRow == DOTS_TO_WIN) {
-                    return true;
+                if(row[i] == symbol){
+                    for (int[]ints: ARR_HORIZONTAL) {
+                        if(ints[1] == 0 && ints[0] == 0 ){
+                            break;
+                        }
+                        int countQuanity = 0;
+
+                        for (int index : ints) {
+                            if(row[index] == symbol){
+                                countQuanity++;
+                            }
+                            else{
+                                break;
+                            }
+                            if(countQuanity == DOTS_TO_WIN){
+                                return true;
+                            }
+                        }
+
+
+                    }
                 }
             }
         }
+//        //что в строке есть нужное количество символов подряд
+//        for (char[] row : map) {
+//            int quantitySymbolInRow = 0;
+//            for (int i = 0; i < SIZE; i++) {
+//                if (row[i] == symbol) {
+//                    quantitySymbolInRow++;
+//                } else if (quantitySymbolInRow > 0) {
+//                    quantitySymbolInRow = 0;
+//                }
+//                if (quantitySymbolInRow == DOTS_TO_WIN) {
+//                    return true;
+//                }
+//            }
+//        }
         //что в столбце есть нужное количество символов подряд
         for (int i = 0; i < SIZE; i++) {
             int quantitySymbolInRow = 0;
@@ -128,7 +158,6 @@ public class TikTakToe {
 
                 }
                 row++;
-                System.out.print("С конца ");
                 for (int k = 0; k < DOTS_TO_WIN; k++) {
                     ARR_VERTICAL[row][k][0] = end;
                     ARR_VERTICAL[row][k][1] = i;
@@ -177,14 +206,12 @@ public class TikTakToe {
                 if(DOTS_TO_WIN + k > SIZE){
                     break;
                 }
-                System.out.print("Основная ");
                 for (int i = 0; i < DOTS_TO_WIN; i++) {
                     ARR_DIAG[rows][i][0] = start;
                     ARR_DIAG[rows][i][1] = i+k;
                     start++;
                 }
                 rows++;
-                System.out.print("Побочная ");
                 for (int i = 0; i < DOTS_TO_WIN; i++) {
                     ARR_DIAG[rows][i][0] = i+k;
                     ARR_DIAG[rows][i][1] = end;
@@ -206,6 +233,7 @@ public class TikTakToe {
     }
 
     private static void aiTurn() {
+
         int x, y;
         do {
             x = new Random().nextInt(SIZE);
