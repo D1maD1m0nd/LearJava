@@ -7,6 +7,7 @@ public class test2 {
     public static final int ARR_LEN;
     //arr^2 * 2 ARR_LEN
     public static int [][][] ArrDiag;
+    public static int [][][] HorizontalDiag;
 
     static {
 
@@ -18,14 +19,15 @@ public class test2 {
         Arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
 
         SIZE_TO_WIN = 4;
-        ArrDiag = new int[SIZE_TO_WIN * 2][SIZE_TO_WIN][2];
+
         ARR_LEN = Arr1.length;
+        ArrDiag = new int[SIZE_TO_WIN * 2][SIZE_TO_WIN][2];
     }
 
     public static void main(String[] args) {
        // checkAllVerticalVaiable();
-        //collectingVerticalSequences();
-       collectingMainDiagonalSequences();
+        collectingVerticalSequences();
+      // collectingMainDiagonalSequences();
     }
     public static void collectingMainDiagonalSequences(){
         int start, end, rows = 0;

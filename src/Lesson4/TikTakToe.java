@@ -13,9 +13,21 @@ public class TikTakToe {
     public static final char DOT_X = 'X';
     public static final char DOT_O = 'O';
 
+    //массивы для направлений
+    //Дагонали
+    public static final int[][][] ARR_DIAG = new int[SIZE * 2][DOTS_TO_WIN][2];
+    //Вертикаль
+    public static final int[][][] ARR_VERTICAL = new int[SIZE * 2][DOTS_TO_WIN][2];
+    //Горизонталь
+    public static final int[][][] ARR_HORIZONTAL = new int[SIZE * 2][DOTS_TO_WIN][2];
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        //Собираем коордианты всех диагональных значений
+        collectingMainDiagonalSequences();
+        //Собираем координаты всех  вертикальных
+
+        //Собираем координаты всех горизонтальных
         initMap();
         printMap();
         boolean humanWin;
@@ -99,7 +111,36 @@ public class TikTakToe {
         }
         return false;
     }
+    public static void collectingMainDiagonalSequences(){
+        int start, end, rows = 0;
+        for (int l = 0; l < SIZE; l++) {
+            if(DOTS_TO_WIN + l > SIZE){
+                break;
+            }
+            for (int k = 0; k < SIZE; k++) {
 
+                start = l;
+                end = SIZE - 1 - l;
+                if(DOTS_TO_WIN + k > SIZE){
+                    break;
+                }
+                System.out.print("Основная ");
+                for (int i = 0; i < DOTS_TO_WIN; i++) {
+                    ARR_DIAG[rows][i][0] = start;
+                    ARR_DIAG[rows][i][1] = i+k;
+                    start++;
+                }
+                rows++;
+                System.out.print("Побочная ");
+                for (int i = 0; i < DOTS_TO_WIN; i++) {
+                    ARR_DIAG[rows][i][0] = i+k;
+                    ARR_DIAG[rows][i][1] = end;
+                    end--;
+                }
+                rows++;
+            }
+        }
+    }
     private static boolean mapIsFull() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
