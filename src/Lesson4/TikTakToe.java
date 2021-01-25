@@ -276,7 +276,7 @@ public class TikTakToe {
                 rows++;
             }
             */
-
+            //Вертикальное блокирование
             for (int[][] intsArr1 : ARR_VERTICAL) {
                 if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[SIZE - 1][0]][intsArr1[SIZE - 1][1]] == DOT_O){
                     continue;
@@ -289,11 +289,18 @@ public class TikTakToe {
 
                     if (map[row][column] == DOT_X) {
                         countQuanity++;
+                        if(countQuanity == 1){
+                            startIndex = row;
+                        }
 
                     }
                     if (countQuanity == DOTS_TO_WIN - 1) {
-                      map[row + 1][column] = DOT_O;
-                      return;
+                        if(row + 1 >= SIZE){
+                            map[startIndex - 1 ][column] = DOT_O;
+                            return;
+                        }
+                        map[row + 1][column] = DOT_O;
+                        return;
                     }
                 }
             }
