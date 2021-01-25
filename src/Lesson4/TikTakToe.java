@@ -127,9 +127,7 @@ public class TikTakToe {
     public static int collectingVerticalSequences(boolean writeMode) {
         int start, end, row = 0;
         for (int i = 0; i < SIZE; i++) {
-            if(DOTS_TO_WIN + i > SIZE){
-                break;
-            }
+
             for (int j = 0; j < SIZE; j++) {
                 start = j;
                 end = SIZE - 1 - j;
@@ -238,38 +236,36 @@ public class TikTakToe {
     }
 
     private static void aiTurn() {
+            //Минимальное число последовательности для блокировки с округление в больную сторону
             int minTurn = (int)Math.ceil((double)DOTS_TO_WIN/2);
             int middleRow = 0;
             int middleColumn = 0;
             int startIndex = 0;
+            //Переменная для хранения текущей строки, увеличивается каждый ход
             int rows = 0;
-             //что в строке есть нужное количество символов подряд
+             /*
+что в строке есть нужное количество символов подряд
             for (char[] row : map) {
-
                 for (int i = 0; i < SIZE; i++) {
                     for (int[] ints : ARR_HORIZONTAL) {
+                        //проверка на заполненность перебираемого значения
                         if(row[ints[0]] == DOT_O || row[ints[SIZE - 1]] == DOT_O){
                             break;
                         }
                         int countQuanity = 0;
-
                         for (int index : ints) {
-
                             if (row[index] == DOT_X) {
-
                                 countQuanity++;
                                 if(countQuanity == 1){
+                                    //Получаем начальный индекс
                                     startIndex = index;
                                 }
                             }
                             if (countQuanity == DOTS_TO_WIN - 1) {
-
                                 if(index + 1 >= SIZE){
-
                                     map[rows][startIndex - 1] = DOT_O;
                                     return;
                                 }
-
                                 map[rows][index + 1] = DOT_O;
                                 return;
                             }
@@ -279,25 +275,28 @@ public class TikTakToe {
                 }
                 rows++;
             }
+            */
 
+            for (int[][] intsArr1 : ARR_VERTICAL) {
+                if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[SIZE - 1][0]][intsArr1[SIZE - 1][1]] == DOT_O){
+                    continue;
+                }
+                int countQuanity = 0;
+                for (int[] intsArr2 : intsArr1) {
 
-//            for (int[][] intsArr1 : ARR_VERTICAL) {
-//
-//                int countQuanity = 0;
-//                for (int[] intsArr2 : intsArr1) {
-//
-//                    int row = intsArr2[0];
-//                    int column = intsArr2[1];
-//                    if (map[row][column] == symbol) {
-//                        countQuanity++;
-//                    } else {
-//                        break;
-//                    }
-//                    if (countQuanity == DOTS_TO_WIN) {
-//                        return true;
-//                    }
-//                }
-//            }
+                    int row = intsArr2[0];
+                    int column = intsArr2[1];
+
+                    if (map[row][column] == DOT_X) {
+                        countQuanity++;
+
+                    }
+                    if (countQuanity == DOTS_TO_WIN - 1) {
+                      map[row + 1][column] = DOT_O;
+                      return;
+                    }
+                }
+            }
 //            for (int[][] intsArr1 : ARR_DIAG) {
 //
 //                int countQuanity = 0;
@@ -316,7 +315,10 @@ public class TikTakToe {
 //                }
 //            }
 //            return false;
-        }
+
+
+
+    }
 
     private static void humanTurn() {
         int x, y;
