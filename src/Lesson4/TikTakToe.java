@@ -1,7 +1,6 @@
 package Lesson4;
 
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 
 public class TikTakToe {
@@ -241,6 +240,7 @@ public class TikTakToe {
             int middleRow = 0;
             int middleColumn = 0;
             int startIndex = 0;
+            int startIndex1 = 0;
             //Переменная для хранения текущей строки, увеличивается каждый ход
             int rows = 0;
              /*
@@ -276,55 +276,61 @@ public class TikTakToe {
                 rows++;
             }
             */
-            //Вертикальное блокирование
-            for (int[][] intsArr1 : ARR_VERTICAL) {
-                if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[SIZE - 1][0]][intsArr1[SIZE - 1][1]] == DOT_O){
-                    continue;
-                }
-                int countQuanity = 0;
-                for (int[] intsArr2 : intsArr1) {
-
-                    int row = intsArr2[0];
-                    int column = intsArr2[1];
-
-                    if (map[row][column] == DOT_X) {
-                        countQuanity++;
-                        if(countQuanity == 1){
-                            startIndex = row;
-                        }
-
-                    }
-                    if (countQuanity == DOTS_TO_WIN - 1) {
-                        if(row + 1 >= SIZE){
-                            map[startIndex - 1 ][column] = DOT_O;
-                            return;
-                        }
-                        map[row + 1][column] = DOT_O;
-                        return;
-                    }
-                }
-            }
-//            for (int[][] intsArr1 : ARR_DIAG) {
-//
+        //Вертикальное блокирование
+//            for (int[][] intsArr1 : ARR_VERTICAL) {
+//                if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[SIZE - 1][0]][intsArr1[SIZE - 1][1]] == DOT_O){
+//                    continue;
+//                }
 //                int countQuanity = 0;
 //                for (int[] intsArr2 : intsArr1) {
 //
 //                    int row = intsArr2[0];
 //                    int column = intsArr2[1];
-//                    if (map[row][column] == symbol) {
+//
+//                    if (map[row][column] == DOT_X) {
 //                        countQuanity++;
-//                    } else {
-//                        break;
+//                        if(countQuanity == 1){
+//                            startIndex = row;
+//                        }
+//
 //                    }
-//                    if (countQuanity == DOTS_TO_WIN) {
-//                        return true;
+//                    if (countQuanity == DOTS_TO_WIN - 1) {
+//                        if(row + 1 >= SIZE){
+//                            map[startIndex - 1 ][column] = DOT_O;
+//                            return;
+//                        }
+//                        map[row + 1][column] = DOT_O;
+//                        return;
 //                    }
 //                }
 //            }
-//            return false;
+        for (int[][] intsArr1 : ARR_DIAG) {
+            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[SIZE - 1][0]][intsArr1[SIZE - 1][1]] == DOT_O){
+                    continue;
+            }
+            int countQuanity = 0;
+            for (int[] intsArr2 : intsArr1) {
 
+                int row = intsArr2[0];
+                int column = intsArr2[1];
+                if (map[row][column] == DOT_X) {
+                    countQuanity++;
+                    if (countQuanity == 1) {
+                        startIndex = column;
+                        startIndex1 = row;
+                    }
+                }
+                if (countQuanity == DOTS_TO_WIN - 1) {
 
-
+                    if (row + 1 >= SIZE) {
+                        map[row - 1][column-1] = DOT_O;
+                        return;
+                    }
+                    map[row + 1][column + 1] = DOT_O;
+                    return;
+                }
+            }
+        }
     }
 
     private static void humanTurn() {
