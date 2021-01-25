@@ -238,14 +238,85 @@ public class TikTakToe {
     }
 
     private static void aiTurn() {
+            int minTurn = (int)Math.ceil((double)DOTS_TO_WIN/2);
+            int middleRow = 0;
+            int middleColumn = 0;
+            int startIndex = 0;
+            int rows = 0;
+             //что в строке есть нужное количество символов подряд
+            for (char[] row : map) {
 
-        int x, y;
-        do {
-            x = new Random().nextInt(SIZE);
-            y = new Random().nextInt(SIZE);
-        } while (!isCellValid(x, y));
-        map[x][y] = DOT_O;
-    }
+                for (int i = 0; i < SIZE; i++) {
+                    for (int[] ints : ARR_HORIZONTAL) {
+                        if(row[ints[0]] == DOT_O || row[ints[SIZE - 1]] == DOT_O){
+                            break;
+                        }
+                        int countQuanity = 0;
+
+                        for (int index : ints) {
+
+                            if (row[index] == DOT_X) {
+
+                                countQuanity++;
+                                if(countQuanity == 1){
+                                    startIndex = index;
+                                }
+                            }
+                            if (countQuanity == DOTS_TO_WIN - 1) {
+
+                                if(index + 1 >= SIZE){
+
+                                    map[rows][startIndex - 1] = DOT_O;
+                                    return;
+                                }
+
+                                map[rows][index + 1] = DOT_O;
+                                return;
+                            }
+                        }
+
+                    }
+                }
+                rows++;
+            }
+
+
+//            for (int[][] intsArr1 : ARR_VERTICAL) {
+//
+//                int countQuanity = 0;
+//                for (int[] intsArr2 : intsArr1) {
+//
+//                    int row = intsArr2[0];
+//                    int column = intsArr2[1];
+//                    if (map[row][column] == symbol) {
+//                        countQuanity++;
+//                    } else {
+//                        break;
+//                    }
+//                    if (countQuanity == DOTS_TO_WIN) {
+//                        return true;
+//                    }
+//                }
+//            }
+//            for (int[][] intsArr1 : ARR_DIAG) {
+//
+//                int countQuanity = 0;
+//                for (int[] intsArr2 : intsArr1) {
+//
+//                    int row = intsArr2[0];
+//                    int column = intsArr2[1];
+//                    if (map[row][column] == symbol) {
+//                        countQuanity++;
+//                    } else {
+//                        break;
+//                    }
+//                    if (countQuanity == DOTS_TO_WIN) {
+//                        return true;
+//                    }
+//                }
+//            }
+//            return false;
+        }
 
     private static void humanTurn() {
         int x, y;
