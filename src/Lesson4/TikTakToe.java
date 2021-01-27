@@ -470,7 +470,7 @@ public class TikTakToe {
         return false;
     }
 
-    private static boolean aiHorizontalSearch(int point){
+    private static boolean aiHorizontalSearch(boolean searchNewReq){
 
         int rows = 0;
         //что в строке есть нужное количество символов подряд
@@ -489,6 +489,11 @@ public class TikTakToe {
                                 map[prevAiRow][index] = DOT_O;
                                 return true;
                             }
+                        }else if(searchNewReq && row[index] == DOT_EMPTY){
+                            map[rows][index] = DOT_O;
+                            prevAiRow = rows;
+                            prevAiColumn = index;
+                            return true;
                         }
 
                     }
@@ -499,7 +504,7 @@ public class TikTakToe {
         }
         return false;
     }
-    private static boolean aiVerticalSearch(int point){
+    private static boolean aiVerticalSearch(boolean searchNewReq){
         //Вертикальное блокирование
         for (int[][] intsArr1 : ARR_VERTICAL) {
             if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X){
@@ -514,12 +519,17 @@ public class TikTakToe {
                         map[row][column] = DOT_O;
                         return true;
                     }
+                }else if(searchNewReq && map[row][column] == DOT_EMPTY){
+                    map[row][column] = DOT_O;
+                    prevAiRow = row;
+                    prevAiColumn = column;
+                    return true;
                 }
             }
         }
         return false;
     }
-    private static boolean aiDiagSearch(int point){
+    private static boolean aiDiagSearch(boolean searchNewReq){
         for (int[][] intsArr1 : ARR_DIAG) {
             if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X){
                 continue;
@@ -531,6 +541,12 @@ public class TikTakToe {
                if(row == prevAiRow && column == prevAiColumn){
                    if(map[row][column] == DOT_EMPTY){
                        map[row][column] = DOT_O;
+                       return true;
+                   }else if(searchNewReq && map[row][column] == DOT_EMPTY){
+                       map[row][column] = DOT_O;
+                       prevAiRow = row;
+                       prevAiColumn = column;
+                       return true;
                    }
                }
 
@@ -585,22 +601,30 @@ public class TikTakToe {
                     map[middleColumn][middleColumn] = DOT_O;
                     prevAiRow = middleColumn;
                     prevAiColumn = middleColumn;
+                    return;
                 }
                 else if(map[middleColumn][middleColumn + 1] == DOT_EMPTY){
                     map[middleColumn][middleColumn + 1] = DOT_O;
                     prevAiRow = middleColumn;
                     prevAiColumn = middleColumn + 1;
+                    return;
                 }
                 else if(map[middleColumn - 1][middleColumn - 1] == DOT_EMPTY){
                     map[middleColumn][middleColumn - 1] = DOT_O;
                     prevAiRow = middleColumn;
                     prevAiColumn = middleColumn - 1;
+                    return;
                 }
                 else{
                     middleState = true;
                 }
                 //Сначала ищем последовательность содержащую prevAiRow Column для этого можно использовать, измененный метод checkWin
-
+            }
+            if(aiVerticalSearch(false) || aiDiagSearch(false) || aiVerticalSearch(false)){
+                return;
+            }
+            if(aiVerticalSearch(true) || aiDiagSearch(true) || aiVerticalSearch(true)){
+                return;
             }
     }
 
