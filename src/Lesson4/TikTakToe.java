@@ -704,10 +704,10 @@ public class TikTakToe {
             }
             //Сначала ищем последовательность содержащую prevAiRow Column для этого можно использовать, измененный метод checkWin
         }
-        if (aiVerticalSearch(false) || aiDiagSearch(false) || aiVerticalSearch(false)) {
+        if (aiVerticalSearch(false) || aiDiagSearch(false) || aiHorizontalSearch(false)) {
             return;
         }
-        if (aiVerticalSearch(true) || aiDiagSearch(true) || aiVerticalSearch(true)) {
+        if (aiVerticalSearch(true) || aiDiagSearch(true) || aiHorizontalSearch(true)) {
             return;
         }
     }
