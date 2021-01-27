@@ -250,37 +250,37 @@ public class TikTakToe {
             //Переменная для хранения текущей строки, увеличивается каждый ход
             int rows = 0;
 
-//            //что в строке есть нужное количество символов подряд
-//            for (char[] row : map) {
-//                for (int i = 0; i < SIZE; i++) {
-//                    for (int[] ints : ARR_HORIZONTAL) {
-//                        //проверка на заполненность перебираемого значения
-//                        if(row[ints[0]] == DOT_O || row[ints[SIZE - 1]] == DOT_O){
-//                            break;
-//                        }
-//                        int countQuanity = 0;
-//                        for (int index : ints) {
-//                            if (row[index] == DOT_X) {
-//                                countQuanity++;
-//                                if(countQuanity == 1){
-//                                    //Получаем начальный индекс
-//                                    startIndex = index;
-//                                }
-//                            }
-//                            if (countQuanity == DOTS_TO_WIN - 1) {
-//                                if(index + 1 >= SIZE){
-//                                    map[rows][startIndex - 1] = DOT_O;
-//                                    return;
-//                                }
-//                                map[rows][index + 1] = DOT_O;
-//                                return;
-//                            }
-//                        }
-//
-//                    }
-//                }
-//                rows++;
-//            }
+            //что в строке есть нужное количество символов подряд
+            for (char[] row : map) {
+
+                for (int i = 0; i < SIZE; i++) {
+                    int dotColumn = 0;
+                    int countStep = 0;
+                    for (int[] ints : ARR_HORIZONTAL) {
+
+                        //проверка на заполненность перебираемого значения
+                        if(row[ints[0]] == DOT_O || row[ints[DOTS_TO_WIN - 1]] == DOT_O){
+                            break;
+                        }
+                        int countQuanity = 0;
+                        for (int index : ints) {
+                            countStep++;
+                            if (row[index] == DOT_X) {
+                                countQuanity++;
+                            }else if(row[index] == DOT_EMPTY){
+                                dotColumn = index;
+                            }
+                            if (countQuanity == DOTS_TO_WIN - 1 && countStep == DOTS_TO_WIN) {
+
+                                map[rows][dotColumn] = DOT_O;
+                                return;
+                            }
+                        }
+
+                    }
+                }
+                rows++;
+            }
         //Вертикальное блокирование
             for (int[][] intsArr1 : ARR_VERTICAL) {
                 if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O){
@@ -308,45 +308,45 @@ public class TikTakToe {
                     }
                 }
             }
-//        for (int[][] intsArr1 : ARR_DIAG) {
-//            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O){
-//                    continue;
-//            }
-//            int dotColumn = 0;
-//            int dotRow = 0;
-//            int sideDiag = 0;
-//            int mainDiag =  0;
-//            int countQuanity = 0;
-//            int countStep = 0;
-//            for (int[] intsArr2 : intsArr1) {
-//                countStep++;
-//                int row = intsArr2[0];
-//                int column = intsArr2[1];
-//                if(row == column){
-//                    mainDiag++;
-//                }else{
-//                    sideDiag++;
-//                }
-//                if (map[row][column] == DOT_X) {
-//                    countQuanity++;
-//                }else if(map[row][column] == DOT_EMPTY){
-//                    dotRow = row;
-//                    dotColumn = column;
-//                }
-//                if (countQuanity == DOTS_TO_WIN - 1 && countStep == DOTS_TO_WIN) {
-//
-//                    if(mainDiag >=DOTS_TO_WIN - 1){
-//                        map[dotRow][dotColumn] = DOT_O;
-//                        return;
-//                    }
-//                    if (sideDiag >= DOTS_TO_WIN - 1){
-//                        map[dotRow][dotColumn] = DOT_O;
-//                        return;
-//                    }
-//
-//                }
-//            }
-//        }
+        for (int[][] intsArr1 : ARR_DIAG) {
+            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O){
+                    continue;
+            }
+            int dotColumn = 0;
+            int dotRow = 0;
+            int sideDiag = 0;
+            int mainDiag =  0;
+            int countQuanity = 0;
+            int countStep = 0;
+            for (int[] intsArr2 : intsArr1) {
+                countStep++;
+                int row = intsArr2[0];
+                int column = intsArr2[1];
+                if(row == column){
+                    mainDiag++;
+                }else{
+                    sideDiag++;
+                }
+                if (map[row][column] == DOT_X) {
+                    countQuanity++;
+                }else if(map[row][column] == DOT_EMPTY){
+                    dotRow = row;
+                    dotColumn = column;
+                }
+                if (countQuanity == DOTS_TO_WIN - 1 && countStep == DOTS_TO_WIN) {
+
+                    if(mainDiag >=DOTS_TO_WIN - 1){
+                        map[dotRow][dotColumn] = DOT_O;
+                        return;
+                    }
+                    if (sideDiag >= DOTS_TO_WIN - 1){
+                        map[dotRow][dotColumn] = DOT_O;
+                        return;
+                    }
+
+                }
+            }
+        }
     }
 
     private static void humanTurn() {
