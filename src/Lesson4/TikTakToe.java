@@ -241,6 +241,7 @@ public class TikTakToe {
             int middleColumn = 0;
             int startIndex = 0;
             int startIndex1 = 0;
+
             //Переменная для хранения текущей строки, увеличивается каждый ход
             int rows = 0;
              /*
@@ -308,25 +309,31 @@ public class TikTakToe {
             if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[SIZE - 1][0]][intsArr1[SIZE - 1][1]] == DOT_O){
                     continue;
             }
+            int sideDiag = 0;
+            int mainDiag =  0;
             int countQuanity = 0;
             for (int[] intsArr2 : intsArr1) {
 
                 int row = intsArr2[0];
                 int column = intsArr2[1];
+                if(row == column){
+                    mainDiag++;
+                }else{
+                    sideDiag++;
+                }
                 if (map[row][column] == DOT_X) {
                     countQuanity++;
-                    if (countQuanity == 1) {
-                        startIndex = column;
-                        startIndex1 = row;
-                    }
                 }
                 if (countQuanity == DOTS_TO_WIN - 1) {
-
-                    if (row + 1 >= SIZE) {
-                        map[row - 1][column-1] = DOT_O;
+                    if(mainDiag >=DOTS_TO_WIN - 1){
+                        if (row + 1 >= SIZE) {
+                            map[row - 1][column-1] = DOT_O;
+                            return;
+                        }
+                        map[row + 1][column + 1] = DOT_O;
                         return;
                     }
-                    map[row + 1][column + 1] = DOT_O;
+                    map[row + 1][column - 1] = DOT_O;
                     return;
                 }
             }
