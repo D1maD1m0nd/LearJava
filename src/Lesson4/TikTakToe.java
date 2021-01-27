@@ -469,6 +469,75 @@ public class TikTakToe {
         }
         return false;
     }
+
+    private static boolean aiHorizontalSearch(int point){
+
+        int rows = 0;
+        //что в строке есть нужное количество символов подряд
+        for (char[] row : map) {
+
+            for (int i = 0; i < SIZE; i++) {
+                for (int[] ints : ARR_HORIZONTAL) {
+
+                    //проверка на заполненность перебираемого значения
+                    if(row[ints[0]] == DOT_X || row[ints[DOTS_TO_WIN - 1]] == DOT_X){
+                        break;
+                    }
+                    for (int index : ints) {
+                        if(prevAiColumn == index && prevAiRow == rows){
+                            if(row[index] == DOT_EMPTY){
+                                map[prevAiRow][index] = DOT_O;
+                                return true;
+                            }
+                        }
+
+                    }
+
+                }
+            }
+            rows++;
+        }
+        return false;
+    }
+    private static boolean aiVerticalSearch(int point){
+        //Вертикальное блокирование
+        for (int[][] intsArr1 : ARR_VERTICAL) {
+            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X){
+                continue;
+            }
+            for (int[] intsArr2 : intsArr1) {
+
+                int row = intsArr2[0];
+                int column = intsArr2[1];
+                if(row == prevAiRow && column == prevAiRow){
+                    if(map[row][column] == DOT_EMPTY){
+                        map[row][column] = DOT_O;
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    private static boolean aiDiagSearch(int point){
+        for (int[][] intsArr1 : ARR_DIAG) {
+            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X){
+                continue;
+            }
+
+            for (int[] intsArr2 : intsArr1) {
+                int row = intsArr2[0];
+                int column = intsArr2[1];
+               if(row == prevAiRow && column == prevAiColumn){
+                   if(map[row][column] == DOT_EMPTY){
+                       map[row][column] = DOT_O;
+                   }
+               }
+
+            }
+        }
+        return false;
+    }
     private static void aiTurn() {
             //Минимальное число последовательности для блокировки с округление в больную сторону
             int minTurn = DOTS_TO_WIN/2;
@@ -530,14 +599,9 @@ public class TikTakToe {
                 else{
                     middleState = true;
                 }
+                //Сначала ищем последовательность содержащую prevAiRow Column для этого можно использовать, измененный метод checkWin
 
             }
-
-
-
-
-
-
     }
 
 
