@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class TikTakToe {
     public static final int SIZE = 5;
-    public static final int DOTS_TO_WIN = 3;
+    public static final int DOTS_TO_WIN = 4;
     public static final char DOT_EMPTY = '•';
     public static final char DOT_X = 'X';
     public static final char DOT_O = 'O';
@@ -27,15 +27,12 @@ public class TikTakToe {
     public static final int[][] ARR_HORIZONTAL = new int[lenArrHorizontal][DOTS_TO_WIN];
     public static Scanner scanner = new Scanner(System.in);
 
-
-    public static int[] aiHorizontalArr = new int[DOTS_TO_WIN];
-    public static int[][] aiDiagArr = new int[DOTS_TO_WIN][2];
-    public static int[][] aiVerticalArr = new int[DOTS_TO_WIN][2];
-
+    //предыдущая колонка
     public static int prevAiColumn = 0;
+    //текущая строка
     public static int prevAiRow = 0;
-    public static int prevWay = 0;
 
+    //состояние центральной точки
     public static boolean middleState = false;
 
     public static void main(String[] args) {
@@ -77,12 +74,18 @@ public class TikTakToe {
         }
     }
 
+    /**
+     * Проверка победы
+     *
+     * @param symbol проверяемый символ
+     * @return true в случае победы одного из игроков
+     */
     private static boolean checkWin(char symbol) {
         //Если текущий ход не равен количеству точек для победы, то возвращает false
         if(currrentTurn  < DOTS_TO_WIN - 1){
             return false;
         }
-        //        //что в строке есть нужное количество символов подряд
+        //что в строке есть нужное количество символов подряд
         for (char[] row : map) {
             for (int i = 0; i < SIZE; i++) {
                 if (row[i] == symbol) {
@@ -105,7 +108,7 @@ public class TikTakToe {
             }
         }
 
-
+        //вертикаль
         for (int[][] intsArr1 : ARR_VERTICAL) {
 
             int countQuanity = 0;
@@ -123,6 +126,7 @@ public class TikTakToe {
                 }
             }
         }
+        //диагональ
         for (int[][] intsArr1 : ARR_DIAG) {
 
             int countQuanity = 0;
@@ -143,6 +147,12 @@ public class TikTakToe {
         return false;
     }
 
+    /**
+     * Метод записывает в массив вертикальную последовательность
+     *
+     * @param writeMode мод для записи в массив, в случае false , метод считает количество записей
+     * @return возвращает количество записей
+     */
     public static int collectingVerticalSequences(boolean writeMode) {
         int start, end, row = 0;
         for (int i = 0; i < SIZE; i++) {
@@ -178,6 +188,12 @@ public class TikTakToe {
         return row;
     }
 
+    /**
+     * Метод записывает в массив горизонатльную последовательность
+     *
+     * @param writeMode мод для записи в массив, в случае false , метод считает количество записей
+     * @return возвращает количество записей
+     */
     public static int collectingHorizontalSequences(boolean writeMode) {
         int start, end, row = 0;
         for (int i = 0; i < SIZE; i++) {
@@ -207,6 +223,12 @@ public class TikTakToe {
         return row;
     }
 
+    /**
+     * Метод записывает в массив диагональную последовательность
+     *
+     * @param writeMode мод для записи в массив, в случае false , метод считает количество записей
+     * @return возвращает количество записей
+     */
     public static int collectingMainDiagonalSequences(boolean writeMode) {
         int start, end, rows = 0;
         for (int l = 0; l < SIZE; l++) {
@@ -243,6 +265,11 @@ public class TikTakToe {
         return rows;
     }
 
+    /**
+     * Проверка на заполненность карты
+     *
+     * @return возвращает true в случае ее заполненности
+     */
     private static boolean mapIsFull() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -253,10 +280,17 @@ public class TikTakToe {
         }
         return true;
     }
-    private static boolean aiVertical(int point){
+
+    /**
+     * Блокирует вертикальную последовательность
+     *
+     * @param point количество элемент от которого необходимо произвести блок
+     * @return возвращает true в случае блокирования хода аппонента
+     */
+    private static boolean aiVertical(int point) {
         //Вертикальное блокирование
         for (int[][] intsArr1 : ARR_VERTICAL) {
-            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O){
+            if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O) {
                 continue;
             }
             int dotColumn = 0;
@@ -270,12 +304,11 @@ public class TikTakToe {
 
                 if (map[row][column] == DOT_X && countQuanity != DOTS_TO_WIN - point) {
                     countQuanity++;
-                }
-                else if(map[row][column] == DOT_EMPTY){
+                } else if(map[row][column] == DOT_EMPTY){
                     dotRow = row;
                     dotColumn = column;
                 }
-                if (countQuanity == DOTS_TO_WIN - point &&  countStep == DOTS_TO_WIN) {
+                if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
                     map[dotRow][dotColumn] = DOT_O;
                     return true;
                 }
@@ -283,7 +316,14 @@ public class TikTakToe {
         }
         return false;
     }
-    private static boolean aiHorizontal(int point){
+
+    /**
+     * Блокирует горизонтальную последовательность
+     *
+     * @param point количество элемент от которого необходимо произвести блок
+     * @return возвращает true в случае блокирования хода аппонента
+     */
+    private static boolean aiHorizontal(int point) {
 
         int rows = 0;
         //что в строке есть нужное количество символов подряд
@@ -319,39 +359,46 @@ public class TikTakToe {
         }
         return false;
     }
-    private static boolean aiDiag(int point){
+
+    /**
+     * Блокирует диагональную последовательность
+     *
+     * @param point количество элемент от которого необходимо произвести блок
+     * @return возвращает true в случае блокирования хода аппонента
+     */
+    private static boolean aiDiag(int point) {
         for (int[][] intsArr1 : ARR_DIAG) {
-            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O){
+            if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O) {
                 continue;
             }
             int dotColumn = 0;
             int dotRow = 0;
             int sideDiag = 0;
-            int mainDiag =  0;
+            int mainDiag = 0;
             int countQuanity = 0;
             int countStep = 0;
             for (int[] intsArr2 : intsArr1) {
                 countStep++;
                 int row = intsArr2[0];
                 int column = intsArr2[1];
-                if(row == column){
+                if (row == column) {
                     mainDiag++;
-                }else{
+                } else {
                     sideDiag++;
                 }
                 if (map[row][column] == DOT_X && countQuanity != DOTS_TO_WIN - point) {
                     countQuanity++;
-                }else if(map[row][column] == DOT_EMPTY){
+                } else if (map[row][column] == DOT_EMPTY) {
                     dotRow = row;
                     dotColumn = column;
                 }
                 if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
 
-                    if(mainDiag >=DOTS_TO_WIN - 1){
+                    if (mainDiag >= DOTS_TO_WIN - 1) {
                         map[dotRow][dotColumn] = DOT_O;
                         return true;
                     }
-                    if (sideDiag >= DOTS_TO_WIN - 1){
+                    if (sideDiag >= DOTS_TO_WIN - 1) {
                         map[dotRow][dotColumn] = DOT_O;
                         return true;
                     }
@@ -361,7 +408,14 @@ public class TikTakToe {
         }
         return false;
     }
-    private static boolean aiHorizontalWin(int point){
+
+    /**
+     * Проеряет горизонтальную  последовательность на предмет победы
+     *
+     * @param point количество элемент от которого необходимо произвести блок
+     * @return возвращает true в случае блокирования хода аппонента
+     */
+    private static boolean aiHorizontalWin(int point) {
 
         int rows = 0;
         //что в строке есть нужное количество символов подряд
@@ -373,7 +427,7 @@ public class TikTakToe {
                 for (int[] ints : ARR_HORIZONTAL) {
 
                     //проверка на заполненность перебираемого значения
-                    if(row[ints[0]] == DOT_X || row[ints[DOTS_TO_WIN - 1]] == DOT_X){
+                    if (row[ints[0]] == DOT_X || row[ints[DOTS_TO_WIN - 1]] == DOT_X) {
                         break;
                     }
                     int countQuanity = 0;
@@ -381,7 +435,7 @@ public class TikTakToe {
                         countStep++;
                         if (row[index] == DOT_O && countQuanity != DOTS_TO_WIN - point) {
                             countQuanity++;
-                        }else if(row[index] == DOT_EMPTY){
+                        } else if (row[index] == DOT_EMPTY) {
                             dotColumn = index;
                         }
                         if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
@@ -397,39 +451,46 @@ public class TikTakToe {
         }
         return false;
     }
-    private static boolean aiDiagWin(int point){
+
+    /**
+     * Проеряет диагональную  последовательность на предмет победы
+     *
+     * @param point количество элемент от которого необходимо произвести блок
+     * @return возвращает true в случае блокирования хода аппонента
+     */
+    private static boolean aiDiagWin(int point) {
         for (int[][] intsArr1 : ARR_DIAG) {
-            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X){
+            if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X) {
                 continue;
             }
             int dotColumn = 0;
             int dotRow = 0;
             int sideDiag = 0;
-            int mainDiag =  0;
+            int mainDiag = 0;
             int countQuanity = 0;
             int countStep = 0;
             for (int[] intsArr2 : intsArr1) {
                 countStep++;
                 int row = intsArr2[0];
                 int column = intsArr2[1];
-                if(row == column){
+                if (row == column) {
                     mainDiag++;
-                }else{
+                } else {
                     sideDiag++;
                 }
                 if (map[row][column] == DOT_O && countQuanity != DOTS_TO_WIN - point) {
                     countQuanity++;
-                }else if(map[row][column] == DOT_EMPTY){
+                } else if (map[row][column] == DOT_EMPTY) {
                     dotRow = row;
                     dotColumn = column;
                 }
                 if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
 
-                    if(mainDiag >=DOTS_TO_WIN - 1){
+                    if (mainDiag >= DOTS_TO_WIN - 1) {
                         map[dotRow][dotColumn] = DOT_O;
                         return true;
                     }
-                    if (sideDiag >= DOTS_TO_WIN - 1){
+                    if (sideDiag >= DOTS_TO_WIN - 1) {
                         map[dotRow][dotColumn] = DOT_O;
                         return true;
                     }
@@ -439,10 +500,17 @@ public class TikTakToe {
         }
         return false;
     }
-    private static boolean aiVerticalWin(int point){
+
+    /**
+     * Проеряет вертикальную  последовательность на предмет победы
+     *
+     * @param point количество элемент от которого необходимо произвести блок
+     * @return возвращает true в случае блокирования хода аппонента
+     */
+    private static boolean aiVerticalWin(int point) {
         //Вертикальное блокирование
         for (int[][] intsArr1 : ARR_VERTICAL) {
-            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X){
+            if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X) {
                 continue;
             }
             int dotColumn = 0;
@@ -456,12 +524,11 @@ public class TikTakToe {
 
                 if (map[row][column] == DOT_O && countQuanity != DOTS_TO_WIN - point) {
                     countQuanity++;
-                }
-                else if(map[row][column] == DOT_EMPTY){
+                } else if(map[row][column] == DOT_EMPTY){
                     dotRow = row;
                     dotColumn = column;
                 }
-                if (countQuanity == DOTS_TO_WIN - point &&  countStep == DOTS_TO_WIN) {
+                if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
                     map[dotRow][dotColumn] = DOT_O;
                     return true;
                 }
@@ -470,7 +537,13 @@ public class TikTakToe {
         return false;
     }
 
-    private static boolean aiHorizontalSearch(boolean searchNewReq){
+    /**
+     * Ищет горизонтальную  последовательность по координатам предыдущей точки или ищет совершенно новую последовательность
+     *
+     * @param searchNewReq состояние поиска новой последоватеьности
+     * @return возвращает true в случае блокирования хода аппонента
+     */
+    private static boolean aiHorizontalSearch(boolean searchNewReq) {
 
         int rows = 0;
         //что в строке есть нужное количество символов подряд
@@ -504,10 +577,17 @@ public class TikTakToe {
         }
         return false;
     }
-    private static boolean aiVerticalSearch(boolean searchNewReq){
+
+    /**
+     * Ищет вертикальную  последовательность по координатам предыдущей точки или ищет совершенно новую последовательность
+     *
+     * @param searchNewReq состояние поиска новой последоватеьности
+     * @return возвращает true в случае блокирования хода аппонента
+     */
+    private static boolean aiVerticalSearch(boolean searchNewReq) {
         //Вертикальное блокирование
         for (int[][] intsArr1 : ARR_VERTICAL) {
-            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X){
+            if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X) {
                 continue;
             }
             for (int[] intsArr2 : intsArr1) {
@@ -519,7 +599,7 @@ public class TikTakToe {
                         map[row][column] = DOT_O;
                         return true;
                     }
-                }else if(searchNewReq && map[row][column] == DOT_EMPTY){
+                } else if (searchNewReq && map[row][column] == DOT_EMPTY) {
                     map[row][column] = DOT_O;
                     prevAiRow = row;
                     prevAiColumn = column;
@@ -529,26 +609,33 @@ public class TikTakToe {
         }
         return false;
     }
-    private static boolean aiDiagSearch(boolean searchNewReq){
+
+    /**
+     * Ищет диагональную  последовательность по координатам предыдущей точки или ищет совершенно новую последовательность
+     *
+     * @param searchNewReq состояние поиска новой последоватеьности
+     * @return возвращает true в случае блокирования хода аппонента
+     */
+    private static boolean aiDiagSearch(boolean searchNewReq) {
         for (int[][] intsArr1 : ARR_DIAG) {
-            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X){
+            if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X) {
                 continue;
             }
 
             for (int[] intsArr2 : intsArr1) {
                 int row = intsArr2[0];
                 int column = intsArr2[1];
-               if(row == prevAiRow && column == prevAiColumn){
-                   if(map[row][column] == DOT_EMPTY){
-                       map[row][column] = DOT_O;
-                       return true;
-                   }else if(searchNewReq && map[row][column] == DOT_EMPTY){
-                       map[row][column] = DOT_O;
-                       prevAiRow = row;
-                       prevAiColumn = column;
-                       return true;
-                   }
-               }
+                if (row == prevAiRow && column == prevAiColumn){
+                    if(map[row][column] == DOT_EMPTY){
+                        map[row][column] = DOT_O;
+                        return true;
+                    }else if(searchNewReq && map[row][column] == DOT_EMPTY){
+                        map[row][column] = DOT_O;
+                        prevAiRow = row;
+                        prevAiColumn = column;
+                        return true;
+                    }
+                }
 
             }
         }
@@ -595,37 +682,34 @@ public class TikTakToe {
               }
           }
           // Всегда начинаем с центра
-            if(!middleState){
-                //обработка центра
-                if(map[middleColumn][middleColumn] == DOT_EMPTY){
-                    map[middleColumn][middleColumn] = DOT_O;
-                    prevAiRow = middleColumn;
-                    prevAiColumn = middleColumn;
-                    return;
-                }
-                else if(map[middleColumn][middleColumn + 1] == DOT_EMPTY){
-                    map[middleColumn][middleColumn + 1] = DOT_O;
-                    prevAiRow = middleColumn;
-                    prevAiColumn = middleColumn + 1;
-                    return;
-                }
-                else if(map[middleColumn - 1][middleColumn - 1] == DOT_EMPTY){
-                    map[middleColumn][middleColumn - 1] = DOT_O;
-                    prevAiRow = middleColumn;
-                    prevAiColumn = middleColumn - 1;
-                    return;
-                }
-                else{
-                    middleState = true;
-                }
-                //Сначала ищем последовательность содержащую prevAiRow Column для этого можно использовать, измененный метод checkWin
-            }
-            if(aiVerticalSearch(false) || aiDiagSearch(false) || aiVerticalSearch(false)){
+        if(!middleState){
+            //обработка центра
+            if (map[middleColumn][middleColumn] == DOT_EMPTY) {
+                map[middleColumn][middleColumn] = DOT_O;
+                prevAiRow = middleColumn;
+                prevAiColumn = middleColumn;
                 return;
-            }
-            if(aiVerticalSearch(true) || aiDiagSearch(true) || aiVerticalSearch(true)){
+            } else if (map[middleColumn][middleColumn + 1] == DOT_EMPTY) {
+                map[middleColumn][middleColumn + 1] = DOT_O;
+                prevAiRow = middleColumn;
+                prevAiColumn = middleColumn + 1;
                 return;
+            } else if (map[middleColumn - 1][middleColumn - 1] == DOT_EMPTY) {
+                map[middleColumn][middleColumn - 1] = DOT_O;
+                prevAiRow = middleColumn;
+                prevAiColumn = middleColumn - 1;
+                return;
+            } else {
+                middleState = true;
             }
+            //Сначала ищем последовательность содержащую prevAiRow Column для этого можно использовать, измененный метод checkWin
+        }
+        if (aiVerticalSearch(false) || aiDiagSearch(false) || aiVerticalSearch(false)) {
+            return;
+        }
+        if (aiVerticalSearch(true) || aiDiagSearch(true) || aiVerticalSearch(true)) {
+            return;
+        }
     }
 
 
