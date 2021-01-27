@@ -10,6 +10,9 @@ public class TikTakToe {
     public static final char DOT_X = 'X';
     public static final char DOT_O = 'O';
     public static char[][] map;
+
+
+
     //переменная для хранения текущего хода
     public static int currrentTurn = 0;
     //массивы для направлений
@@ -23,6 +26,17 @@ public class TikTakToe {
     public static int lenArrHorizontal = collectingHorizontalSequences(false);
     public static final int[][] ARR_HORIZONTAL = new int[lenArrHorizontal][DOTS_TO_WIN];
     public static Scanner scanner = new Scanner(System.in);
+
+
+    public static int[] aiHorizontalArr = new int[DOTS_TO_WIN];
+    public static int[][] aiDiagArr = new int[DOTS_TO_WIN][2];
+    public static int[][] aiVerticalArr = new int[DOTS_TO_WIN][2];
+
+    public static int prevAiColumn = 0;
+    public static int prevAiRow = 0;
+    public static int prevWay = 0;
+
+    public static boolean middleState = false;
 
     public static void main(String[] args) {
         //Собираем коордианты всех диагональных значений
@@ -65,7 +79,7 @@ public class TikTakToe {
 
     private static boolean checkWin(char symbol) {
         //Если текущий ход не равен количеству точек для победы, то возвращает false
-        if(currrentTurn  <= DOTS_TO_WIN){
+        if(currrentTurn  < DOTS_TO_WIN - 1){
             return false;
         }
         //        //что в строке есть нужное количество символов подряд
@@ -239,78 +253,76 @@ public class TikTakToe {
         }
         return true;
     }
-
-    private static void aiTurn() {
-            //Минимальное число последовательности для блокировки с округление в больную сторону
-            int minTurn = (int)Math.ceil((double)DOTS_TO_WIN/2);
-            int middleRow = 0;
-            int middleColumn = 0;
-            int startIndex = 0;
-
-            //Переменная для хранения текущей строки, увеличивается каждый ход
-            int rows = 0;
-
-            //что в строке есть нужное количество символов подряд
-            for (char[] row : map) {
-
-                for (int i = 0; i < SIZE; i++) {
-                    int dotColumn = 0;
-                    int countStep = 0;
-                    for (int[] ints : ARR_HORIZONTAL) {
-
-                        //проверка на заполненность перебираемого значения
-                        if(row[ints[0]] == DOT_O || row[ints[DOTS_TO_WIN - 1]] == DOT_O){
-                            break;
-                        }
-                        int countQuanity = 0;
-                        for (int index : ints) {
-                            countStep++;
-                            if (row[index] == DOT_X) {
-                                countQuanity++;
-                            }else if(row[index] == DOT_EMPTY){
-                                dotColumn = index;
-                            }
-                            if (countQuanity == DOTS_TO_WIN - 1 && countStep == DOTS_TO_WIN) {
-
-                                map[rows][dotColumn] = DOT_O;
-                                return;
-                            }
-                        }
-
-                    }
-                }
-                rows++;
-            }
+    private static boolean aiVertical(int point){
         //Вертикальное блокирование
-            for (int[][] intsArr1 : ARR_VERTICAL) {
-                if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O){
-                    continue;
-                }
-                int dotColumn = 0;
-                int dotRow = 0;
-                int countStep = 0;
-                int countQuanity = 0;
-                for (int[] intsArr2 : intsArr1) {
-                    countStep++;
-                    int row = intsArr2[0];
-                    int column = intsArr2[1];
+        for (int[][] intsArr1 : ARR_VERTICAL) {
+            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O){
+                continue;
+            }
+            int dotColumn = 0;
+            int dotRow = 0;
+            int countStep = 0;
+            int countQuanity = 0;
+            for (int[] intsArr2 : intsArr1) {
+                countStep++;
+                int row = intsArr2[0];
+                int column = intsArr2[1];
 
-                    if (map[row][column] == DOT_X) {
-                        countQuanity++;
-                    }
-                    else if(map[row][column] == DOT_EMPTY){
-                        dotRow = row;
-                        dotColumn = column;
-                    }
-                    if (countQuanity == DOTS_TO_WIN - 1 &&  countStep == DOTS_TO_WIN) {
-                        map[dotRow][dotColumn] = DOT_O;
-                        return;
-                    }
+                if (map[row][column] == DOT_X && countQuanity != DOTS_TO_WIN - point) {
+                    countQuanity++;
+                }
+                else if(map[row][column] == DOT_EMPTY){
+                    dotRow = row;
+                    dotColumn = column;
+                }
+                if (countQuanity == DOTS_TO_WIN - point &&  countStep == DOTS_TO_WIN) {
+                    map[dotRow][dotColumn] = DOT_O;
+                    return true;
                 }
             }
+        }
+        return false;
+    }
+    private static boolean aiHorizontal(int point){
+
+        int rows = 0;
+        //что в строке есть нужное количество символов подряд
+        for (char[] row : map) {
+
+            for (int i = 0; i < SIZE; i++) {
+                int dotColumn = 0;
+                int countStep = 0;
+                for (int[] ints : ARR_HORIZONTAL) {
+
+                    //проверка на заполненность перебираемого значения
+                    if(row[ints[0]] == DOT_O || row[ints[DOTS_TO_WIN - 1]] == DOT_O){
+                        break;
+                    }
+                    int countQuanity = 0;
+                    for (int index : ints) {
+                        countStep++;
+                        if (row[index] == DOT_X && countQuanity != DOTS_TO_WIN - point) {
+                            countQuanity++;
+                        }else if(row[index] == DOT_EMPTY){
+                            dotColumn = index;
+                        }
+                        if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
+
+                            map[rows][dotColumn] = DOT_O;
+                            return true;
+                        }
+                    }
+
+                }
+            }
+            rows++;
+        }
+        return false;
+    }
+    private static boolean aiDiag(int point){
         for (int[][] intsArr1 : ARR_DIAG) {
             if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O){
-                    continue;
+                continue;
             }
             int dotColumn = 0;
             int dotRow = 0;
@@ -327,27 +339,207 @@ public class TikTakToe {
                 }else{
                     sideDiag++;
                 }
-                if (map[row][column] == DOT_X) {
+                if (map[row][column] == DOT_X && countQuanity != DOTS_TO_WIN - point) {
                     countQuanity++;
                 }else if(map[row][column] == DOT_EMPTY){
                     dotRow = row;
                     dotColumn = column;
                 }
-                if (countQuanity == DOTS_TO_WIN - 1 && countStep == DOTS_TO_WIN) {
+                if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
 
                     if(mainDiag >=DOTS_TO_WIN - 1){
                         map[dotRow][dotColumn] = DOT_O;
-                        return;
+                        return true;
                     }
                     if (sideDiag >= DOTS_TO_WIN - 1){
                         map[dotRow][dotColumn] = DOT_O;
-                        return;
+                        return true;
                     }
 
                 }
             }
         }
+        return false;
     }
+    private static boolean aiHorizontalWin(int point){
+
+        int rows = 0;
+        //что в строке есть нужное количество символов подряд
+        for (char[] row : map) {
+
+            for (int i = 0; i < SIZE; i++) {
+                int dotColumn = 0;
+                int countStep = 0;
+                for (int[] ints : ARR_HORIZONTAL) {
+
+                    //проверка на заполненность перебираемого значения
+                    if(row[ints[0]] == DOT_X || row[ints[DOTS_TO_WIN - 1]] == DOT_X){
+                        break;
+                    }
+                    int countQuanity = 0;
+                    for (int index : ints) {
+                        countStep++;
+                        if (row[index] == DOT_O && countQuanity != DOTS_TO_WIN - point) {
+                            countQuanity++;
+                        }else if(row[index] == DOT_EMPTY){
+                            dotColumn = index;
+                        }
+                        if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
+
+                            map[rows][dotColumn] = DOT_O;
+                            return true;
+                        }
+                    }
+
+                }
+            }
+            rows++;
+        }
+        return false;
+    }
+    private static boolean aiDiagWin(int point){
+        for (int[][] intsArr1 : ARR_DIAG) {
+            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X){
+                continue;
+            }
+            int dotColumn = 0;
+            int dotRow = 0;
+            int sideDiag = 0;
+            int mainDiag =  0;
+            int countQuanity = 0;
+            int countStep = 0;
+            for (int[] intsArr2 : intsArr1) {
+                countStep++;
+                int row = intsArr2[0];
+                int column = intsArr2[1];
+                if(row == column){
+                    mainDiag++;
+                }else{
+                    sideDiag++;
+                }
+                if (map[row][column] == DOT_O && countQuanity != DOTS_TO_WIN - point) {
+                    countQuanity++;
+                }else if(map[row][column] == DOT_EMPTY){
+                    dotRow = row;
+                    dotColumn = column;
+                }
+                if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
+
+                    if(mainDiag >=DOTS_TO_WIN - 1){
+                        map[dotRow][dotColumn] = DOT_O;
+                        return true;
+                    }
+                    if (sideDiag >= DOTS_TO_WIN - 1){
+                        map[dotRow][dotColumn] = DOT_O;
+                        return true;
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
+    private static boolean aiVerticalWin(int point){
+        //Вертикальное блокирование
+        for (int[][] intsArr1 : ARR_VERTICAL) {
+            if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X){
+                continue;
+            }
+            int dotColumn = 0;
+            int dotRow = 0;
+            int countStep = 0;
+            int countQuanity = 0;
+            for (int[] intsArr2 : intsArr1) {
+                countStep++;
+                int row = intsArr2[0];
+                int column = intsArr2[1];
+
+                if (map[row][column] == DOT_O && countQuanity != DOTS_TO_WIN - point) {
+                    countQuanity++;
+                }
+                else if(map[row][column] == DOT_EMPTY){
+                    dotRow = row;
+                    dotColumn = column;
+                }
+                if (countQuanity == DOTS_TO_WIN - point &&  countStep == DOTS_TO_WIN) {
+                    map[dotRow][dotColumn] = DOT_O;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private static void aiTurn() {
+            //Минимальное число последовательности для блокировки с округление в больную сторону
+            int minTurn = DOTS_TO_WIN/2;
+            int maxTurn = 1;
+            //считаем индекс центра
+            int middleColumn = SIZE/2;
+            int startIndex = 0;
+
+            int countO = 0;
+            //состояния проверки
+            boolean stateH = false;
+            boolean stateV = false;
+            boolean stateD = false;
+
+
+
+            //Ищем выигрышную последовательность
+            //Вычисляем ход. после которого необходимо вести проверку на выигрышную последовательность у крестиков или ноликов
+          if(DOTS_TO_WIN - minTurn - 1 <= currrentTurn){
+              //Ищем выигрышную последовательность
+              if(aiHorizontalWin(maxTurn) || aiVerticalWin(maxTurn) || aiDiagWin(maxTurn)){
+                  return;
+              }
+
+
+              stateH = aiHorizontal(maxTurn);
+              stateD = aiDiag(maxTurn);
+              stateV  = aiVertical(maxTurn);
+              if(stateH || stateD || stateV) {
+                  return;
+              }
+              if(!(stateH && stateD && stateV) && minTurn != maxTurn){
+                  stateH = aiHorizontal(minTurn);
+                  stateD = aiDiag(minTurn);
+                  stateV  = aiVertical(minTurn);
+                  if(stateH || stateD || stateV) {
+                      return;
+                  }
+              }
+          }
+          // Всегда начинаем с центра
+            if(!middleState){
+                //обработка центра
+                if(map[middleColumn][middleColumn] == DOT_EMPTY){
+                    map[middleColumn][middleColumn] = DOT_O;
+                    prevAiRow = middleColumn;
+                    prevAiColumn = middleColumn;
+                }
+                else if(map[middleColumn][middleColumn + 1] == DOT_EMPTY){
+                    map[middleColumn][middleColumn + 1] = DOT_O;
+                    prevAiRow = middleColumn;
+                    prevAiColumn = middleColumn + 1;
+                }
+                else if(map[middleColumn - 1][middleColumn - 1] == DOT_EMPTY){
+                    map[middleColumn][middleColumn - 1] = DOT_O;
+                    prevAiRow = middleColumn;
+                    prevAiColumn = middleColumn - 1;
+                }
+                else{
+                    middleState = true;
+                }
+
+            }
+
+
+
+
+
+
+    }
+
 
     private static void humanTurn() {
         int x, y;
