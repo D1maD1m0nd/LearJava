@@ -10,9 +10,10 @@ public class TikTakToe {
     public static final char DOT_X = 'X';
     public static final char DOT_O = 'O';
     public static char[][] map;
+    //переменная для хранения текущего хода
+    public static int currrentTurn = 0;
     //массивы для направлений
     //Дагонали
-
     public static int lenArrDiag = collectingMainDiagonalSequences(false);
     public static final int[][][] ARR_DIAG = new int[lenArrDiag][DOTS_TO_WIN][2];
     //Вертикаль
@@ -49,6 +50,7 @@ public class TikTakToe {
             if (aiWin || mapIsFull()) {
                 break;
             }
+            currrentTurn++;
         } while (true);
         if (humanWin) {
             System.out.println("Победил человек");
@@ -62,6 +64,10 @@ public class TikTakToe {
     }
 
     private static boolean checkWin(char symbol) {
+        //Если текущий ход не равен количеству точек для победы, то возвращает false
+        if(currrentTurn  <= DOTS_TO_WIN){
+            return false;
+        }
         //        //что в строке есть нужное количество символов подряд
         for (char[] row : map) {
             for (int i = 0; i < SIZE; i++) {
