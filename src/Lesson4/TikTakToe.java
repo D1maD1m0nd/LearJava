@@ -309,11 +309,14 @@ public class TikTakToe {
             if(map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[SIZE - 1][0]][intsArr1[SIZE - 1][1]] == DOT_O){
                     continue;
             }
+            int dotColumn = 0;
+            int dotRow = 0;
             int sideDiag = 0;
             int mainDiag =  0;
             int countQuanity = 0;
+            int countStep = 0;
             for (int[] intsArr2 : intsArr1) {
-
+                countStep++;
                 int row = intsArr2[0];
                 int column = intsArr2[1];
                 if(row == column){
@@ -323,18 +326,21 @@ public class TikTakToe {
                 }
                 if (map[row][column] == DOT_X) {
                     countQuanity++;
+                }else if(map[row][column] == DOT_EMPTY){
+                    dotRow = row;
+                    dotColumn = column;
                 }
-                if (countQuanity == DOTS_TO_WIN - 1) {
+                if (countQuanity == DOTS_TO_WIN - 1 && countStep == SIZE) {
+
                     if(mainDiag >=DOTS_TO_WIN - 1){
-                        if (row + 1 >= SIZE) {
-                            map[row - 1][column-1] = DOT_O;
-                            return;
-                        }
-                        map[row + 1][column + 1] = DOT_O;
+                        map[dotRow][dotColumn] = DOT_O;
                         return;
                     }
-                    map[row + 1][column - 1] = DOT_O;
-                    return;
+                    if (sideDiag >= DOTS_TO_WIN - 1){
+                        map[dotRow][dotColumn] = DOT_O;
+                        return;
+                    }
+
                 }
             }
         }
