@@ -21,7 +21,7 @@ public class TestEmployee
         return employee;
     }
     private static int genRandomNumPhone(){
-        return (int)(Math.random() * 11) + 11;
+        return (int) (Math.random() * 1000000000) + 1000000000;
     }
     private static double genSalary(){
         return Math.random() * 100000 + 20000;
