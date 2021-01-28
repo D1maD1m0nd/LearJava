@@ -4,11 +4,11 @@ import java.util.Random;
 
 public class TestEmployee
 {
-    private static String[] names = new String[]{"Авдошин Дима Александрович",
-                                        "Перекопиваев Анатолий Александрович",
-                                        "Артемовавич Тигран Александрович",
-                                        "Музыкальный Виктор Суварович",
-                                         "Засанадлева Анастасия Викторовна"};
+    private static final String[] names = new String[]{"Авдошин Дима Александрович",
+                                                        "Перекопиваев Анатолий Александрович",
+                                                        "Артемовавич Тигран Александрович",
+                                                        "Музыкальный Виктор Суварович",
+                                                         "Засанадлева Анастасия Викторовна"};
     private static final String EMAIL = "company@mail.ru";
     public static void main(String[] args) {
        Employee[] employees =  generateEmployee();
