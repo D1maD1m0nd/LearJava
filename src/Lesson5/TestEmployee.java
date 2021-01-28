@@ -1,6 +1,5 @@
 package Lesson5;
 
-import java.util.Random;
 
 public class TestEmployee
 {
