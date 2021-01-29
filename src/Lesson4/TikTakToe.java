@@ -595,12 +595,12 @@ public class TikTakToe {
         int x, y;
         do {
             System.out.println("Введите коордаты");
-            System.out.println("Введите X");
-            x = scanner.nextInt() - 1;
             System.out.println("Введите Y");
             y = scanner.nextInt() - 1;
+            System.out.println("Введите X");
+            x = scanner.nextInt() - 1;
         } while (!isCellValid(x, y));
-        map[x][y] = DOT_X;
+        map[y][x] = DOT_X;
     }
 
     private static boolean isCellValid(int x, int y) {//true если условие валидно, т.е. мы можем поставить символ в эту ячейку, false в иных случаях
