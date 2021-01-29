@@ -574,19 +574,13 @@ public class TikTakToe {
               if(aiHorizontal(maxTurn,0) || aiVerticalWin(maxTurn) || aiDiag(maxTurn, 0)){
                   return;
               }
-              stateH = aiHorizontal(maxTurn, 1);
-              stateD = (stateH) ? false : aiDiag(maxTurn, 1);
-              stateV  = (stateD) ? false : aiVertical(maxTurn);
-              if(stateH || stateD || stateV) {
+              //1 проверка
+              if(aiHorizontal(maxTurn, 1) || aiDiag(maxTurn, 1) || aiVertical(maxTurn)) {
                   return;
               }
-              if(!(stateH && stateD && stateV) && minTurn != maxTurn){
-                  stateH = aiHorizontal(minTurn, 1);
-                  stateD = stateH ? false : aiDiag(minTurn, 1);
-                  stateV  = stateD ? false : aiVertical(minTurn);
-                  if(stateH || stateD || stateV) {
-                      return;
-                  }
+              //2 проверка
+              if(aiHorizontal(minTurn, 1) || aiDiag(minTurn, 1) || aiVertical(minTurn)) {
+                  return;
               }
           }
           // Всегда начинаем с центра
