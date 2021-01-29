@@ -604,7 +604,7 @@ public class TikTakToe {
     }
 
     private static boolean isCellValid(int x, int y) {//true если условие валидно, т.е. мы можем поставить символ в эту ячейку, false в иных случаях
-        return x >= 0 && x < SIZE && y >= 0 && y < SIZE && map[x][y] == DOT_EMPTY;
+        return x >= 0 && x < SIZE && y >= 0 && y < SIZE && map[y][x] == DOT_EMPTY;
     }
 
     private static void printMap() {
