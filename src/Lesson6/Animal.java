@@ -35,6 +35,7 @@ public abstract class Animal {
     public void swim(double let){
         if(let > maxDistSwim){
             System.out.printf("%s не может проплыть больше %.1f м\n", name, maxDistSwim);
+            return;
         }
         System.out.printf("%s проплыл %.1f м\n", name, let);
     };
