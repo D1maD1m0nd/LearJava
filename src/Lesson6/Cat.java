@@ -2,7 +2,6 @@ package Lesson6;
 
 public class Cat extends Animal{
     private static int count = 0;
-    private final double maxDistanseSwim = 0;
     Cat(String name,  double maxDistRun){
         super(name,maxDistRun);
         count++;
