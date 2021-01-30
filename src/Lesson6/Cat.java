@@ -11,8 +11,6 @@ public class Cat extends Animal{
 
     }
 
-    public static int getCount(){
-        return count;
-    }
+    public static int getCount(){return count; }
 
 }

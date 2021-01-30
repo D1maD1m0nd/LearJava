@@ -5,6 +5,7 @@ public abstract class Animal {
     private double maxDistSwim;
     private double maxDistRun;
     private static int count;
+    //так как кошки не могут плавать то и параметр максимальной дистанции указывать не к чему
     Animal(String name,double maxDistSwim, double maxDistRun){
         this.name = name;
 
@@ -13,9 +14,10 @@ public abstract class Animal {
 
         count++;
     }
+
+    //конструктор для кошек
     Animal(String name, double maxDistRun){
         this.name = name;
-
         this.maxDistRun = maxDistRun;
         count++;
     }
