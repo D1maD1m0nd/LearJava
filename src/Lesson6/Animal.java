@@ -1,29 +1,30 @@
 package Lesson6;
 
 public abstract class Animal {
-    public String name;
-    public int age;
-    public String color;
-    public double maxDistSwim;
-    public double maxDistRun;
-    public static int countAnimal;
-    Animal(String name, int age, String color, double maxDistSwim, double maxDistRun){
+    private String name;
+    private double maxDistSwim;
+    private double maxDistRun;
+    private static int count;
+    Animal(String name,double maxDistSwim, double maxDistRun){
         this.name = name;
-        this.age = age;
-        this.color = color;
+
         this.maxDistRun = maxDistRun;
         this.maxDistSwim = maxDistSwim;
 
-        countAnimal++;
+        count++;
     }
-    Animal(String name, int age, String color,  double maxDistRun){
+    Animal(String name, double maxDistRun){
         this.name = name;
-        this.age = age;
-        this.color = color;
-        this.maxDistRun = maxDistRun;
-        countAnimal++;
-    }
 
+        this.maxDistRun = maxDistRun;
+        count++;
+    }
+    public static int getCount(){
+        return count;
+    }
+    public String getName(){
+        return name;
+    }
     public void run(double let){
         if(let > maxDistRun){
             System.out.printf("%s не может пробежать больше %.1f м\n", name, maxDistRun);

@@ -1,10 +1,13 @@
 package Lesson6;
 
 public class Dog extends Animal{
-    public static int countDog = 0;
+    private static int count;
 
-    Dog(String name, int age, String color, double maxDistSwim, double maxDistRun){
-        super(name,age,color, maxDistSwim,maxDistRun);
-        countDog++;
+    Dog(String name,  double maxDistSwim, double maxDistRun){
+        super(name, maxDistSwim,maxDistRun);
+        count++;
+    }
+    public static int getCount(){
+        return count;
     }
 }
