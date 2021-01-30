@@ -37,6 +37,6 @@ public class TestAnimal {
         vovaDog.run(500);
         vovaDog.run(501);
 
-        System.out.printf("Видов животных %d суммарное количество животных %d", Animal.countAnimal, Dog.countDog + Cat.countCat);
+        System.out.printf("суммарное количество животных %d", Animal.countAnimal);
     }
 }

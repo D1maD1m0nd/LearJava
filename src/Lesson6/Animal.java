@@ -21,6 +21,7 @@ public abstract class Animal {
         this.age = age;
         this.color = color;
         this.maxDistRun = maxDistRun;
+        countAnimal++;
     }
 
     public void run(double let){
