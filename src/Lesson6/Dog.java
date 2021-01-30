@@ -3,8 +3,8 @@ package Lesson6;
 public class Dog extends Animal{
     private static int count;
 
-    Dog(String name,  double maxDistSwim, double maxDistRun){
-        super(name, maxDistSwim,maxDistRun);
+    Dog(String name){
+        super(name, 10,500);
         count++;
     }
     public static int getCount(){

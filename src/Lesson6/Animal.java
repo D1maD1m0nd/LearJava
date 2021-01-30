@@ -14,7 +14,6 @@ public abstract class Animal {
 
         count++;
     }
-
     //конструктор для кошек
     Animal(String name, double maxDistRun){
         this.name = name;
