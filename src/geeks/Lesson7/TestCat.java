@@ -5,9 +5,9 @@ public class TestCat {
         Cat[] cats = RuleCats.GenerateCats(60);
         Plate plate = new Plate(200);
         //в данном случае остались голодные коты
-        RuleCats.eatCats(cats,plate);
+        RuleCats.eatCats(cats, plate);
 
         //в следующем случае все коты должны быть уже накормленные,но это не факт
-        RuleCats.eatCats(cats,plate);
+        RuleCats.eatCats(cats, plate);
     }
 }
