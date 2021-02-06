@@ -3,7 +3,12 @@ package geeks.Lesson7;
 public class Plate {
     private int food;
     Plate(int food){
-        this.food = food;
+        if (food <= 0){
+            this.food = 500;
+        }else {
+            this.food = food;
+        }
+
     }
     public void info(){
         System.out.printf("Еды в тарелке осталось %d\n",food);
