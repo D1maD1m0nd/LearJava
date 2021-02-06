@@ -28,7 +28,7 @@ public class Plate {
             System.out.println("Значение еды не может быть отрицательным или 0");
             return;
         }
-        this.food = food;
+        this.food += food;
     }
 
     /**
