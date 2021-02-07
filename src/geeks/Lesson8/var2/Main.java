@@ -1,4 +1,4 @@
-package geeks.Lesson8.Var1;
+package geeks.Lesson8.var2;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,7 +16,16 @@ public class Main {
                 participants) {
             for (Barrier barrier:
                     barriers) {
-
+                if(barrier instanceof  Wall){
+                    if(!participant.jump(barrier)){
+                        break;
+                    }
+                }
+                if(barrier instanceof Treadmill){
+                    if(!participant.run(barrier)){
+                        break;
+                    }
+                }
             }
         }
     }
