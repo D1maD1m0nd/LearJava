@@ -1,6 +1,6 @@
 package tests;
 
-public class Cat {
+public class Cat implements Tests.Swimming{
     private String name;
     private int appetite;
 
@@ -15,5 +15,8 @@ public class Cat {
 
     public void eat(Plate plate){
         plate.decreaseFood(appetite);
+    }
+    public void swim(){
+        System.out.println("Плыву");
     }
 }
