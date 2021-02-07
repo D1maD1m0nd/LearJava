@@ -8,7 +8,7 @@ public class Treadmill implements Barrier {
     }
 
     @Override
-    public int overcomingBarrier() {
+    public int getBarrier() {
         return lengthTreadmill;
     }
 }

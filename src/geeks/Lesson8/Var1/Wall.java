@@ -6,7 +6,7 @@ public class Wall implements Barrier {
         this.maxHeight = maxHeight;
     }
     @Override
-    public int overcomingBarrier() {
+    public int getBarrier() {
         return maxHeight;
     }
 }

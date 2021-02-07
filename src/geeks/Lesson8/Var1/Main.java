@@ -17,12 +17,12 @@ public class Main {
             for (Barrier barrier:
                     barriers) {
                 if(barrier instanceof Treadmill){
-                    if(!participant.run(barrier.overcomingBarrier())){
+                    if(!participant.run(barrier.getBarrier())){
                         break;
                     };
                 }
                 if(barrier instanceof Wall){
-                    if(!participant.jump(barrier.overcomingBarrier())){
+                    if(!participant.jump(barrier.getBarrier())){
                         break;
                     };
                 }
