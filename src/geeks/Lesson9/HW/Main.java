@@ -5,7 +5,6 @@ public class Main {
     public static final ErrorDescription eDescipt = new ErrorDescription();
     public static void main(String[] args) {
         String[][] arr = {{"1","3","3","4"},{"1","2 ","3","4"},{"1","2","3","4"},{"1","e","в","4"}};
-
         try{
             sumArray(arr);
         }catch (MyArraySizeException  | MyArrayDataException e){
@@ -40,6 +39,9 @@ public class Main {
         int sum = 0;
         for (String[] strings : arr) {
             for (String elem : strings) {
+                //убираем пробелы, так как без низ по факту число тоже должно быть числом, в других языках именно так
+                elem = elem.trim();
+                //пример изи шарпа Convert.ToInt32("1232323          ") даст число, а не исключение
                 //я хотел ловить намбер формат, но вроде смысл задания как раз писать свою обработку , поэтому использ0овал проверку через регулярку
                 if (elem.matches("[0-9]+")) {
                     sum += Integer.parseInt(elem);
