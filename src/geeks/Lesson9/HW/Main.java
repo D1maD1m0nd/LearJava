@@ -1,34 +1,29 @@
 package geeks.Lesson9.HW;
 
-import java.io.PrintStream;
-import java.util.Arrays;
 
 public class Main {
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
+    public static final ErrorDescription eDescipt = new ErrorDescription();
     public static void main(String[] args) {
-        String[][] arr = {{"1","3","3","4"},{"1","2","3","4"},{"1","2","3","4"},{"1","e","3","4"}};
+        String[][] arr = {{"1","3","3","4"},{"1","2","3","4"},{"1","2","3","4"},{"1","e","в","4"}};
 
         try{
             sumArray(arr);
         }catch (MyArraySizeException  | MyArrayDataException e){
             //тут вызовется MyArrayDataException
-            System.out.println(e.getMessage());
-            System.out.println(ANSI_RED + e.getStackTrace()[0] + "\n" + e.getStackTrace()[1] + ANSI_RESET);
+            eDescipt.printInfoError(e.getStackTrace(), e.getMessage());
         }
+
         String[][] arr1 = {{"1","3","3","4"},{"1","2","3","4"},{"1","2","3","4"}};
         try{
             sumArray(arr1);
 
         }catch (MyArraySizeException  | MyArrayDataException e){
             //тут вызовется MyArraySizeException
-            System.out.println(e.getMessage());
-            System.out.println(ANSI_RED + e.getStackTrace()[0] + "\n" + e.getStackTrace()[1] + ANSI_RESET);
-
-
+            eDescipt.printInfoError(e.getStackTrace(), e.getMessage());
         }
     }
-    public static void sumArray(String arr[][]) throws MyArraySizeException,MyArrayDataException{
+
+    public static void sumArray(String[][] arr) throws MyArraySizeException,MyArrayDataException{
 
         int maxSizeRow = 4;
         int maxSizeColumn = 4;
@@ -45,12 +40,13 @@ public class Main {
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int k = 0; k < arr[i].length; k++) {
+                String elem = arr[i][k];
                 //я хотел ловить намбер формат, но вроде смысл задания как раз писать свою обработку , поэтому использ0овал проверку через регулярку
-                if (arr[i][k].matches("[0-9]+")){
-                    sum += Integer.parseInt(arr[i][k]);
+                if (elem.matches("[0-9]+")){
+                    sum += Integer.parseInt(elem);
                 }else{
-                    System.out.println("Сумма элементов массива " + sum);
-                    throw new MyArrayDataException("[" + Integer.toString(i) + "][" + Integer.toString(k) + "]", arr[i][k]);
+                    System.out.println("Не полная сумма элементов массива равна: " + sum);
+                    throw new MyArrayDataException( eDescipt.printProblemElements(arr));
                 }
             }
         }
