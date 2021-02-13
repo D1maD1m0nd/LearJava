@@ -12,7 +12,7 @@ public class Main {
             //тут вызовется MyArrayDataException
             System.out.println(e.getMessage());
         }
-        String[][] arr1 = {{"1","3","3","4"},{"1","2,","3","4"},{"1","2","3","4"},{"1","2","3","4"},{"1","3","3","4"}};
+        String[][] arr1 = {{"1","3","3","4"},{"1","2","3","4"},{"1","2","3","4"}};
         try{
             sumArray(arr1);
         }catch (MyArraySizeException  | MyArrayDataException e){
@@ -22,14 +22,22 @@ public class Main {
     }
 
     public static void sumArray(String arr[][]) throws MyArraySizeException,MyArrayDataException{
-        int maxSizeRow = 5;
-        int maxSizeColumn = 5;
-        if(Arrays.stream(arr).count() >= maxSizeRow || Arrays.stream(arr[0]).count() >= maxSizeColumn){
+        int maxSizeRow = 4;
+        int maxSizeColumn = 4;
+        if(arr.length > maxSizeRow || arr.length < maxSizeRow){
             throw new MyArraySizeException();
+        }else{
+            //обрабатываем длинну элементов
+            for (String [] item: arr) {
+                if(item.length > maxSizeColumn || item.length < maxSizeColumn){
+                    throw new MyArraySizeException();
+                }
+            }
         }
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int k = 0; k < arr[i].length; k++) {
+                //я хотел ловить намбер формат, но вроде смысл задания как раз писать свою обработку , поэтому использ0овал проверку через регулярку
                 if (arr[i][k].matches("[0-9]+")){
                     sum += Integer.parseInt(arr[i][k]);
                 }else{
