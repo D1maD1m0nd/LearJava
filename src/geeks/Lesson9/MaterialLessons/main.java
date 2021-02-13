@@ -18,6 +18,7 @@ public class main {
         }
 
         catch (MyZeroExeption e){
+
             System.out.println(e.getMessage());
         }
         System.out.println(someFunction(5.0,0.0));

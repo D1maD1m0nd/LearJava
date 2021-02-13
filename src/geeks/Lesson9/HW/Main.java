@@ -1,8 +1,11 @@
 package geeks.Lesson9.HW;
 
+import java.io.PrintStream;
 import java.util.Arrays;
 
 public class Main {
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
     public static void main(String[] args) {
         String[][] arr = {{"1","3","3","4"},{"1","2","3","4"},{"1","2","3","4"},{"1","e","3","4"}};
 
@@ -11,13 +14,18 @@ public class Main {
         }catch (MyArraySizeException  | MyArrayDataException e){
             //тут вызовется MyArrayDataException
             System.out.println(e.getMessage());
+            System.out.println(ANSI_RED + e.getStackTrace()[0] + "\n" + e.getStackTrace()[1] + ANSI_RESET);
         }
         String[][] arr1 = {{"1","3","3","4"},{"1","2","3","4"},{"1","2","3","4"}};
         try{
             sumArray(arr1);
+
         }catch (MyArraySizeException  | MyArrayDataException e){
             //тут вызовется MyArraySizeException
             System.out.println(e.getMessage());
+            System.out.println(ANSI_RED + e.getStackTrace()[0] + "\n" + e.getStackTrace()[1] + ANSI_RESET);
+
+
         }
     }
     public static void sumArray(String arr[][]) throws MyArraySizeException,MyArrayDataException{
