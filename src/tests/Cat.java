@@ -1,6 +1,6 @@
 package tests;
 
-public class Cat implements Tests.Swimming{
+public class Cat implements TestInf{
     private String name;
     private int appetite;
 
