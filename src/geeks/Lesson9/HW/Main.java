@@ -20,8 +20,8 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
-
     public static void sumArray(String arr[][]) throws MyArraySizeException,MyArrayDataException{
+
         int maxSizeRow = 4;
         int maxSizeColumn = 4;
         if(arr.length > maxSizeRow || arr.length < maxSizeRow){
