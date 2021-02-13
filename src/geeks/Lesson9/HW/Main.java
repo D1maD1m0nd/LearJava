@@ -4,7 +4,7 @@ package geeks.Lesson9.HW;
 public class Main {
     public static final ErrorDescription eDescipt = new ErrorDescription();
     public static void main(String[] args) {
-        String[][] arr = {{"1","3","3","4"},{"1","2","3","4"},{"1","2","3","4"},{"1","e","в","4"}};
+        String[][] arr = {{"1","3","3","4"},{"1","2 ","3","4"},{"1","2","3","4"},{"1","e","в","4"}};
 
         try{
             sumArray(arr);
@@ -38,18 +38,18 @@ public class Main {
             }
         }
         int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            for (int k = 0; k < arr[i].length; k++) {
-                String elem = arr[i][k];
+        for (String[] strings : arr) {
+            for (String elem : strings) {
                 //я хотел ловить намбер формат, но вроде смысл задания как раз писать свою обработку , поэтому использ0овал проверку через регулярку
-                if (elem.matches("[0-9]+")){
+                if (elem.matches("[0-9]+")) {
                     sum += Integer.parseInt(elem);
-                }else{
+                } else {
                     System.out.println("Не полная сумма элементов массива равна: " + sum);
-                    throw new MyArrayDataException( eDescipt.printProblemElements(arr));
+                    throw new MyArrayDataException(eDescipt.printProblemElements(arr));
                 }
             }
         }
+
         System.out.println("Сумма элементов массива" + sum);
 
     }
