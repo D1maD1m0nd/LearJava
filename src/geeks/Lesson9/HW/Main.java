@@ -2,6 +2,9 @@ package geeks.Lesson9.HW;
 
 
 public class Main {
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     public static final ErrorDescription eDescipt = new ErrorDescription();
     public static void main(String[] args) {
         String[][] arr = {{"1","3","3","4"},{"1","2 ","3","4"},{"1","2","3","4"},{"1","e","в","4"}};
