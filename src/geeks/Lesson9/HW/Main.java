@@ -33,7 +33,7 @@ public class Main {
                 if (arr[i][k].matches("[0-9]+")){
                     sum += Integer.parseInt(arr[i][k]);
                 }else{
-                    System.out.println("Сумма элементов массива" + sum);
+                    System.out.println("Сумма элементов массива " + sum);
                     throw new MyArrayDataException("[" + Integer.toString(i) + "][" + Integer.toString(k) + "]", arr[i][k]);
                 }
             }
