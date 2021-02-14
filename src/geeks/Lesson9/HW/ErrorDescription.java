@@ -1,12 +1,10 @@
 package geeks.Lesson9.HW;
 
 public class ErrorDescription {
-    private static final String ANSI_RED = "\u001B[31m";
-    private static final String ANSI_RESET = "\u001B[0m";
     public void printInfoError (StackTraceElement[] e, String infoError){
         System.out.println(infoError);
         for (Object elem: e) {
-            System.out.println(ANSI_RED + elem + ANSI_RESET);
+            System.out.println(Main.ANSI_RED + elem + Main.ANSI_RESET);
         }
     }
     public String printProblemElements(String[][] arr){
