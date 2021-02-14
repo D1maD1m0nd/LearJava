@@ -55,7 +55,7 @@ public class Main {
             }
         }
 
-        System.out.println("Сумма элементов массива" + sum);
+        System.out.println("Сумма элементов массива: " + sum);
 
     }
 }
