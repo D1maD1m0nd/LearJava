@@ -1,5 +1,6 @@
 package geeks.Lesson10.homeWork;
 
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class Main {
@@ -30,8 +31,13 @@ public class Main {
         lookup.add("Генералов", "+891234654");
         lookup.add("Васильев", "+8123467534");
         lookup.add("Викториянов", "+89432123");
+        //тут проверяем то, что одинаковые номера не будут добавляться в коллекцию
+        lookup.add("Викториянов", "+89432123");
         lookup.add("Васильев", "+812346753321");
-        System.out.println(lookup.get("Васильев"));
+        System.out.println("Васильев: " + lookup.get("Васильев"));
+        System.out.println("Генералов: " + lookup.get("Генералов"));
+        System.out.println("Данисимов: " + lookup.get("Данисимов"));
+        System.out.println("Викториянов: " + lookup.get("Викториянов"));
     }
 
     /**

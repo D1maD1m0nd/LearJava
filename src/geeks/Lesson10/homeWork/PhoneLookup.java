@@ -9,19 +9,26 @@ public class PhoneLookup {
 
     private Map persons;
     PhoneLookup(){
+
         persons = new HashMap();
     }
     //это надо переделать
     public void add(String lastName, String phoneNumber){
+        Set value = new HashSet();
         if(persons.containsKey(lastName)){
-            //переделаю на коллекцию с строк
-            String newValue = persons.get(lastName).toString() + phoneNumber + " " ;
-            persons.put(lastName,newValue);
+
+            value = (Set)persons.get(lastName);
+            value.add(phoneNumber);
+            persons.put(lastName,value);
             return;
         }
-        persons.put(lastName, phoneNumber + " ");
+        value.add(phoneNumber);
+        persons.put(lastName, value);
     }
     public String get(String lastName){
-        return persons.get(lastName).toString();
+        if(persons.containsKey(lastName)){
+            return persons.get(lastName).toString();
+        }
+        return "Человек с такой фамилией не найден";
     }
 }
