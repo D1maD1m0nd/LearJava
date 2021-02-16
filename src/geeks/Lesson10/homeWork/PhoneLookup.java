@@ -18,11 +18,7 @@ public class PhoneLookup {
     public void add(String lastName, String phoneNumber) {
         Set value = new HashSet();
         if (persons.containsKey(lastName)) {
-
             value = (Set) persons.get(lastName);
-            value.add(phoneNumber);
-            persons.put(lastName, value);
-            return;
         }
         value.add(phoneNumber);
         persons.put(lastName, value);
