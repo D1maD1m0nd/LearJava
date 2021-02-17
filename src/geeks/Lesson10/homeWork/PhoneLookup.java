@@ -26,7 +26,9 @@ public class PhoneLookup {
 
     public String get(String lastName) {
         if (persons.containsKey(lastName)) {
+            boolean a = true;
             return persons.get(lastName).toString();
+
         }
         return "Человек с такой фамилией не найден";
     }
