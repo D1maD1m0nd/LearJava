@@ -17,6 +17,7 @@ public class Main {
         System.out.println(stats.average());
         System.out.println(doubleStats.average());
         System.out.println(stats.sameAverage(doubleStats));
+        System.out.println(stats.<String>doSomething("Привет"));
     }
     public  static SimpleBox<Integer> sumSimpleBoxes(SimpleBox<Integer> simpleBox1, SimpleBox<Integer> simpleBox2){
 

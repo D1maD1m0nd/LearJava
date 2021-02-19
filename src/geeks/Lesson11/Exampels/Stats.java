@@ -18,6 +18,10 @@ public class Stats <T extends Number>{
         return this.average() == stats.average();
     }
 
+    public <K> K doSomething(K param){
+        System.out.println(param);
+        return param;
+    }
     public void setNum(T[] nums) {
         this.nums = nums;
     }
