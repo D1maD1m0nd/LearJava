@@ -24,5 +24,6 @@ public class Main {
         System.out.println(elemsInts.arrayToArrayList(new Integer[] {1,2,3,4}).getClass());
         System.out.println("Строки");
         System.out.println(elemsStrings.arrayToArrayList(new String[]{"12323","rewrwer","rewrewr","rewrere"}).getClass());
+
     }
 }
