@@ -3,7 +3,7 @@ package geeks.Lesson11.HomeWork;
 import java.util.ArrayList;
 
 public class Box <T extends Fruit>{
-    private ArrayList<T> value = new ArrayList<>();
+    private final ArrayList<T> value = new ArrayList<>();
 
     public float getWeight(){
         if(value.size() == 0){
