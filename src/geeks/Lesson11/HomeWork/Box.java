@@ -24,7 +24,7 @@ public class Box <T extends Fruit>{
     public void fill(Box<T> fruits){
         if(value.size() == 0){
 
-            value = fruits.getValue();
+            value.addAll(fruits.getValue());
             fruits.clear();
         }
     }

@@ -9,12 +9,13 @@ public class Main {
         Integer[] ints = new Integer[]{1,2,3,4,5};
         String[] strings = new String[]{"o1","p2","e3","g4"};
         System.out.println("Свапы");
-        System.out.println(Arrays.toString(ints));
-        System.out.println(Arrays.toString(strings));
+        ;
+        System.out.println("Числа до " + Arrays.toString(ints));
+        System.out.println("Строки до " + Arrays.toString(strings));
         swap(ints,1,2);
         swap(strings,3,2);
-        System.out.println(Arrays.toString(ints));
-        System.out.println(Arrays.toString(strings));
+        System.out.println("Числа после " + Arrays.toString(ints));
+        System.out.println("Строки после " + Arrays.toString(strings));
 
         //2. Написать метод, который преобразует массив в ArrayList;
         System.out.println("Числа");
@@ -39,8 +40,13 @@ public class Main {
         box3.add(new Orange());
         box3.add(new Orange());
         box3.add(new Orange());
+        box3.add(new Orange());
+        box3.add(new Orange());
+        box3.add(new Orange());
 
         Box<Orange> box4 = new Box<>();
+        box4.add(new Orange());
+        box4.add(new Orange());
         box4.add(new Orange());
         box4.add(new Orange());
         box4.add(new Orange());
@@ -58,15 +64,25 @@ public class Main {
         //Написать метод, который позволяет пересыпать фрукты из текущей коробки в другую. Помним про сортировку фруктов: нельзя яблоки высыпать в коробку с апельсинами. Соответственно, в текущей коробке фруктов не остается, а в другую перекидываются объекты, которые были в первой;
         //очищаем коробку
         box2.clear();
-        System.out.println("Коробка 1 перед заполнением: " + box1.getValue().size());
-        System.out.println("Коробка 2 перед заполнением: " + box2.getValue().size());
+        System.out.println("Коробка 1 перед заполнением яблоками: " + box1.getValue().size());
+        System.out.println("Коробка 2 перед заполнением яблоками: " + box2.getValue().size());
         box2.fill(box1);
-        System.out.println("Коробка 2 после заполнения из коробки 1: " + box2.getValue().size());
-        System.out.println("Коробка 1 после заполнения коробки 2: " + box1.getValue().size());
+        System.out.println("Коробка 2 после заполнения из коробки 1 яблоками: " + box2.getValue().size());
+        System.out.println("Коробка 1 после заполнения коробки 2 яблоками: " + box1.getValue().size());
         //Не забываем про метод добавления фрукта в коробку.
+
+        box3.clear();
+        System.out.println("Коробка 1 перед заполнением апельсинами: " + box4.getValue().size());
+        System.out.println("Коробка 2 перед заполнением апельсинами: " + box3.getValue().size());
+        box3.fill(box4);
+        System.out.println("Коробка 2 после заполнения из коробки 1 апельсинами: " + box3.getValue().size());
+        System.out.println("Коробка 1 после заполнения коробки 2 апельсинами: " + box4.getValue().size());
     }
 
     public static <T> void swap(T[] params, int index1, int index2){
+        if(params.length < (index1 + index2)/2 || (index1 + index2)/2 <= 0){
+            return;
+        }
         T buf = params[index1];
         params[index1] = params[index2];
         params[index2] = buf;
