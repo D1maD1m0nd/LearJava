@@ -1,29 +1,79 @@
 package geeks.Lesson11.HomeWork;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
         //1. Написать метод, который меняет два элемента массива местами (массив может быть любого ссылочного типа);
-        System.out.println("Числа");
-        Array<Integer> elemsInts = new Array<>(new Integer[]{1,2,3,4,5});
-        elemsInts.swap(1,2);
-        System.out.println(Arrays.toString(elemsInts.getValues()));
-        elemsInts.setValues(new Integer[]{1,32,435,5443,2222});
-        elemsInts.swap(3,4);
-        Integer[] newelements =  elemsInts.getValues();
-        System.out.println(Arrays.toString(newelements));
-        System.out.println("Строки");
-        Array<String> elemsStrings = new Array<>(new String[]{"dasdsad","ewqewqe","ewqewqe","dasdasdasdsdas", "ewqeqw123rertre"});
-        elemsStrings.swap(1,2);
-        System.out.println(Arrays.toString(elemsStrings.getValues()));
-
+        Integer[] ints = new Integer[]{1,2,3,4,5};
+        String[] strings = new String[]{"o1","p2","e3","g4"};
+        System.out.println("Свапы");
+        System.out.println(Arrays.toString(ints));
+        System.out.println(Arrays.toString(strings));
+        swap(ints,1,2);
+        swap(strings,3,2);
+        System.out.println(Arrays.toString(ints));
+        System.out.println(Arrays.toString(strings));
 
         //2. Написать метод, который преобразует массив в ArrayList;
         System.out.println("Числа");
-        System.out.println(elemsInts.arrayToArrayList(new Integer[] {1,2,3,4}).getClass());
+        System.out.println(arrayToArrayList(ints).getClass());
         System.out.println("Строки");
-        System.out.println(elemsStrings.arrayToArrayList(new String[]{"12323","rewrwer","rewrewr","rewrere"}).getClass());
+        System.out.println(arrayToArrayList(strings).getClass());
 
+
+        //Даны классы Fruit, Apple extends Fruit, Orange extends Fruit;
+        //Класс Box, в который можно складывать фрукты. Коробки условно сортируются по типу фрукта, поэтому в одну коробку нельзя сложить и яблоки, и апельсины;
+        Box<Apple> box1 = new Box<>();
+        box1.add(new Apple());
+        box1.add(new Apple());
+        box1.add(new Apple());
+
+        Box<Apple> box2 = new Box<>();
+        box2.add(new Apple());
+        box2.add(new Apple());
+        box2.add(new Apple());
+
+        Box<Orange> box3 = new Box<>();
+        box3.add(new Orange());
+        box3.add(new Orange());
+        box3.add(new Orange());
+
+        Box<Orange> box4 = new Box<>();
+        box4.add(new Orange());
+        box4.add(new Orange());
+        box4.add(new Orange());
+        //Для хранения фруктов внутри коробки можно использовать ArrayList;
+        System.out.println("Получаем список яблок");
+        System.out.println(box1.getValue());
+        //Сделать метод getWeight(), который высчитывает вес коробки, зная вес одного фрукта и их количество: вес яблока – 1.0f, апельсина – 1.5f (единицы измерения не важны);
+        System.out.println("Получаем вес коробки");
+        System.out.println(box1.getWeight());
+        //Внутри класса Box сделать метод compare(), который позволяет сравнить текущую коробку с той, которую подадут в compare() в качестве параметра. true – если их массы равны, false в противоположном случае. Можно сравнивать коробки с яблоками и апельсинами;
+        System.out.println("Сравниваем вес коробок");
+        System.out.println(box1.compare(box2));
+        box2.add(new Apple());
+        System.out.println(box1.compare(box2));
+        //Написать метод, который позволяет пересыпать фрукты из текущей коробки в другую. Помним про сортировку фруктов: нельзя яблоки высыпать в коробку с апельсинами. Соответственно, в текущей коробке фруктов не остается, а в другую перекидываются объекты, которые были в первой;
+        //очищаем коробку
+        box2.clear();
+        System.out.println("Коробка 1 перед заполнением: " + box1.getValue().size());
+        System.out.println("Коробка 2 перед заполнением: " + box2.getValue().size());
+        box2.fill(box1);
+        System.out.println("Коробка 2 после заполнения из коробки 1: " + box2.getValue().size());
+        System.out.println("Коробка 1 после заполнения коробки 2: " + box1.getValue().size());
+        //Не забываем про метод добавления фрукта в коробку.
+    }
+
+    public static <T> void swap(T[] params, int index1, int index2){
+        T buf = params[index1];
+        params[index1] = params[index2];
+        params[index2] = buf;
+    }
+
+    public static <T> ArrayList<T> arrayToArrayList(T[] elems){
+
+        return new ArrayList<T>(Arrays.asList(elems));
     }
 }
