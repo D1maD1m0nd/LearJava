@@ -74,6 +74,6 @@ public class Main {
 
     public static <T> ArrayList<T> arrayToArrayList(T[] elems){
 
-        return new ArrayList<T>(Arrays.asList(elems));
+        return new ArrayList<>(Arrays.asList(elems));
     }
 }
