@@ -63,20 +63,24 @@ public class Main {
         System.out.println(box1.compare(box2));
         //Написать метод, который позволяет пересыпать фрукты из текущей коробки в другую. Помним про сортировку фруктов: нельзя яблоки высыпать в коробку с апельсинами. Соответственно, в текущей коробке фруктов не остается, а в другую перекидываются объекты, которые были в первой;
         //очищаем коробку
-        box2.clear();
+        box1.getValue().clear();
         System.out.println("Коробка 1 перед заполнением яблоками: " + box1.getValue().size());
         System.out.println("Коробка 2 перед заполнением яблоками: " + box2.getValue().size());
         box2.fill(box1);
-        System.out.println("Коробка 2 после заполнения из коробки 1 яблоками: " + box2.getValue().size());
-        System.out.println("Коробка 1 после заполнения коробки 2 яблоками: " + box1.getValue().size());
+        System.out.println("Коробка 1 после пересыпания яблок из коробки 2: " + box1.getValue().size());
+        System.out.println("Коробка 2 после пересыпания в коробку 1 яблок: " + box2.getValue().size());
+
         //Не забываем про метод добавления фрукта в коробку.
 
-        box3.clear();
-        System.out.println("Коробка 1 перед заполнением апельсинами: " + box4.getValue().size());
-        System.out.println("Коробка 2 перед заполнением апельсинами: " + box3.getValue().size());
+        box4.getValue().clear();
+        System.out.println("Коробка 3 перед заполнением яблоками: " + box3.getValue().size());
+        System.out.println("Коробка 4 перед заполнением яблоками: " + box4.getValue().size());
         box3.fill(box4);
-        System.out.println("Коробка 2 после заполнения из коробки 1 апельсинами: " + box3.getValue().size());
-        System.out.println("Коробка 1 после заполнения коробки 2 апельсинами: " + box4.getValue().size());
+        System.out.println("Коробка 3 после заполнения из коробки 4 апельсинами: " + box3.getValue().size());
+        System.out.println("Коробка 4 после заполнения коробки 3 апельсинами: " + box4.getValue().size());
+
+        System.out.println(new Apple() == new Apple());
+        System.out.println(new Apple().equals(new Apple()));
     }
 
     public static <T> void swap(T[] params, int index1, int index2){

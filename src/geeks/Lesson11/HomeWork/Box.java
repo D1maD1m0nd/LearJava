@@ -22,14 +22,12 @@ public class Box <T extends Fruit>{
         return box.getWeight() == this.getWeight();
     }
     public void fill(Box<T> fruits){
-        if(value.isEmpty()){
+        if(fruits.getValue().isEmpty()){
+            for (T elem: value) {
+                fruits.add(elem);
+            }
+            value.clear();
 
-            value.addAll(fruits.getValue());
-            fruits.clear();
         }
-    }
-
-    public void clear(){
-        value.clear();
     }
 }
