@@ -22,7 +22,7 @@ public class Box <T extends Fruit>{
         return box.getWeight() == this.getWeight();
     }
     public void fill(Box<T> fruits){
-        if(value.size() == 0){
+        if(value.isEmpty()){
 
             value.addAll(fruits.getValue());
             fruits.clear();
