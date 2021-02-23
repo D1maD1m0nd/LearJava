@@ -9,6 +9,7 @@ public class Box <T extends Fruit>{
         if(value.size() == 0){
             return 0.0F;
         }
+
         return value.size() * value.get(0).getWeight();
     };
 
