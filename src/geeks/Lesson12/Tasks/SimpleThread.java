@@ -34,7 +34,7 @@ public class SimpleThread extends Thread{
         myThread.start();
         myThread1.start();
     }
-    private synchronized void myMethod3(){
+    public synchronized void myMethod3(){
         System.out.println("я выполнился после всего");
     }
 }

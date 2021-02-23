@@ -2,12 +2,11 @@ package geeks.Lesson12.Tasks;
 
 public class Main {
     public static void main(String[] args) {
-
+        Main main = new Main();
         SimpleThread thread = new SimpleThread();
         SimpleThread thread1 = new SimpleThread();
         thread.start();
         thread1.start();
-        Main main = new Main();
         Thread myThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -21,15 +20,15 @@ public class Main {
         Thread myThread2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    main.method2();
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }
+
+                    for (int i = 0; i < 5; i++) {
+                        System.out.println("Принт");
+                    }
 
             }
         });
-        System.out.println("Принт");
+        System.out.println(thread.getState());
+        //thread1.myMethod3();
 //        myThread.start();
 //        myThread2.start();
 
