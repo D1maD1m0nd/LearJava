@@ -8,15 +8,6 @@ public class Main {
 
         //для однопотока
         newArray.calcExpOneThread();
-
-//        Thread threadConcatArray = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                newArray.concat();
-//            }
-//        });
-        //запуск двух потоков
         newArray.start();
-        //threadConcatArray.start();
     }
 }
