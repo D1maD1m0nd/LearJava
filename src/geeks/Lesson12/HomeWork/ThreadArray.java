@@ -2,9 +2,10 @@ package geeks.Lesson12.HomeWork;
 
 import java.util.Arrays;
 
-public class ThreadArray extends Thread{
+public class ThreadArray extends Thread {
     static final int SIZE = 10_000_000;
     static final int HALF = SIZE / 2;
+
     @Override
     public void run() {
         try {
@@ -18,14 +19,14 @@ public class ThreadArray extends Thread{
      * Метод пересчитвает значения каждого элемента массива по формуле, массивом берется поле arr
      * (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
      */
-    public void calcExpOneThread(){
+    public void calcExpOneThread() {
         //Создаем массив
         final float[] arr = new float[SIZE];
         //заполняем единицами
-        Arrays.fill(arr,1);
+        Arrays.fill(arr, 1);
         long a = System.currentTimeMillis();
         for (int i = 0; i < SIZE; i++) {
-            arr[i] =  (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+            arr[i] = (float) (arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
         }
         System.out.println("Время в однопотоке: " + (System.currentTimeMillis() - a));
     }
@@ -36,24 +37,25 @@ public class ThreadArray extends Thread{
      *
      * @param arr массив, который необходимо обработать
      */
-    public void calcExpOneThread(float[]arr){
+    public void calcExpOneThread(float[] arr) {
         for (int i = 0; i < HALF; i++) {
-            arr[i] =  (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+            arr[i] = (float) (arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
         }
     }
 
     /**
      * Метод вычитываем значения элментов массива в двух потоках, после завершение каждого происходит их объединение
+     *
      * @throws InterruptedException
      */
-    public  void calcExpInThreads() throws InterruptedException {
+    public void calcExpInThreads() throws InterruptedException {
         //Создаем массив
         final float[] arr = new float[SIZE];
         final float[] part1 = new float[HALF];
         final float[] part2 = new float[HALF];
 
         //Заполняем единицами
-        Arrays.fill(arr,1);
+        Arrays.fill(arr, 1);
         //начало отсчета времени
         long startTimes = System.currentTimeMillis();
         //разделяем на две части массив arr
@@ -80,7 +82,7 @@ public class ThreadArray extends Thread{
         myThread.join();
         myThread1.join();
         //дожидаемся завершения потоков, а далее объединяем
-        concatTwoPartIntoArray(arr,part1,part2);
+        concatTwoPartIntoArray(arr, part1, part2);
         //конец отсчета времени
         System.out.println("Время в двупотоке: " + (System.currentTimeMillis() - startTimes));
 
@@ -90,14 +92,8 @@ public class ThreadArray extends Thread{
      * Объединяем две части массива между собой в один, частями являются массивы обработанные до этого в потоке
      * part1 & part2
      */
-    public  void concatTwoPartIntoArray(float[] arr, float[] part1,float[] part2){
-
+    public void concatTwoPartIntoArray(float[] arr, float[] part1, float[] part2) {
         System.arraycopy(part1, 0, arr, 0, HALF);
         System.arraycopy(part2, 0, arr, HALF, HALF);
-
-
-
-
-
     }
 }
