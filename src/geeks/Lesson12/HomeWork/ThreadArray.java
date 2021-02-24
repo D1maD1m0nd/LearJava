@@ -33,7 +33,8 @@ public class ThreadArray extends Thread {
      */
     public void calcExpOneThread(float[] arr, int max) {
         for (int i = 0; i < HALF; i++) {
-            arr[i] = (float) (arr[i] * Math.sin(0.2f + (i + max) / 5) * Math.cos(0.2f + (i + max) / 5) * Math.cos(0.4f + (i + max) / 2));
+            max = max + i;
+            arr[i] = (float) (arr[i] * Math.sin(0.2f + (max) / 5) * Math.cos(0.2f + (max) / 5) * Math.cos(0.4f + (max) / 2));
         }
     }
 
