@@ -33,6 +33,7 @@ public class Plate {
 
     /**
      * изменение состояния еды
+     *
      * @param n - количество appetite из объекта Cat
      */
     public void decreaseFood(int n) {

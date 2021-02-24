@@ -1,24 +1,26 @@
 package geeks.Lesson12.Tasks;
 
-public class SimpleThread extends Thread{
+public class SimpleThread extends Thread {
     @Override
     public void run() {
         myMethod2();
     }
 
-    private void myMethod(){
+    private void myMethod() {
         System.out.println("Мой метод 1");
         System.out.println("Мой метод 2");
         System.out.println("Мой метод 3");
         System.out.println("Мой метод Конец 1");
     }
-    private void myMethod1(){
+
+    private void myMethod1() {
         System.out.println("Мой метод 2");
         System.out.println("Мой метод 1");
         System.out.println("Мой метод 0");
         System.out.println("Мой метод Конец 2");
     }
-    private synchronized void myMethod2(){
+
+    private synchronized void myMethod2() {
         Thread myThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -34,7 +36,8 @@ public class SimpleThread extends Thread{
         myThread.start();
         myThread1.start();
     }
-    public synchronized void myMethod3(){
+
+    public synchronized void myMethod3() {
         System.out.println("я выполнился после всего");
     }
 }

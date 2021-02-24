@@ -10,7 +10,7 @@ public class DogTestDrive {
         );
     }
 
-    int go(){
-        return 1*43;
+    int go() {
+        return 1 * 43;
     }
 }

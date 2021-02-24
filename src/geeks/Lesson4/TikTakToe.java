@@ -12,7 +12,6 @@ public class TikTakToe {
     public static char[][] map;
 
 
-
     //переменная для хранения текущего хода
     public static int currrentTurn = 0;
     //массивы для направлений
@@ -82,7 +81,7 @@ public class TikTakToe {
      */
     private static boolean checkWin(char symbol) {
         //Если текущий ход не равен количеству точек для победы, то возвращает false
-        if(currrentTurn  < DOTS_TO_WIN - 1){
+        if (currrentTurn < DOTS_TO_WIN - 1) {
             return false;
         }
         //что в строке есть нужное количество символов подряд
@@ -291,10 +290,12 @@ public class TikTakToe {
         char checkAbleSymbol = (mode == 0) ? DOT_O : DOT_X;
         //Вертикальное блокирование
         for (int[][] intsArr1 : ARR_VERTICAL) {
-            if(mode == 0){
-                if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X) continue;
-            }else{
-                if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O) continue;
+            if (mode == 0) {
+                if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X)
+                    continue;
+            } else {
+                if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O)
+                    continue;
             }
 
             int dotColumn = -1;
@@ -308,12 +309,12 @@ public class TikTakToe {
 
                 if (map[row][column] == checkAbleSymbol && countQuanity != DOTS_TO_WIN - point) {
                     countQuanity++;
-                } else if(map[row][column] == DOT_EMPTY){
+                } else if (map[row][column] == DOT_EMPTY) {
                     dotRow = row;
                     dotColumn = column;
                 }
                 if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
-                    if(dotColumn == -1  || dotRow == -1){
+                    if (dotColumn == -1 || dotRow == -1) {
                         continue;
                     }
                     map[dotRow][dotColumn] = DOT_O;
@@ -343,13 +344,13 @@ public class TikTakToe {
                 int countStep = 0;
                 for (int[] ints : ARR_HORIZONTAL) {
 
-                    if(mode == 0){
+                    if (mode == 0) {
                         //проверка на заполненность перебираемого значения
                         if (row[ints[0]] == DOT_X || row[ints[DOTS_TO_WIN - 1]] == DOT_X) continue;
 
-                    }else{
+                    } else {
                         //проверка на заполненность перебираемого значения
-                        if(row[ints[0]] == DOT_O || row[ints[DOTS_TO_WIN - 1]] == DOT_O) continue;
+                        if (row[ints[0]] == DOT_O || row[ints[DOTS_TO_WIN - 1]] == DOT_O) continue;
 
                     }
 
@@ -358,13 +359,13 @@ public class TikTakToe {
                         countStep++;
                         if (row[index] == checkAbleSymbol && countQuanity != DOTS_TO_WIN - point) {
                             countQuanity++;
-                        }else if(row[index] == DOT_EMPTY){
+                        } else if (row[index] == DOT_EMPTY) {
                             dotColumn = index;
                         }
 
 
                         if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
-                            if(dotColumn == -1) {
+                            if (dotColumn == -1) {
                                 continue;
                             }
                             map[rows][dotColumn] = DOT_O;
@@ -388,10 +389,12 @@ public class TikTakToe {
     private static boolean aiDiag(int point, int mode) {
         char checkAbleSymbol = (mode == 0) ? DOT_O : DOT_X;
         for (int[][] intsArr1 : ARR_DIAG) {
-            if(mode == 0) {
-                if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X) continue;
-            }else{
-                if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O)  continue;
+            if (mode == 0) {
+                if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_X || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_X)
+                    continue;
+            } else {
+                if (map[intsArr1[0][0]][intsArr1[0][1]] == DOT_O || map[intsArr1[DOTS_TO_WIN - 1][0]][intsArr1[DOTS_TO_WIN - 1][1]] == DOT_O)
+                    continue;
 
             }
             int dotColumn = -1, dotRow = -1, sideDiag = 0, mainDiag = 0, countQuanity = 0, countStep = 0;
@@ -411,7 +414,7 @@ public class TikTakToe {
                     dotColumn = column;
                 }
                 if (countQuanity == DOTS_TO_WIN - point && countStep == DOTS_TO_WIN) {
-                    if(dotColumn == -1  || dotRow == -1){
+                    if (dotColumn == -1 || dotRow == -1) {
                         continue;
                     }
                     if (mainDiag >= DOTS_TO_WIN - 1) {
@@ -430,8 +433,6 @@ public class TikTakToe {
     }
 
 
-
-
     /**
      * Ищет горизонтальную  последовательность по координатам предыдущей точки или ищет совершенно новую последовательность
      *
@@ -448,16 +449,16 @@ public class TikTakToe {
                 for (int[] ints : ARR_HORIZONTAL) {
 
                     //проверка на заполненность перебираемого значения
-                    if(row[ints[0]] == DOT_X || row[ints[DOTS_TO_WIN - 1]] == DOT_X){
+                    if (row[ints[0]] == DOT_X || row[ints[DOTS_TO_WIN - 1]] == DOT_X) {
                         break;
                     }
                     for (int index : ints) {
-                        if(prevAiColumn == index && prevAiRow == rows){
-                            if(row[index] == DOT_EMPTY){
+                        if (prevAiColumn == index && prevAiRow == rows) {
+                            if (row[index] == DOT_EMPTY) {
                                 map[prevAiRow][index] = DOT_O;
                                 return true;
                             }
-                        }else if(searchNewReq && row[index] == DOT_EMPTY){
+                        } else if (searchNewReq && row[index] == DOT_EMPTY) {
                             map[rows][index] = DOT_O;
                             prevAiRow = rows;
                             prevAiColumn = index;
@@ -489,8 +490,8 @@ public class TikTakToe {
 
                 int row = intsArr2[0];
                 int column = intsArr2[1];
-                if(row == prevAiRow && column == prevAiRow){
-                    if(map[row][column] == DOT_EMPTY){
+                if (row == prevAiRow && column == prevAiRow) {
+                    if (map[row][column] == DOT_EMPTY) {
                         map[row][column] = DOT_O;
                         return true;
                     }
@@ -520,11 +521,11 @@ public class TikTakToe {
             for (int[] intsArr2 : intsArr1) {
                 int row = intsArr2[0];
                 int column = intsArr2[1];
-                if (row == prevAiRow && column == prevAiColumn){
-                    if(map[row][column] == DOT_EMPTY){
+                if (row == prevAiRow && column == prevAiColumn) {
+                    if (map[row][column] == DOT_EMPTY) {
                         map[row][column] = DOT_O;
                         return true;
-                    }else if(searchNewReq && map[row][column] == DOT_EMPTY){
+                    } else if (searchNewReq && map[row][column] == DOT_EMPTY) {
                         map[row][column] = DOT_O;
                         prevAiRow = row;
                         prevAiColumn = column;
@@ -536,31 +537,32 @@ public class TikTakToe {
         }
         return false;
     }
+
     private static void aiTurn() {
-            // minTurn Минимальное число последовательности для блокировки с округление в больную сторону
-            //maxTurn переменная для провервки максимального хода для проверки выигрыша в данном случа n-1
-            //middleColumn центр поля
-            int minTurn = DOTS_TO_WIN/2, maxTurn = 1, middleColumn = SIZE/2;
-            //состояния проверки
-            boolean stateH = false, stateV = false, stateD = false;
+        // minTurn Минимальное число последовательности для блокировки с округление в больную сторону
+        //maxTurn переменная для провервки максимального хода для проверки выигрыша в данном случа n-1
+        //middleColumn центр поля
+        int minTurn = DOTS_TO_WIN / 2, maxTurn = 1, middleColumn = SIZE / 2;
+        //состояния проверки
+        boolean stateH = false, stateV = false, stateD = false;
+        //Ищем выигрышную последовательность
+        //Вычисляем ход. после которого необходимо вести проверку на выигрышную последовательность у крестиков или ноликов
+        if (DOTS_TO_WIN - minTurn - 1 <= currrentTurn) {
             //Ищем выигрышную последовательность
-            //Вычисляем ход. после которого необходимо вести проверку на выигрышную последовательность у крестиков или ноликов
-          if(DOTS_TO_WIN - minTurn - 1 <= currrentTurn){
-              //Ищем выигрышную последовательность
-              if(aiHorizontal(maxTurn,0) || aiVertical(maxTurn,0) || aiDiag(maxTurn, 0)){
-                  return;
-              }
-              //1 проверка
-              if(aiHorizontal(maxTurn, 1) || aiDiag(maxTurn, 1) || aiVertical(maxTurn,1)) {
-                  return;
-              }
-              //2 проверка
-              if(aiHorizontal(minTurn, 1) || aiDiag(minTurn, 1) || aiVertical(minTurn,1)) {
-                  return;
-              }
-          }
-          // Всегда начинаем с центра
-        if(!middleState){
+            if (aiHorizontal(maxTurn, 0) || aiVertical(maxTurn, 0) || aiDiag(maxTurn, 0)) {
+                return;
+            }
+            //1 проверка
+            if (aiHorizontal(maxTurn, 1) || aiDiag(maxTurn, 1) || aiVertical(maxTurn, 1)) {
+                return;
+            }
+            //2 проверка
+            if (aiHorizontal(minTurn, 1) || aiDiag(minTurn, 1) || aiVertical(minTurn, 1)) {
+                return;
+            }
+        }
+        // Всегда начинаем с центра
+        if (!middleState) {
             //обработка центра
             if (map[middleColumn][middleColumn] == DOT_EMPTY) {
                 map[middleColumn][middleColumn] = DOT_O;

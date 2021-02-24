@@ -2,10 +2,11 @@ package books.headfirst.Lesson4;
 
 public class Puzzle4b {
     int ivar;
-    public int doStuff(int factor){
-        if(ivar > 100){
+
+    public int doStuff(int factor) {
+        if (ivar > 100) {
             return ivar * factor;
-        }else{
+        } else {
             return ivar * (5 - factor);
         }
     }

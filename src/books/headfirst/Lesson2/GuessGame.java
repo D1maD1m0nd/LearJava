@@ -4,7 +4,8 @@ public class GuessGame {
     Player p1;
     Player p2;
     Player p3;
-    public  void startGame(){
+
+    public void startGame() {
         p1 = new Player();
         p2 = new Player();
         p3 = new Player();
@@ -22,7 +23,7 @@ public class GuessGame {
         int targetNumber = (int) (Math.random() * 100000000);
         System.out.println("I think num 0 of 9");
 
-        while(true){
+        while (true) {
             System.out.println("Num whoes think - " + targetNumber);
 
             p1.guess();
@@ -34,21 +35,21 @@ public class GuessGame {
             guessp2 = p2.number;
             guessp3 = p3.number;
 
-            if(guessp1 == targetNumber){
+            if (guessp1 == targetNumber) {
                 p1Right = true;
             }
-            if(guessp2 == targetNumber){
+            if (guessp2 == targetNumber) {
                 p2Right = true;
             }
-            if(guessp3 == targetNumber){
+            if (guessp3 == targetNumber) {
                 p3Right = true;
             }
-            if(p1Right || p2Right || p3Right){
+            if (p1Right || p2Right || p3Right) {
                 System.out.println("First player " + p1Right);
                 System.out.println("Second player " + p2Right);
                 System.out.println("Third player " + p3Right);
                 break;
-            }else{
+            } else {
                 System.out.println("Игровки пробуют еще раз");
             }
             count++;

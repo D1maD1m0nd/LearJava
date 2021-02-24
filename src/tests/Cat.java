@@ -1,6 +1,6 @@
 package tests;
 
-public class Cat implements TestInf{
+public class Cat implements TestInf {
     private String name;
     private int appetite;
 
@@ -13,10 +13,11 @@ public class Cat implements TestInf{
         return appetite;
     }
 
-    public void eat(Plate plate){
+    public void eat(Plate plate) {
         plate.decreaseFood(appetite);
     }
-    public void swim(){
+
+    public void swim() {
         System.out.println("Плыву");
     }
 }

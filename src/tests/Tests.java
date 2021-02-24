@@ -1,10 +1,11 @@
 package tests;
 
 public class Tests {
-    interface Runabe{
+    interface Runabe {
         void run();
     }
-    interface Swimming{
+
+    interface Swimming {
         void swim();
     }
 }

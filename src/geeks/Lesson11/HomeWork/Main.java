@@ -6,14 +6,14 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         //1. Написать метод, который меняет два элемента массива местами (массив может быть любого ссылочного типа);
-        Integer[] ints = new Integer[]{1,2,3,4,5};
-        String[] strings = new String[]{"o1","p2","e3","g4"};
+        Integer[] ints = new Integer[]{1, 2, 3, 4, 5};
+        String[] strings = new String[]{"o1", "p2", "e3", "g4"};
         System.out.println("Свапы");
         ;
         System.out.println("Числа до " + Arrays.toString(ints));
         System.out.println("Строки до " + Arrays.toString(strings));
-        swap(ints,1,2);
-        swap(strings,3,2);
+        swap(ints, 1, 2);
+        swap(strings, 3, 2);
         System.out.println("Числа после " + Arrays.toString(ints));
         System.out.println("Строки после " + Arrays.toString(strings));
 
@@ -83,8 +83,8 @@ public class Main {
         System.out.println(new Apple().equals(new Apple()));
     }
 
-    public static <T> void swap(T[] params, int index1, int index2){
-        if(params.length < (index1 + index2)/2 || (index1 + index2)/2 <= 0){
+    public static <T> void swap(T[] params, int index1, int index2) {
+        if (params.length < (index1 + index2) / 2 || (index1 + index2) / 2 <= 0) {
             return;
         }
         T buf = params[index1];
@@ -92,7 +92,7 @@ public class Main {
         params[index2] = buf;
     }
 
-    public static <T> ArrayList<T> arrayToArrayList(T[] elems){
+    public static <T> ArrayList<T> arrayToArrayList(T[] elems) {
 
         return new ArrayList<>(Arrays.asList(elems));
     }

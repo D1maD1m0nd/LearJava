@@ -15,7 +15,7 @@ public class textArray {
 
         int y = 0;
         int ref;
-        while (y < 4){
+        while (y < 4) {
             ref = index[y];
             System.out.println(island[ref]);
             y++;

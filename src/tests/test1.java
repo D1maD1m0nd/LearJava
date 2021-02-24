@@ -21,7 +21,7 @@ public class test1 {
             long time = System.currentTimeMillis() - startTime;
             finalTime += time;
         }
-        System.out.println("1 " + finalTime/1000);
+        System.out.println("1 " + finalTime / 1000);
 
         for (int j = 0; j < 1000; j++) {
             b = 0;
@@ -38,7 +38,7 @@ public class test1 {
             long time = System.currentTimeMillis() - startTime;
             finalTime += time;
         }
-        System.out.println("2 " + finalTime/1000);
+        System.out.println("2 " + finalTime / 1000);
     }
 
 }

@@ -8,20 +8,20 @@ public class SimpleDotCom {
         this.locationCells = locationCells;
     }
 
-    public String checkYourSelf(String stringGuess){
+    public String checkYourSelf(String stringGuess) {
         int guess = Integer.parseInt(stringGuess);
 
         String result = "Мимо";
 
-        for (int cell:
+        for (int cell :
                 locationCells) {
-            if(guess == cell){
+            if (guess == cell) {
                 result = "Попал";
                 numOfHits++;
                 break;
             }
         }
-        if(numOfHits == locationCells.length){
+        if (numOfHits == locationCells.length) {
             result = "Потопил";
         }
 

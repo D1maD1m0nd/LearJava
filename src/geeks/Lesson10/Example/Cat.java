@@ -5,7 +5,8 @@ import java.util.Objects;
 public class Cat {
     String name;
     int age;
-    Cat(String isName, int isAge){
+
+    Cat(String isName, int isAge) {
         name = isName;
         age = isAge;
     }

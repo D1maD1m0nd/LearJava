@@ -1,6 +1,6 @@
 package books.headfirst.Lesson4;
 
-import static java.lang.System.*;
+import static java.lang.System.out;
 
 public class Puzzle4 {
     public static void main(String[] args) {
@@ -9,7 +9,7 @@ public class Puzzle4 {
         int y = 1;
         int x = 0;
         int result = 0;
-        while (x < 6){
+        while (x < 6) {
             obs[x] = new Puzzle4b();
             obs[x].ivar = y;
             out.println(y);
@@ -19,7 +19,7 @@ public class Puzzle4 {
         }
         x = 6;
 
-        while (x > 0){
+        while (x > 0) {
             x = x - 1;
             result = result + obs[x].doStuff(x);
         }

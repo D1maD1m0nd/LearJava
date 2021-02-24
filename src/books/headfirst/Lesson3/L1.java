@@ -6,20 +6,22 @@ public class L1 {
         reverseArray(array);
         printArray(array);
         long f = 132323232;
-        Math.pow((double)f,3);
+        Math.pow((double) f, 3);
         System.out.println();
     }
+
     public static void reverseArray(int[] array) {
         int[] arrayReverse = new int[array.length];
-        for(int i = array.length - 1, j = 0; i >= 0; i--,j++){
+        for (int i = array.length - 1, j = 0; i >= 0; i--, j++) {
 
             arrayReverse[j] = array[i];
 
         }
-        for(int i = 0; i < array.length; i++){
+        for (int i = 0; i < array.length; i++) {
             array[i] = arrayReverse[i];
         }
     }
+
     public static void printArray(int[] array) {
         for (int i : array) {
             System.out.print(i + ", ");
@@ -27,13 +29,13 @@ public class L1 {
         System.out.println();
     }
 
-        public static int min(int a, int b, int c) {
-            if(a > b  && b > c){
-                return c;
-            }
-            if(a < b && b < c){
-                return b;
-            }
-            return a;
+    public static int min(int a, int b, int c) {
+        if (a > b && b > c) {
+            return c;
         }
+        if (a < b && b < c) {
+            return b;
+        }
+        return a;
+    }
 }

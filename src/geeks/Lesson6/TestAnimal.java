@@ -19,20 +19,20 @@ public class TestAnimal {
         victorCat.run(201);
 
         System.out.println("\nСобаки");
-        Dog dimaDog = new Dog("Бобик" );
+        Dog dimaDog = new Dog("Бобик");
         dimaDog.swim(5);
         dimaDog.swim(11);
         dimaDog.run(250);
         dimaDog.run(500);
 
-        Dog vovaDog = new Dog("Вова" );
+        Dog vovaDog = new Dog("Вова");
         vovaDog.swim(5);
         vovaDog.swim(11);
         vovaDog.run(250);
         vovaDog.run(500);
         vovaDog.run(501);
-        System.out.printf("Количество котов %d \n",Cat.getCount());
-        System.out.printf("Количество собак %d \n",Dog.getCount());
+        System.out.printf("Количество котов %d \n", Cat.getCount());
+        System.out.printf("Количество собак %d \n", Dog.getCount());
         System.out.printf("суммарное количество животных %d", Animal.getCount());
     }
 }

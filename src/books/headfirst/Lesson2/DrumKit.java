@@ -4,11 +4,11 @@ public class DrumKit {
     boolean topHat = true;
     boolean snare = true;
 
-    void playShare(){
+    void playShare() {
         System.out.println("Buh buh buh bu-buh");
     }
 
-    void playTopHat(){
+    void playTopHat() {
         System.out.println("Din din din di-din");
     }
 }

@@ -41,7 +41,7 @@ public class Main {
      */
     public static void printOriginalWords(List words) {
         System.out.println("Уникальные слова встречающиеся лишь один раз");
-        for (Object word: words) {
+        for (Object word : words) {
             if (words.indexOf(word) == words.lastIndexOf(word)) {
                 System.out.println(word);
             }
@@ -53,13 +53,13 @@ public class Main {
         System.out.println("Подсчет каждого слова");
         Set wordOriginal = new HashSet(words);
 
-        for (Object word: wordOriginal) {
+        for (Object word : wordOriginal) {
             if (words.indexOf(word) == words.lastIndexOf(word)) {
                 System.out.println(word + ": " + 1);
                 continue;
             }
             int countWord = 0;
-            for (Object word1: words) {
+            for (Object word1 : words) {
                 if (word.equals(word1)) {
                     countWord++;
                 }

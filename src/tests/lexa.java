@@ -58,7 +58,7 @@ public class lexa {
 
         System.out.println("Повторить игру еще раз? 1 – да / 0 – нет");
         int answer = sc.nextInt();
-        if (answer == 1){
+        if (answer == 1) {
             checkTheNumber(number);
         }
     }
@@ -82,14 +82,15 @@ public class lexa {
         return arr[rand];
     }
 
-    public static void guessWordGame(){
+    public static void guessWordGame() {
         String theWord = randomArray(words);
         System.out.printf("компьютер загадал одно из этих слов, угадайте, какое %s", Arrays.toString(words));
         System.out.println(theWord); //выводит слово, для самотестирования
         String trial;
-        do{
+        do {
             System.out.println("введите ваше слово ");
-            trial = sc.nextLine();}
+            trial = sc.nextLine();
+        }
         while (!compareTheWords(theWord, trial));
     }
 

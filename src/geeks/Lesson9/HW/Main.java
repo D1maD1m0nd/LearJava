@@ -8,34 +8,34 @@ public class Main {
     public static final ErrorDescription eDescipt = new ErrorDescription();
 
     public static void main(String[] args) {
-        String[][] arr = {{"1","3","3","4"},{"1","2 ","3","4"},{"1","2","3","4"},{"1","e","в","4"}};
-        try{
+        String[][] arr = {{"1", "3", "3", "4"}, {"1", "2 ", "3", "4"}, {"1", "2", "3", "4"}, {"1", "e", "в", "4"}};
+        try {
             sumArray(arr);
-        }catch (MyArraySizeException  | MyArrayDataException e){
+        } catch (MyArraySizeException | MyArrayDataException e) {
             //тут вызовется MyArrayDataException
             eDescipt.printInfoError(e.getStackTrace(), e.getMessage());
         }
 
-        String[][] arr1 = {{"1","3","3","4"},{"1","2","3","4"},{"1","2","3","4"}};
-        try{
+        String[][] arr1 = {{"1", "3", "3", "4"}, {"1", "2", "3", "4"}, {"1", "2", "3", "4"}};
+        try {
             sumArray(arr1);
 
-        }catch (MyArraySizeException  | MyArrayDataException e){
+        } catch (MyArraySizeException | MyArrayDataException e) {
             //тут вызовется MyArraySizeException
             eDescipt.printInfoError(e.getStackTrace(), e.getMessage());
         }
     }
 
-    public static void sumArray(String[][] arr) throws MyArraySizeException,MyArrayDataException{
+    public static void sumArray(String[][] arr) throws MyArraySizeException, MyArrayDataException {
 
         int maxSizeRow = 4;
         int maxSizeColumn = 4;
-        if(arr.length > maxSizeRow || arr.length < maxSizeRow){
+        if (arr.length > maxSizeRow || arr.length < maxSizeRow) {
             throw new MyArraySizeException();
-        }else{
+        } else {
             //обрабатываем длинну элементов
-            for (String [] item: arr) {
-                if(item.length > maxSizeColumn || item.length < maxSizeColumn){
+            for (String[] item : arr) {
+                if (item.length > maxSizeColumn || item.length < maxSizeColumn) {
                     throw new MyArraySizeException();
                 }
             }
