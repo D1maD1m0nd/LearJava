@@ -5,15 +5,17 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         ThreadArray newArray = new ThreadArray();
-        newArray.fill();
+
+        //для однопотока
         newArray.calcExpOneThread();
-        newArray.fill();
+
 //        Thread threadConcatArray = new Thread(new Runnable() {
 //            @Override
 //            public void run() {
 //                newArray.concat();
 //            }
 //        });
+        //запуск двух потоков
         newArray.start();
         //threadConcatArray.start();
     }
