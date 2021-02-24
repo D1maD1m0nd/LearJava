@@ -8,6 +8,7 @@ public class Main {
 
         //для однопотока
         newArray.calcExpOneThread();
+        //для многопотка
         newArray.start();
     }
 }
