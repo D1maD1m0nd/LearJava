@@ -87,7 +87,6 @@ public class ThreadArray extends Thread {
      * part1 & part2
      */
     public void concatTwoPartIntoArray(float[] arr, float[] part1, float[] part2) {
-
         System.arraycopy(part1, 0, arr, 0, HALF);
         System.arraycopy(part2, 0, arr, HALF, HALF);
     }
