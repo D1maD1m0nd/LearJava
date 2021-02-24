@@ -20,6 +20,7 @@ public class ThreadArray extends Thread {
             arr[i] = (float) (arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
         }
         System.out.println("Время в однопотоке: " + (System.currentTimeMillis() - a));
+        System.out.println("Однопоток " + arr[HALF]);
     }
 
     /**
@@ -27,10 +28,12 @@ public class ThreadArray extends Thread {
      * (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
      *
      * @param arr массив, который необходимо обработать
+     * @param max параметр, который позволяет начать вычисления Math.sin(0.2f + (i + max) / 5) с оставшейся половины массива
+     *              в ином случае значения получаются не верные, так как i просто 0 ... 5 000 000 , а не 5 000 000 ... 10 000 000
      */
-    public void calcExpOneThread(float[] arr) {
+    public void calcExpOneThread(float[] arr, int max) {
         for (int i = 0; i < HALF; i++) {
-            arr[i] = (float) (arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+            arr[i] = (float) (arr[i] * Math.sin(0.2f + (i + max) / 5) * Math.cos(0.2f + (i + max) / 5) * Math.cos(0.4f + (i + max) / 2));
         }
     }
 
@@ -58,14 +61,14 @@ public class ThreadArray extends Thread {
         Thread myThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                calcExpOneThread(part1);
+                calcExpOneThread(part1,0);
             }
         });
         //поток два
         Thread myThread1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                calcExpOneThread(part2);
+                calcExpOneThread(part2,5_000_000);
             }
         });
         myThread.start();
@@ -76,7 +79,7 @@ public class ThreadArray extends Thread {
         concatTwoPartIntoArray(arr, part1, part2);
         //конец отсчета времени
         System.out.println("Время в двупотоке: " + (System.currentTimeMillis() - startTimes));
-
+        System.out.println("Двупоток " + arr[HALF]);
     }
 
     /**
@@ -84,6 +87,7 @@ public class ThreadArray extends Thread {
      * part1 & part2
      */
     public void concatTwoPartIntoArray(float[] arr, float[] part1, float[] part2) {
+
         System.arraycopy(part1, 0, arr, 0, HALF);
         System.arraycopy(part2, 0, arr, HALF, HALF);
     }
