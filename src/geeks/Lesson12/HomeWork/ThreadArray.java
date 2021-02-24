@@ -5,9 +5,6 @@ import java.util.Arrays;
 public class ThreadArray extends Thread{
     static final int SIZE = 10_000_000;
     static final int HALF = SIZE / 2;
-
-    long startTimes;
-
     @Override
     public void run() {
         try {
@@ -58,7 +55,7 @@ public class ThreadArray extends Thread{
         //Заполняем единицами
         Arrays.fill(arr,1);
         //начало отсчета времени
-        startTimes = System.currentTimeMillis();
+        long startTimes = System.currentTimeMillis();
         //разделяем на две части массив arr
         System.arraycopy(arr, 0, part1, 0, HALF);
         System.arraycopy(arr, HALF, part2, 0, HALF);
@@ -81,6 +78,9 @@ public class ThreadArray extends Thread{
         myThread1.join();
         //дожидаемся завершения потоков, а далее объединяем
         concatTwoPartIntoArray(arr,part1,part2);
+        //конец отсчета времени
+        System.out.println("Время в двупотоке: " + (System.currentTimeMillis() - startTimes));
+
     }
 
     /**
@@ -92,9 +92,7 @@ public class ThreadArray extends Thread{
         System.arraycopy(part1, 0, arr, 0, HALF);
         System.arraycopy(part2, 0, arr, HALF, HALF);
 
-        //конец отсчета времени
-        System.out.println("Время в двупотоке: " + (System.currentTimeMillis() - startTimes));
-        //System.out.println(Arrays.compare(part1,part2) == 0? "Части равны":"Части не равны");
+
 
 
 
