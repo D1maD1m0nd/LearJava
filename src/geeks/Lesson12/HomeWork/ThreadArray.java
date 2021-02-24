@@ -28,13 +28,12 @@ public class ThreadArray extends Thread {
      * (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
      *
      * @param arr массив, который необходимо обработать
-     * @param max параметр, который позволяет начать вычисления Math.sin(0.2f + (i + max) / 5) с оставшейся половины массива
+     * @param item параметр, который позволяет начать вычисления Math.sin(0.2f + (i + max) / 5) с оставшейся половины массива
      *              в ином случае значения получаются не верные, так как i просто 0 ... 5 000 000 , а не 5 000 000 ... 10 000 000
      */
-    public void calcExpOneThread(float[] arr, int max) {
-        for (int i = 0; i < HALF; i++) {
-            max = max + i;
-            arr[i] = (float) (arr[i] * Math.sin(0.2f + (max) / 5) * Math.cos(0.2f + (max) / 5) * Math.cos(0.4f + (max) / 2));
+    public void calcExpOneThread(float[] arr, int item) {
+        for (int i = 0; i < HALF; i++,item++) {
+            arr[i] = (float) (arr[i] * Math.sin(0.2f + (item) / 5) * Math.cos(0.2f + (item) / 5) * Math.cos(0.4f + (item) / 2));
         }
     }
 
