@@ -60,12 +60,15 @@ public class ThreadArray extends Thread{
         System.arraycopy(arr, 0, part1, 0, HALF);
         System.arraycopy(arr, HALF, part2, 0, HALF);
 
+
+        //поток один
         Thread myThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 calcExpOneThread(part1);
             }
         });
+        //поток два
         Thread myThread1 = new Thread(new Runnable() {
             @Override
             public void run() {
