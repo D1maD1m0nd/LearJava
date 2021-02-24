@@ -37,7 +37,7 @@ public class ThreadArray extends Thread{
         System.out.println("конец");
     }
 
-    public synchronized void calcExpInThreads() throws InterruptedException {
+    public  void calcExpInThreads() throws InterruptedException {
         System.out.println(1);
         startTimes = System.currentTimeMillis();
         System.arraycopy(arr, 0, part1, 0, HALF);
@@ -59,9 +59,10 @@ public class ThreadArray extends Thread{
         myThread1.start();
         myThread.join();
         myThread1.join();
+        concat();
     }
     // надо доделать этот метод
-    public synchronized void concat(){
+    public  void concat(){
 
         System.arraycopy(part1, 0, arr, 0, HALF);
         System.arraycopy(part2, 0, arr, HALF, HALF);

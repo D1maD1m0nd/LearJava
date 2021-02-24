@@ -8,13 +8,13 @@ public class Main {
         newArray.fill();
         newArray.calcExpOneThread();
         newArray.fill();
-        Thread threadConcatArray = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                newArray.concat();
-            }
-        });
+//        Thread threadConcatArray = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                newArray.concat();
+//            }
+//        });
         newArray.start();
-        threadConcatArray.start();
+        //threadConcatArray.start();
     }
 }
