@@ -36,11 +36,10 @@ public class Car implements Runnable {
             e.printStackTrace();
         }
 
-        System.out.println("Гонка началась");
+        //System.out.println("Гонка началась");
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
-
 
     }
 }

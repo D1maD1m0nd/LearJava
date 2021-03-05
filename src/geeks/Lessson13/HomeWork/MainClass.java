@@ -1,14 +1,15 @@
 package geeks.Lessson13.HomeWork;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.Semaphore;
+
 
 public class MainClass {
     public static final int CARS_COUNT = 4;
     public static final CyclicBarrier cb = new CyclicBarrier(CARS_COUNT);
+    public static final CountDownLatch countDownLatch = new CountDownLatch(1);
+    public static final Semaphore mySemaphore = new Semaphore(CARS_COUNT/2);
     public static void main(String[] args) {
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
         Race race = new Race(new Road(60), new Tunnel(), new Road(40));
@@ -21,6 +22,8 @@ public class MainClass {
             new Thread(cars[i]).start();
         }
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
+
+
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
     }
 }
