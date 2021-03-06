@@ -26,7 +26,7 @@ public class Car implements Runnable {
     }
     @Override
     public void run(){
-
+        Lock lockCarIntoFinish = new ReentrantLock();
         try {
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int)(Math.random() * 800));
@@ -40,9 +40,14 @@ public class Car implements Runnable {
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
+        lockCarIntoFinish.lock();
         if(!MainClass.WINNER){
             System.out.println("WIN!!! " + "Победителем становится " + name);
             MainClass.WINNER = true;
+            lockCarIntoFinish.unlock();
+        }else{
+            System.out.println("Finish " + "Участник " + name + " Финишировал!!!");
+            lockCarIntoFinish.unlock();
         }
         MainClass.countDownLatch.countDown();
     }
