@@ -40,15 +40,17 @@ public class Car implements Runnable {
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
+        //Тут я не уверен, но должно блокровать поток, что бы исправить момент с двумя победител
+        //По крайней мере такого больше я не встречал
         lockCarIntoFinish.lock();
-        if(!MainClass.WINNER){
+        if(MainClass.WINNER){
+            MainClass.WINNER = false;
             System.out.println("WIN!!! " + "Победителем становится " + name);
-            MainClass.WINNER = true;
-            lockCarIntoFinish.unlock();
         }else{
             System.out.println("Finish " + "Участник " + name + " Финишировал!!!");
-            lockCarIntoFinish.unlock();
         }
+        lockCarIntoFinish.unlock();
+        //Уменьшаем каждый раз, когда участник финшировал
         MainClass.countDownLatch.countDown();
     }
 }

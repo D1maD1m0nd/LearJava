@@ -7,10 +7,13 @@ import java.util.concurrent.Semaphore;
 
 public class MainClass {
     public static final int CARS_COUNT = 4;
-    public static boolean WINNER;
+    public static boolean WINNER = true;
     public static int carsStart;
+    //Состояние готовности
     public static final CyclicBarrier cb = new CyclicBarrier(CARS_COUNT);
+    //Состояние завершения гонки
     public static final CountDownLatch countDownLatch = new CountDownLatch(CARS_COUNT);
+    //Состояние проезда через туннель
     public static final Semaphore mySemaphore = new Semaphore(CARS_COUNT/2);
     public static void main(String[] args) {
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
