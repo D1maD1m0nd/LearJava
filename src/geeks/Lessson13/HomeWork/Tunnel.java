@@ -16,8 +16,8 @@ public class Tunnel extends Stage {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
-                MainClass.mySemaphore.release();
                 System.out.println(c.getName() + " закончил этап: " + description);
+                MainClass.mySemaphore.release();
             }
         } catch (Exception e) {
             e.printStackTrace();

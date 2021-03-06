@@ -40,6 +40,10 @@ public class Car implements Runnable {
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
-
+        if(!MainClass.WINNER){
+            System.out.println("WIN!!! " + "Победителем становится " + name);
+            MainClass.WINNER = true;
+        }
+        MainClass.countDownLatch.countDown();
     }
 }
