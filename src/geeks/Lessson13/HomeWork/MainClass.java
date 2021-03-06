@@ -8,7 +8,6 @@ import java.util.concurrent.Semaphore;
 public class MainClass {
     public static final int CARS_COUNT = 4;
     public static boolean WINNER = true;
-    public static int carsStart;
     //Состояние готовности
     public static final CyclicBarrier cb = new CyclicBarrier(CARS_COUNT);
     //Состояние завершения гонки
@@ -23,11 +22,12 @@ public class MainClass {
             cars[i] = new Car(race, 20 + (int) (Math.random() * 10));
         }
 
-        for (int i = 0; i < cars.length; i++) {
-            new Thread(cars[i]).start();
+        for (Car car : cars) {
+            new Thread(car).start();
         }
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
         try{
+            //Дожидаемся конца гонки
             countDownLatch.await();
         }catch (InterruptedException e){
             e.printStackTrace();

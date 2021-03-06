@@ -1,17 +1,15 @@
 package geeks.Lessson13.HomeWork;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.TimeUnit;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Car implements Runnable {
     private static int CARS_COUNT;
-    private Race race;
-    private int speed;
-    private String name;
-    public static int carsReady;
+    private final Race race;
+    private final int speed;
+    private final String name;
+
     public String getName() {
         return name;
     }
@@ -41,7 +39,7 @@ public class Car implements Runnable {
             race.getStages().get(i).go(this);
         }
         //Тут я не уверен, но должно блокровать поток, что бы исправить момент с двумя победител
-        //По крайней мере такого больше я не встречал
+        //По крайней мере такого больше я не встречал, после внесения этого изменения
         lockCarIntoFinish.lock();
         if(MainClass.WINNER){
             MainClass.WINNER = false;
