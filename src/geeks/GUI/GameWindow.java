@@ -22,7 +22,7 @@ public class GameWindow extends JFrame {
 
     private static void onRepaint(Graphics g){
         g.fillOval(10,10,200,100);
-        g.drawLine(0,20,300,20);
+        g.drawLine(200,200,300,200);
 
     }
     private static class GameField extends JPanel{
