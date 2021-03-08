@@ -38,7 +38,13 @@ public class AlgTask {
         int num = 5;
         System.out.println("Примитивный " + num);
 
-        //Дополните предыдущий код сравнением ваших данных с другой переменной, данный код должен имитировать простейший поиск перебором.
+       //сравнение данных
+        System.out.println(data.compare(num, 5));
+        System.out.println(data.compare(str,"123"));
+        System.out.println(data.compare(data,new Data(5)));
+        System.out.println(data.compare(data,new Data(3)));
+        //Дополните предыдущий код сравнением ваших данных с другой переменной,
+        // данный код должен имитировать простейший поиск перебором.
         //Оцените время выполнения алгоритма с помощью базового метода System.nanoTime().
         Integer[] nums = new Integer[]{1,2,3,5};
         System.out.println("Поиск числа " + num + " занял " + data.lineSearch(num, nums));

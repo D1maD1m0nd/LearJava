@@ -20,11 +20,14 @@ public class Data {
     public <T> long lineSearch(T searchObj,T[] searchData){
         long t1 = System.nanoTime();
         for (T data: searchData) {
-            if(searchObj.equals(data)){
+            if(compare(searchObj, data)){
                 return System.nanoTime() - t1;
             }
         }
         return -1;
+    }
+    public <T> boolean compare(T elem1, T elem2){
+        return elem1.equals(elem2);
     }
 
     @Override
