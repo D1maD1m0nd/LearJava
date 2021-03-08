@@ -3,7 +3,11 @@ package geeks.GUI;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.Random;
 
 public class GameWindow extends JFrame {
     private static GameWindow game_window;
@@ -29,6 +33,21 @@ public class GameWindow extends JFrame {
         game_window.setResizable(false);
         lastFrameTime = System.nanoTime();
         GameField game_field = new GameField();
+        game_field.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
+                float dropRight = drop_left * drop.getWidth(null);
+                float dropBottom = drop_top * drop.getHeight(null);
+                boolean idDrop = x >= drop_left && x <= dropRight && y >= drop_top && y<= dropBottom;
+                if(idDrop){
+                    drop_top = -100;
+                    drop_left = (int)(Math.random() * (game_field.getWidth() - drop.getWidth(null)));
+                    dropV = dropV + 20;
+                }
+            }
+        });
         game_window.add(game_field);
         //видимость окна
         game_window.setVisible(true);
@@ -39,11 +58,13 @@ public class GameWindow extends JFrame {
         float deltaTime = (currentTime - lastFrameTime) * 0.000000001f;
         lastFrameTime = currentTime;
         drop_top = drop_top + dropV * deltaTime;
-        drop_left = drop_left + dropV * deltaTime;
+
         g.drawImage(background,0,0,null);
        // g.drawImage(gameOver,280,120,null);
         g.drawImage(drop,(int)drop_left,(int)drop_top,null);
-
+        if(drop_top > game_window.getHeight()){
+            g.drawImage(gameOver,280,120,null);
+        }
 
     }
     private static class GameField extends JPanel{
