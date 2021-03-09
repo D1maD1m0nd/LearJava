@@ -1,6 +1,7 @@
 package geeks.Algorithms.Lesson1;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class Data {
     private int data;
