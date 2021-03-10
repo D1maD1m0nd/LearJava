@@ -56,22 +56,7 @@ public class Main {
 
 
     }
-    public static void testSorted(){
-        int[] arr = new int[50];
-        fill(arr);
-        long t1 = System.nanoTime();;
-        Sorted.choiceSorted(arr);
-        System.out.println("Выбором " + (System.nanoTime() - t1));
-        fill(arr);
 
-        t1 = System.nanoTime();
-        Sorted.bubbleSort(arr);
-        System.out.println("Пузырьком " + (System.nanoTime() - t1));
-
-        t1 = System.nanoTime() ;
-        Sorted.includeSorted(arr);
-        System.out.println("Вставками " + (System.nanoTime() - t1));
-    }
     public static void fill(int[]arr){
         Random rand = new Random();
         for (int i = 0; i < arr.length; i++) {
