@@ -7,9 +7,10 @@ public class Main {
     public static void main(String[] args) {
 //        На основе программного кода из домашнего задания №1 реализуйте массив на основе существующих примитивных или ссылочных типов данных.
 //        Выполните обращение к массиву и базовые операции класса Arrays.
-        int[] arr = new int[10000000];
-        String[] strs = new String[22200];
+        int[] arr = new int[400];
+        String[] strs = new String[400];
         int[] arrCopy;
+        String[] arrStrCopy;
         long t1 = System.nanoTime();
         //заполняем единицами
         Arrays.fill(arr,1);
@@ -19,24 +20,33 @@ public class Main {
         System.out.println(Arrays.equals(arr,arrCopy));
         System.out.println("Время выполнения базовых операций массивов " + (System.nanoTime() - t1));
 
-//        На основе написанного кода в задании 2.1 реализуйте линейный и двоичный поиск.
-//       Оценить алгоритмы линейного и двоичного поиска с помощью базового класса System.nanoTime(),
-//       при необходимости расширьте уже существующий массив данных.
+        fill(arr);
 
-        //заполняем рандомными значениями
-        fill(strs);
-
-        strs[4] = "То что я ищу";
-        Arrays.sort(strs);
         t1 = System.nanoTime();
-        System.out.println(Search.binnarySearch("То что я ищу",strs));
-        System.out.println("Бинарный поиск строки " + (System.nanoTime() - t1));
+
+        Arrays.sort(arr);
+
+        System.out.println("Время сортировки чисел методом Arrays.sort " + (System.nanoTime() - t1));
+        fill(arr);
+        t1 = System.nanoTime();
+        Sorted.bubbleSort(arr);
+        System.out.println("Время сортировки чисел методом пузырьковой сортировки " + (System.nanoTime() - t1));
 
         fill(arr);
-        Arrays.sort(arr);
         t1 = System.nanoTime();
-        System.out.println(Search.binnarySearch(arr,0));
-        System.out.println("Бинарный поиск числа " + (System.nanoTime() - t1));
+        //сортировка выбором
+        Sorted.choiceSorted(arr);
+        System.out.println("Время сортировки чисел методом выбором " + (System.nanoTime() - t1));
+
+        fill(arr);
+        t1 = System.nanoTime();
+        //сортировка вставками
+        Sorted.includeSorted(arr);
+        System.out.println("Время сортировки чисел методом вставками " + (System.nanoTime() - t1));
+
+        t1 = System.nanoTime();
+        Search.binnarySearch(arr,0);
+        System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
     }
     public static void testSorted(){
         int[] arr = new int[50];
