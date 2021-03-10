@@ -11,7 +11,7 @@ public class Sorted {
             }
         }
     }
-    public static void includeSorted(int arr[]){
+    public static void choiceSorted(int arr[]){
         int len = arr.length;
         for (int i = 0; i < len - 1; i++) {
             int min = i;
@@ -21,6 +21,20 @@ public class Sorted {
                 }
             }
             swap(i,min,arr);
+        }
+    }
+
+    public static void includeSorted(int arr[]){
+        int in = 0;
+        int len = arr.length;
+        for (int i = 0; i < len; i++) {
+            int buf = arr[i];
+            in = i;
+            while (in > 0 && arr[in - 1] >= buf){
+                arr[in] = arr[in -1];
+                --in;
+            }
+            arr[in] = buf;
         }
     }
     public static void swap(int first, int last, int[]arr){
