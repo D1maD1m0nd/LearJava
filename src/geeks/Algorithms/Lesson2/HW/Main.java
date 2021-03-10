@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 //        На основе программного кода из домашнего задания №1 реализуйте массив на основе существующих примитивных или ссылочных типов данных.
 //        Выполните обращение к массиву и базовые операции класса Arrays.
-        int[] arr = new int[2000];
+        int[] arr = new int[400];
         String[] strs = new String[400];
         int[] arrCopy;
         String[] arrStrCopy;
