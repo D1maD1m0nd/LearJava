@@ -20,13 +20,13 @@ public class Search {
         return -1;
     }
     public static int binnarySearch(int[] arr, int key){
-        int left = 0;
+        int left = 1;
         int right = arr.length - 1;
 
         while (right >= left){
             int middle = (left + right)/2;
             if(arr[middle] == key){
-                System.out.println("Бинарный поиск найденный элемент " + arr[middle]);
+                //System.out.println("Бинарный поиск найденный элемент " + arr[middle]);
                 return middle;
             }else if(arr[middle] < key){
                 left = middle + 1;
@@ -42,7 +42,7 @@ public class Search {
         int lastIndex = arr.length - 1;
 
         while (firstIndex <= lastIndex){
-            int middleIndex = (firstIndex + lastIndex) / 2;
+            int middleIndex = (firstIndex + lastIndex) >>> 1;
             if(arr[middleIndex].equals(elem)){
                 return middleIndex;
             }else if(arr[middleIndex].compareTo(elem) < 0){
