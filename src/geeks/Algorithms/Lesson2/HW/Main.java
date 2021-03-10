@@ -36,13 +36,13 @@ public class Main {
         System.out.println("Время сортировки чисел методом выбором " + (System.nanoTime() - t1));
 
         fill(arr);
-        arr[(arr.length - 1)/2] = 32132;
         t1 = System.nanoTime();
         //сортировка вставками
         Sorted.includeSorted(arr);
         System.out.println("Время сортировки чисел методом вставками " + (System.nanoTime() - t1));
 
         fill(arr);
+        arr[(arr.length - 1)/2] = 32132;
         t1 = System.nanoTime();
         Arrays.sort(arr);
         System.out.println("Время сортировки чисел методом Arrays.sort " + (System.nanoTime() - t1));
