@@ -33,6 +33,7 @@ public class Main {
         System.out.println("Время сортировки чисел методом пузырьковой сортировки " + (System.nanoTime() - t1));
 
         fill(arr);
+        arr[arr.length - 1] = 32132;
         t1 = System.nanoTime();
         //сортировка выбором
         Sorted.choiceSorted(arr);
@@ -45,11 +46,11 @@ public class Main {
         System.out.println("Время сортировки чисел методом вставками " + (System.nanoTime() - t1));
 
         t1 = System.nanoTime();
-        int res = Search.binnarySearch(arr,54);
+        int res = Search.binnarySearch(arr,32132);
         System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
 
         t1 = System.nanoTime();
-        res = Search.linerSearch(arr,54);
+        res = Search.linerSearch(arr,32132);
         System.out.println("Линейный поиск числа занял " + (System.nanoTime() - t1));
     }
     public static void testSorted(){

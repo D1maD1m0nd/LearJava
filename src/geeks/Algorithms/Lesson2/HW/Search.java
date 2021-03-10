@@ -20,6 +20,7 @@ public class Search {
     public static int binnarySearch(int[] arr, int key){
         int left = 0;
         int right = arr.length - 1;
+
         while (right >= left){
             int middle = (left + right)/2;
             if(arr[middle] == key){
