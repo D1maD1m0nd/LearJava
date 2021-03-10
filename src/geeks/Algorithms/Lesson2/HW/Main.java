@@ -45,11 +45,11 @@ public class Main {
         System.out.println("Время сортировки чисел методом вставками " + (System.nanoTime() - t1));
 
         t1 = System.nanoTime();
-        Search.binnarySearch(arr,5);
+        int res = Search.binnarySearch(arr,8);
         System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
 
         t1 = System.nanoTime();
-        Search.linerSearch(arr,8);
+        res = Search.linerSearch(arr,8);
         System.out.println("Линейный поиск числа занял " + (System.nanoTime() - t1));
     }
     public static void testSorted(){
@@ -71,7 +71,7 @@ public class Main {
     public static void fill(int[]arr){
         Random rand = new Random();
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = rand.nextInt(9);
+            arr[i] = rand.nextInt(55);
         }
     }
 
