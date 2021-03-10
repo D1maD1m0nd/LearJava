@@ -37,7 +37,7 @@ public class Search {
         return -1;
     }
     public static  int  binnarySearch(String elem, String[] arr){
-        int firstIndex = 0;
+        int firstIndex = 1;
         int lastIndex = arr.length - 1;
 
         while (firstIndex <= lastIndex){

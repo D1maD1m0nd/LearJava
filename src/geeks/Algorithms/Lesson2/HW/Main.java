@@ -49,7 +49,7 @@ public class Main {
         System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
 
         t1 = System.nanoTime();
-        Search.linerSearch(arr,5);
+        Search.linerSearch(arr,8);
         System.out.println("Линейный поиск числа занял " + (System.nanoTime() - t1));
     }
     public static void testSorted(){
