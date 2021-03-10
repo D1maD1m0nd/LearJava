@@ -33,13 +33,14 @@ public class Main {
         System.out.println("Время сортировки чисел методом пузырьковой сортировки " + (System.nanoTime() - t1));
 
         fill(arr);
-        arr[arr.length - 1] = 32132;
+
         t1 = System.nanoTime();
         //сортировка выбором
         Sorted.choiceSorted(arr);
         System.out.println("Время сортировки чисел методом выбором " + (System.nanoTime() - t1));
 
         fill(arr);
+        arr[arr.length - 1] = 32132;
         t1 = System.nanoTime();
         //сортировка вставками
         Sorted.includeSorted(arr);

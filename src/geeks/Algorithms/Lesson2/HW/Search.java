@@ -4,6 +4,7 @@ public class Search {
     public static int linerSearch(int[] arr, int key){
         for (int i = 0; i < arr.length; i++) {
             if(arr[i] == key){
+                System.out.println("Линейный найденный элемент " + arr[i]);
                 return i;
             }
         }
@@ -12,6 +13,7 @@ public class Search {
     public static int linerSearch(String[] arr, String key){
         for (int i = 0; i < arr.length; i++) {
             if(arr[i].equals(key)){
+                System.out.println("Линейный найденный элемент " + arr[i]);
                 return i;
             }
         }
@@ -24,13 +26,11 @@ public class Search {
         while (right >= left){
             int middle = (left + right)/2;
             if(arr[middle] == key){
+                System.out.println("Бинарный поиск найденный элемент " + arr[middle]);
                 return middle;
-            }
-            if(arr[middle] < key){
+            }else if(arr[middle] < key){
                 left = middle + 1;
-            }
-
-            if(arr[middle] > key){
+            }else if(arr[middle] > key){
                 right = middle - 1;
             }
 
@@ -45,11 +45,9 @@ public class Search {
             int middleIndex = (firstIndex + lastIndex) / 2;
             if(arr[middleIndex].equals(elem)){
                 return middleIndex;
-            }
-            if(arr[middleIndex].compareTo(elem) < 0){
+            }else if(arr[middleIndex].compareTo(elem) < 0){
                 firstIndex = middleIndex + 1;
-            }
-            if(arr[middleIndex].compareTo(elem) > 0){
+            } else if(arr[middleIndex].compareTo(elem) > 0){
                 lastIndex = middleIndex - 1;
             }
         }
