@@ -43,6 +43,7 @@ public class Main {
         System.out.println("Время сортировки чисел методом вставками " + (System.nanoTime() - t1));
 
         fill(arr);
+        t1 = System.nanoTime();
         Arrays.sort(arr);
         System.out.println("Время сортировки чисел методом Arrays.sort " + (System.nanoTime() - t1));
 
