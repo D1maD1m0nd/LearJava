@@ -32,7 +32,7 @@ public class Search {
         int firstIndex = 0;
         int lastIndex = arr.length - 1;
 
-        while (firstIndex < lastIndex){
+        while (firstIndex <= lastIndex){
             int middleIndex = (firstIndex + lastIndex) / 2;
             if(arr[middleIndex] == elem){
                 return middleIndex;
