@@ -45,11 +45,11 @@ public class Main {
         System.out.println("Время сортировки чисел методом вставками " + (System.nanoTime() - t1));
 
         t1 = System.nanoTime();
-        int res = Search.binnarySearch(arr,8);
+        int res = Search.binnarySearch(arr,54);
         System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
 
         t1 = System.nanoTime();
-        res = Search.linerSearch(arr,8);
+        res = Search.linerSearch(arr,54);
         System.out.println("Линейный поиск числа занял " + (System.nanoTime() - t1));
     }
     public static void testSorted(){

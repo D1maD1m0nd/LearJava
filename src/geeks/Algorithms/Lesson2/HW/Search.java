@@ -18,7 +18,7 @@ public class Search {
         return -1;
     }
     public static int binnarySearch(int[] arr, int key){
-        int left = 1;
+        int left = 0;
         int right = arr.length - 1;
         while (right >= left){
             int middle = (left + right)/2;
