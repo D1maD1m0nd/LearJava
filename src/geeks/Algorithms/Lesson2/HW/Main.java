@@ -8,7 +8,6 @@ public class Main {
 //        На основе программного кода из домашнего задания №1 реализуйте массив на основе существующих примитивных или ссылочных типов данных.
 //        Выполните обращение к массиву и базовые операции класса Arrays.
         int[] arr = new int[400];
-        String[] strs = new String[400];
         int[] arrCopy;
         String[] arrStrCopy;
         long t1 = System.nanoTime();
@@ -21,8 +20,6 @@ public class Main {
         System.out.println("Время выполнения базовых операций массивов " + (System.nanoTime() - t1));
 
         fill(arr);
-
-        t1 = System.nanoTime();
 
         t1 = System.nanoTime();
         Sorted.bubbleSort(arr);
