@@ -27,7 +27,7 @@ public class Sorted {
     public static void includeSorted(int arr[]){
         int in = 0;
         int len = arr.length;
-        for (int i = 0; i < len; i++) {
+        for (int i = 1; i < len; i++) {
             int buf = arr[i];
             in = i;
             while (in > 0 && arr[in - 1] >= buf){

@@ -24,10 +24,6 @@ public class Main {
 
         t1 = System.nanoTime();
 
-        Arrays.sort(arr);
-
-        System.out.println("Время сортировки чисел методом Arrays.sort " + (System.nanoTime() - t1));
-        fill(arr);
         t1 = System.nanoTime();
         Sorted.bubbleSort(arr);
         System.out.println("Время сортировки чисел методом пузырьковой сортировки " + (System.nanoTime() - t1));
@@ -40,19 +36,23 @@ public class Main {
         System.out.println("Время сортировки чисел методом выбором " + (System.nanoTime() - t1));
 
         fill(arr);
-        arr[arr.length/2] = 32132;
+        arr[(arr.length - 1)/2] = 32132;
         t1 = System.nanoTime();
         //сортировка вставками
         Sorted.includeSorted(arr);
         System.out.println("Время сортировки чисел методом вставками " + (System.nanoTime() - t1));
 
-        t1 = System.nanoTime();
-        int res = Search.binnarySearch(arr,32132);
-        System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
+        fill(arr);
+        Arrays.sort(arr);
+        System.out.println("Время сортировки чисел методом Arrays.sort " + (System.nanoTime() - t1));
 
         t1 = System.nanoTime();
-        res = Search.linerSearch(arr,32132);
+        Search.linerSearch(arr,32132);
         System.out.println("Линейный поиск числа занял " + (System.nanoTime() - t1));
+
+        t1 = System.nanoTime();
+        Search.binnarySearch(arr,32132);
+        System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
     }
     public static void testSorted(){
         int[] arr = new int[50];
@@ -73,7 +73,7 @@ public class Main {
     public static void fill(int[]arr){
         Random rand = new Random();
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = rand.nextInt(55);
+            arr[i] = rand.nextInt(100000);
         }
     }
 
