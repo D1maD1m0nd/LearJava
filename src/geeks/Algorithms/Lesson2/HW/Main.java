@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 //        На основе программного кода из домашнего задания №1 реализуйте массив на основе существующих примитивных или ссылочных типов данных.
 //        Выполните обращение к массиву и базовые операции класса Arrays.
-        int[] arr = new int[400];
+        int[] arr = new int[2000];
         String[] strs = new String[400];
         int[] arrCopy;
         String[] arrStrCopy;
@@ -45,8 +45,12 @@ public class Main {
         System.out.println("Время сортировки чисел методом вставками " + (System.nanoTime() - t1));
 
         t1 = System.nanoTime();
-        Search.binnarySearch(arr,0);
+        Search.binnarySearch(arr,5);
         System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
+
+        t1 = System.nanoTime();
+        Search.linerSearch(arr,5);
+        System.out.println("Линейный поиск числа занял " + (System.nanoTime() - t1));
     }
     public static void testSorted(){
         int[] arr = new int[50];
@@ -82,7 +86,7 @@ public class Main {
         Random rand = new Random();
         for (int i = 0; i < bound; i++) {
 
-            str.append((char) rand.nextInt(1200));
+            str.append((char) rand.nextInt(7));
         }
         return new String(str);
     }
