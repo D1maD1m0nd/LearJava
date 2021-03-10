@@ -53,6 +53,8 @@ public class Main {
         t1 = System.nanoTime();
         Search.binnarySearch(arr,32132);
         System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
+
+
     }
     public static void testSorted(){
         int[] arr = new int[50];
