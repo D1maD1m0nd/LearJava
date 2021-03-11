@@ -50,12 +50,14 @@ public class Main {
 
 
         t1 = System.nanoTime();
+        Search.binnarySearch(arr,32132);
+        System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
+
+        t1 = System.nanoTime();
         Arrays.binarySearch(arr,32132);
         System.out.println("Бинарный поиск встроенным методом числа занял " + (System.nanoTime() - t1));
 
-        t1 = System.nanoTime();
-        Search.binnarySearch(arr,32132);
-        System.out.println("Бинарный поиск числа занял " + (System.nanoTime() - t1));
+
 
 
 

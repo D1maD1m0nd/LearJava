@@ -25,12 +25,13 @@ public class Search {
 
         while (right >= left){
             int middle = (left + right)/2;
-            if(arr[middle] == key){
+            int midVal = arr[middle];
+            if(midVal == key){
                 //System.out.println("Бинарный поиск найденный элемент " + arr[middle]);
                 return middle;
-            }else if(arr[middle] < key){
+            }else if(midVal < key){
                 left = middle + 1;
-            }else if(arr[middle] > key){
+            }else if(midVal > key){
                 right = middle - 1;
             }
 
