@@ -26,7 +26,7 @@ public class MyLinkedList<T> {
 
     }
 
-    public void displayLast(){
+    public void display(boolean reverse){
         Link<T> current = last;
         while (current.getPrev() != null){
             System.out.println(current.getValue());
