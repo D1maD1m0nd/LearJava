@@ -54,8 +54,8 @@ public class Main {
         System.out.println(list.find("Artom"));
         System.out.println(list.find("Vasek"));
 
+
         list.display(true);
-        list.display();
 
     }
     public static void fill(Integer[] arr){

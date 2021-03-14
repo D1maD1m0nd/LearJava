@@ -26,13 +26,7 @@ public class MyLinkedList<T> {
 
     }
 
-    public void display(boolean reverse){
-        Link<T> current = last;
-        while (current.getPrev() != null){
-            System.out.println(current.getValue());
-            current = current.getPrev();
-        }
-    }
+
 
     public Link<T> delete(){
         Link<T> temp = first;
@@ -41,12 +35,21 @@ public class MyLinkedList<T> {
         return temp;
     }
 
-    public void display(){
-        Link<T> current = first;
-        while (current != null){
-            System.out.println(current.getValue());
-            current = current.getNext();
+    public void display(boolean reverse){
+        if(reverse){
+            Link<T> current = last;
+            while (current.getPrev() != null){
+                System.out.println(current.getValue());
+                current = current.getPrev();
+            }
+        }else{
+            Link<T> current = first;
+            while (current != null){
+                System.out.println(current.getValue());
+                current = current.getNext();
+            }
         }
+
     }
     public T find(T searchNode){
         Link<T> findNode = new Link<>(searchNode);
