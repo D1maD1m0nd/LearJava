@@ -4,15 +4,16 @@ import geeks.Algorithms.Lesson3.HW.Link;
 
 public class MyLinkedList<T> {
     private Link<T> first;
-    private Link<T> last;
+    private final Link<T> last;
     private Link<T> l = new Link<>();
+
     public MyLinkedList(){
         first = null;
         this.last = l;
     }
 
     public boolean isEmpty(){
-        return first == null;
+        return first == null || last.getPrev() == null;
     }
 
     public void  insert(T link){
@@ -27,8 +28,7 @@ public class MyLinkedList<T> {
 
     public void displayLast(){
         Link<T> current = last;
-
-        while (current != null){
+        while (current.getPrev() != null){
             System.out.println(current.getValue());
             current = current.getPrev();
         }
@@ -37,6 +37,7 @@ public class MyLinkedList<T> {
     public Link<T> delete(){
         Link<T> temp = first;
         first = first.getNext();
+
         return temp;
     }
 
@@ -50,11 +51,18 @@ public class MyLinkedList<T> {
     public T find(T searchNode){
         Link<T> findNode = new Link<>(searchNode);
         Link<T> current = first;
-        while (current != null){
+        Link<T> currentL = last;
+        while (current != null && currentL.getPrev() != null){
             if(current.getValue().equals(findNode.getValue())){
+                System.out.println("Next find");
+                return findNode.getValue();
+            }
+            if (currentL.getValue().equals(findNode.getValue())){
+                System.out.println("Prev find");
                 return findNode.getValue();
             }
             current = current.getNext();
+            currentL = currentL.getPrev();
         }
         return null;
     }

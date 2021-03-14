@@ -45,8 +45,18 @@ public class Main {
         list.insert("Artom");
         list.insert("Rim");
         list.insert("Vasya");
-        list.display();
+        list.insert("Tema");
+        list.insert("Max");
+        list.insert("Vasek");
+
+        System.out.println(list.find("Max"));
+        System.out.println(list.find("Rim"));
+        System.out.println(list.find("Artom"));
+        System.out.println(list.find("Vasek"));
+
         list.displayLast();
+        list.display();
+
     }
     public static void fill(Integer[] arr){
         Random rand = new Random();
