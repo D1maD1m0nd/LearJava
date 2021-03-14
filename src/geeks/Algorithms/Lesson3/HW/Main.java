@@ -38,6 +38,15 @@ public class Main {
         list1.get(2);
         System.out.println("Оценка времени получения элемента в ArraysList " + (System.nanoTime() - t1));
         System.out.println("Получение элемента списка под #2 " + list1.get(2));
+
+        //Реализуйте простой односвязный список и его базовые методы.
+        MyLinkedList<String> list = new MyLinkedList<>();
+
+        list.insert("Artom");
+        list.insert("Rim");
+        list.insert("Vasya");
+        list.display();
+        list.displayLast();
     }
     public static void fill(Integer[] arr){
         Random rand = new Random();
