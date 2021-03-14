@@ -11,12 +11,12 @@ public class Main {
         createAndConvertArrayToList();
     }
 
-     /*
-    Задание 3.1
-    На основе массива из домашнего задания 2.1 реализуйте простой список и коллекцию.
-    Оцените время выполнения преобразования.
-     */
-    public static void createAndConvertArrayToList(){
+    /*
+   Задание 3.1
+   На основе массива из домашнего задания 2.1 реализуйте простой список и коллекцию.
+   Оцените время выполнения преобразования.
+    */
+    public static void createAndConvertArrayToList() {
         Integer[] arr = new Integer[20];
         fill(arr);
         List<Integer> list1 = new ArrayList<>(Arrays.asList(arr));
@@ -58,10 +58,11 @@ public class Main {
         list.display(true);
 
     }
-    public static void fill(Integer[] arr){
+
+    public static void fill(Integer[] arr) {
         Random rand = new Random();
         for (int ai = 0; ai < arr.length; ai++) {
-            arr[ai]  =  rand.nextInt(10);
+            arr[ai] = rand.nextInt(10);
         }
     }
 

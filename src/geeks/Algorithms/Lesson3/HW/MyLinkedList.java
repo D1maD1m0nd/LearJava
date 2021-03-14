@@ -1,22 +1,20 @@
 package geeks.Algorithms.Lesson3.HW;
 
-import geeks.Algorithms.Lesson3.HW.Link;
-
 public class MyLinkedList<T> {
-    private Link<T> first;
     private final Link<T> last;
+    private Link<T> first;
     private Link<T> l = new Link<>();
 
-    public MyLinkedList(){
+    public MyLinkedList() {
         first = null;
         this.last = l;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return first == null || last.getPrev() == null;
     }
 
-    public void  insert(T link){
+    public void insert(T link) {
         Link<T> prevLink = l;
         l.setLink(link);
         l.setNext(first);
@@ -26,41 +24,40 @@ public class MyLinkedList<T> {
 
     }
 
-
-
-    public Link<T> delete(){
+    public Link<T> delete() {
         Link<T> temp = first;
         first = first.getNext();
 
         return temp;
     }
 
-    public void display(boolean reverse){
-        if(reverse){
+    public void display(boolean reverse) {
+        if (reverse) {
             Link<T> current = last;
-            while (current.getPrev() != null){
+            while (current.getPrev() != null) {
                 System.out.println(current.getValue());
                 current = current.getPrev();
             }
-        }else{
+        } else {
             Link<T> current = first;
-            while (current != null){
+            while (current != null) {
                 System.out.println(current.getValue());
                 current = current.getNext();
             }
         }
 
     }
-    public T find(T searchNode){
+
+    public T find(T searchNode) {
         Link<T> findNode = new Link<>(searchNode);
         Link<T> current = first;
         Link<T> currentL = last;
-        while (current != null && currentL.getPrev() != null){
-            if(current.getValue().equals(findNode.getValue())){
+        while (current != null && currentL.getPrev() != null) {
+            if (current.getValue().equals(findNode.getValue())) {
                 System.out.println("Next find");
                 return findNode.getValue();
             }
-            if (currentL.getValue().equals(findNode.getValue())){
+            if (currentL.getValue().equals(findNode.getValue())) {
                 System.out.println("Prev find");
                 return findNode.getValue();
             }
