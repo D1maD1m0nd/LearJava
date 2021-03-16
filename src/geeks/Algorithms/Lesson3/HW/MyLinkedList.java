@@ -31,6 +31,7 @@ public class MyLinkedList<T> {
         return temp;
     }
 
+
     public void display(boolean reverse) {
         if (reverse) {
             Link<T> current = last;

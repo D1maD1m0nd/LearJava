@@ -1,9 +1,6 @@
 package geeks.Algorithms.Lesson3.HW;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
 
@@ -40,6 +37,17 @@ public class Main {
         System.out.println("Получение элемента списка под #2 " + list1.get(2));
 
         //Реализуйте простой односвязный список и его базовые методы.
+        MyLinkedListLine<String> myList = new MyLinkedListLine<>();
+        myList.insert("1232321");
+        myList.insert("dsa");
+        myList.insert("dsadsadas");
+        myList.insert("dasdasdasdasdasd");
+        myList.insert("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+        myList.display();
+
+        //На основе списка из задания 3.1 реализуйте простой двусторонний список и его базовые методы.
+        //Реализуйте список заполненный объектами из вашего класса из задания 1.3
         MyLinkedList<String> list = new MyLinkedList<>();
 
         list.insert("Artom");
@@ -57,6 +65,17 @@ public class Main {
 
         list.display(true);
 
+        //Реализуйте итератор на основе связанных списков из задания 3.4 и выполните базовые операции итератора.
+        ArrayList<String> a = new ArrayList<>();
+        a.add("1232");
+        a.add("dasdas");
+
+
+        Iterator<String> iter = a.iterator();
+        while(iter.hasNext()){
+
+            System.out.println(iter.next());
+        }
     }
 
     public static void fill(Integer[] arr) {
