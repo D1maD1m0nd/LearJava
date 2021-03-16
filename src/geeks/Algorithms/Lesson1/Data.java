@@ -7,7 +7,7 @@ public class Data {
     private int data;
     private static int data1 = 555;
     public static int data3 = 5555;
-    Data(int data){
+    public Data(int data){
         this.data = data;
     }
     public void printData(){

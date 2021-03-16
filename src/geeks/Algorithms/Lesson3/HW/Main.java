@@ -1,5 +1,7 @@
 package geeks.Algorithms.Lesson3.HW;
 
+import geeks.Algorithms.Lesson1.Data;
+
 import java.util.*;
 
 public class Main {
@@ -37,45 +39,36 @@ public class Main {
         System.out.println("Получение элемента списка под #2 " + list1.get(2));
 
         //Реализуйте простой односвязный список и его базовые методы.
-        MyLinkedListLine<String> myList = new MyLinkedListLine<>();
+        MyLinkedListLine<Data> myList = new MyLinkedListLine<>();
 
         t1 = System.nanoTime();
-        myList.insert("1232321");
-        myList.insert("dsa");
-        myList.insert("dsadsadas");
-        myList.insert("dasdasdasdasdasd");
-        myList.insert("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        myList.insert("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        myList.insert(new Data(1));
+        myList.insert(new Data(2));
+        myList.insert(new Data(3));
+        myList.insert(new Data(5));
         System.out.println("Добавление элементов в одно список 6 элементов время  " + (System.nanoTime() - t1));
 
         t1 = System.nanoTime();
-        myList.find("dsa");
+        myList.find(new Data(5));
         System.out.println("Поиск односвяз время  " + (System.nanoTime() - t1));
         myList.display();
 
         //На основе списка из задания 3.1 реализуйте простой двусторонний список и его базовые методы.
         //Реализуйте список заполненный объектами из вашего класса из задания 1.3
 
-        MyLinkedList<String> list = new MyLinkedList<>();
+        MyLinkedList<Data> list = new MyLinkedList<>();
         t1 = System.nanoTime();
-        list.insert("Artom");
-        list.insert("Rim");
-        list.insert("Vasya");
-        list.insert("Tema");
-        list.insert("Max");
-        list.insert("Vasek");
+        list.insert(new Data(2));
+        list.insert(new Data(3));
+        list.insert(new Data(4));
+        list.insert(new Data(5));
+
         System.out.println("Добавление элементов в двусвязный список 6 элементов время  " + (System.nanoTime() - t1));
 
 
         t1 = System.nanoTime();
-        list.find("Max");
+        list.find(new Data(5));
         System.out.println("поиск элементов в двусвязный список   время  " + (System.nanoTime() - t1));
-
-        System.out.println(list.find("Max"));
-        System.out.println(list.find("Rim"));
-        System.out.println(list.find("Artom"));
-        System.out.println(list.find("Vasek"));
-
 
         list.display(true);
 
