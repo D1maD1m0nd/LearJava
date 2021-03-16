@@ -79,6 +79,7 @@ public class Main {
 
 
         Iterator<String> iter = a.iterator();
+
         while(iter.hasNext()){
 
             System.out.println(iter.next());
@@ -91,5 +92,6 @@ public class Main {
             arr[ai] = rand.nextInt(10);
         }
     }
+
 
 }
