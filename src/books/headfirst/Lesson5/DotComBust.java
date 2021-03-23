@@ -3,16 +3,19 @@ package books.headfirst.Lesson5;
 import java.util.ArrayList;
 
 public class DotComBust {
-    private GameHelper helper = new GameHelper();
-    private ArrayList<DotCom> dotComsList = new ArrayList<>();
+    private final GameHelper helper = new GameHelper();
+    private final ArrayList<DotCom> dotComsList = new ArrayList<>();
     private int numOfGuesses = 0;
     
     private void setUpGame(){
         DotCom one = new DotCom();
         one.setName("PornHub.com");
+        dotComsList.add(one);
         DotCom two = new DotCom();
+        dotComsList.add(two);
         two.setName("vk.com");
         DotCom three = new DotCom();
+        dotComsList.add(three);
         three.setName("Lol.com");
 
         System.out.println("Ваша цель потопить три корабля");

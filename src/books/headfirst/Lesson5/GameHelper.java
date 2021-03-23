@@ -42,7 +42,6 @@ public class GameHelper {
 
         comCount++;
         int incr = 1;
-
         if((comCount % 2) == 1){
             incr = gridLength;
         }
@@ -54,10 +53,15 @@ public class GameHelper {
                 if(grid[location] == 0){
                     coords[x++] = location;
                     location += incr;
-                    if((location >= gridSise) || (x > 0 && (location % gridLength == 0))){
+                    if(location >= gridSise){
+                        success = false;
+                    }
+
+                    if(x > 0 && (location % gridLength == 0)){
                         success = false;
                     }
                 }else {
+                    System.out.println("Используется " + location);
                     success = false;
                 }
             }
