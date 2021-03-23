@@ -32,8 +32,34 @@ public class DotComBust {
     }
 
     private void finishGame() {
+        System.out.println("КОНЕЦ ИГРЫ ВСЕ САЙТЫ ПОТОПЛЕНЫ");
+        if(numOfGuesses <= 18){
+            System.out.println("Количество попыток " + numOfGuesses);
+            System.out.println("Положительный результат");
+        }else{
+            System.out.println("Отрицательный результат");
+        }
     }
 
     private void checkUserGuess(String usetGuess) {
+        numOfGuesses++;
+        String result = "Мимо";
+
+        for (DotCom dotComToTest : dotComsList){
+            result = dotComToTest.checkYourself(usetGuess);
+            if(result.equals("Попал"))
+                break;
+            if(result.equals("Потопил")){
+                dotComsList.remove(dotComToTest);
+                break;
+            }
+        }
+        System.out.println(result);
+    }
+
+    public static void main(String[] args) {
+        DotComBust game = new DotComBust();
+        game.setUpGame();
+        game.startPlaying();
     }
 }
