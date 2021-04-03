@@ -7,7 +7,7 @@ package Achitecture.Lesson4;public class App {
          ControlNumber c2 = new ControlNumber(tableNumber);
 
         for (int i = 0; i < 10000; i++) {
-            c1.addNumber(5);
+            c1.addNumber(51);
             c2.addNumber(5);
         }
         System.out.println(c1.sumNumbers());
