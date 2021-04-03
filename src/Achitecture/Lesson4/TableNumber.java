@@ -26,7 +26,7 @@ public class TableNumber implements Number{
 
         numbers.add(new Integer[number]);
         for (Integer[] item:numbers) {
-            Arrays.fill(item,rand.nextInt());
+            Arrays.fill(item,rand.nextInt(number));
         }
         return this;
     }
