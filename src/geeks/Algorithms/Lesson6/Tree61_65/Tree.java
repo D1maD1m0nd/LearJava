@@ -1,4 +1,4 @@
-package geeks.Algorithms.Lesson6.Tree;
+package geeks.Algorithms.Lesson6.Tree61_65;
 
 public class Tree {
     private Node root;

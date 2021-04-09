@@ -1,5 +1,7 @@
 package geeks.Algorithms.Lesson6.HeapTree;
 
+import geeks.Algorithms.Lesson2.HW.Sorted;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -7,14 +9,36 @@ public class App {
     public static void main(String[] args) {
         int[] arr;
         Random rand = new Random();
-        arr = new int[10];
+        arr = new int[400];
 
         for (int i = 0; i <arr.length ; i++) {
-            arr[i] = rand.nextInt(10);
+            arr[i] = rand.nextInt(12345678);
         }
-
-        System.out.println(Arrays.toString(arr));
+        long timeHeapSort;
+        long t = System.nanoTime();
         HeapSort.sort(arr);
-        System.out.println(Arrays.toString(arr));
+        timeHeapSort = System.nanoTime() - t;
+
+
+        long end ;
+        t = System.nanoTime();
+        Sorted.bubbleSort(arr);
+        end  = System.nanoTime();
+        System.out.println("Сортировка пузырьком заняла " + (end - t) + " а HeapSort "  + timeHeapSort);
+
+        t = System.nanoTime();
+        Sorted.includeSorted(arr);
+        end  = System.nanoTime();
+        System.out.println("Сортировка вставками заняла " + (end - t) + " а HeapSort "  + timeHeapSort);
+
+        t = System.nanoTime();
+        Sorted.choiceSorted(arr);
+        end  = System.nanoTime();
+        System.out.println("Сортировка выбором заняла " + (end - t) + " а HeapSort "  + timeHeapSort);
+
+        t = System.nanoTime();
+        Arrays.sort(arr);
+        end  = System.nanoTime();
+        System.out.println("Сортировка выбором заняла " + (end - t) + " а HeapSort "  + timeHeapSort);
     }
 }
