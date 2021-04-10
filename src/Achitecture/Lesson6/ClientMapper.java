@@ -44,6 +44,19 @@ public class ClientMapper {
         }
         return this;
     }
+    public void updateClientCapital(String id, double capital) {
+        String query = "UPDATE potentialclients SET Capital = ? WHERE Id = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setDouble(1, capital);
+            preparedStatement.setString(2, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<Client> findClientByContactName(String name){
         String query = String.format("SELECT * FROM potentialclients WHERE Contact = '%s'",name);

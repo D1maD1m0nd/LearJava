@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class App {
@@ -13,6 +14,7 @@ public class App {
     private static final String password = "Lbvf88801";
 
     public static void main(String[] args) {
+        Random rand = new Random();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, password);
@@ -29,13 +31,13 @@ public class App {
             //Поиск контактов в таблице
             List<Client> clients = new ArrayList<>(clientMapper.findClientByContactName("Дмитрий Авдошин"));
             for (Client client:clients) {
-                System.out.println(client.toString());
+                clientMapper.updateClientCapital(client.getId(), client.getCapital() + rand.nextInt(12345678));
+                System.out.println(client);
             }
 
             System.out.println("Количество строк в таблице до удаления" + clientMapper.getCountPotentialClient());
             clientMapper.deleteByName("JOJO")
-                        .deleteByName("IECOmapny")
-                        .deleteByName("ООО МояНочьСветла");
+                        .deleteByName("IECOmapny");
             System.out.println("Количество строк после удаления " + clientMapper.getCountPotentialClient());
 
 
