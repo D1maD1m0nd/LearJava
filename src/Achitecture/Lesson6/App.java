@@ -12,7 +12,7 @@ public class App {
     private static final String url = "jdbc:mysql://localhost:3306/clients?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String user = "root";
     private static final String password = "Lbvf88801";
-
+    public static UnitOfWork unitOfWork = new UnitOfWork();
     public static void main(String[] args) {
         Random rand = new Random();
         try {
@@ -28,14 +28,21 @@ public class App {
                         .insert(UUID.randomUUID(), "IECOmapny", "Дмитрий Авдошин", "+321321312", 3213213)
                         .insert(UUID.randomUUID(), "JOJO", "Сергей Беляков", "+891232312", 321321321);
 
+
             //Поиск контактов в таблице
-            List<Client> clients = new ArrayList<>(clientMapper.findClientByContactName("Дмитрий Авдошин"));
+            clientMapper.findClientByContactName("Дмитрий Авдошин");
+            //комитим изменения после созадния объектов
+            unitOfWork.commit();
+            //получаем отфильтрованный список правильных объектов без ошибок
+            List<Client> clients = new ArrayList<>(unitOfWork.getNewObjs());
             for (Client client:clients) {
+                //обновление капитала по Id
                 clientMapper.updateClientCapital(client.getId(), client.getCapital() + rand.nextInt(12345678));
                 System.out.println(client);
             }
 
             System.out.println("Количество строк в таблице до удаления" + clientMapper.getCountPotentialClient());
+            //удаление из таблицы
             clientMapper.deleteByName("JOJO")
                         .deleteByName("IECOmapny");
             System.out.println("Количество строк после удаления " + clientMapper.getCountPotentialClient());
