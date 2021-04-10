@@ -32,6 +32,12 @@ public class App {
                 System.out.println(client.toString());
             }
 
+            System.out.println("Количество строк в таблице до удаления" + clientMapper.getCountPotentialClient());
+            clientMapper.deleteByName("JOJO")
+                        .deleteByName("IECOmapny")
+                        .deleteByName("ООО МояНочьСветла");
+            System.out.println("Количество строк после удаления " + clientMapper.getCountPotentialClient());
+
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
