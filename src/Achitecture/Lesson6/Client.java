@@ -8,6 +8,17 @@ public class Client {
     private String phoneNumber;
     private double capital;
 
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", contact='" + contact + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", capital=" + capital +
+                '}';
+    }
+
     public String getId() {
         return id;
     }

@@ -16,7 +16,7 @@ public class ClientMapper {
 
     public ClientMapper deleteByName(String name){
         String query = "DELETE FROM potentialclients " +
-                String.format(" WHERE name = '%s';",name);
+                String.format(" WHERE AccountName = '%s';",name);
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.executeUpdate();
@@ -29,10 +29,7 @@ public class ClientMapper {
         if(id == null){
             id = UUID.randomUUID();
         }
-        String query = "INSERT potentialclients(Id, AccountName, Contact,PhoneNumber,Capital) VALUES(?, ?, ?,?, ?)";
-
-
-        System.out.println(query);
+        String query = "INSERT potentialclients(Id, AccountName, Contact,PhoneNumber,Capital) VALUES(?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,id.toString());
@@ -49,7 +46,8 @@ public class ClientMapper {
     }
 
     public List<Client> findClientByContactName(String name){
-        String query = String.format("select * from potentialclients WHERE Contact = %s",name);
+        String query = String.format("SELECT * FROM potentialclients WHERE Contact = '%s'",name);
+
         List<Client> clients = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
