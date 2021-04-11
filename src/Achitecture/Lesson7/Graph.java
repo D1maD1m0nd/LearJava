@@ -84,6 +84,7 @@ public class Graph {
     public void fullDisplayVerterx(int vertex1, int vertex2){
         System.out.println("Вершины " + vertexList[vertex1].label + "-" + vertexList[vertex2].label);
     }
+
     public void addVertex(char label){
         vertexList[size++] = new Vertex(label);
     }
