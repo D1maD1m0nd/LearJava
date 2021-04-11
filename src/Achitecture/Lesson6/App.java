@@ -3,12 +3,9 @@ package Achitecture.Lesson6;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
-public class App {
+public class App{
     private static final String url = "jdbc:mysql://localhost:3306/clients?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String user = "root";
     private static final String password = "Lbvf88801";
@@ -19,7 +16,8 @@ public class App {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, password);
             ClientMapper clientMapper = new ClientMapper(con);
-
+            System.out.println("1232".charAt(3));
+            System.out.println(Arrays.toString(new char[]{'1', '1'}));
             //запись в таблицу
             clientMapper.insert(UUID.randomUUID(),"ООО МояНочьСветла", "Дима Пастушков", "+89322134444",30000.123213D)
                         .insert(UUID.randomUUID(), "ООО БеременнаяВ16","Сергей Беляков", "+88878674", 2_000_000.12321)

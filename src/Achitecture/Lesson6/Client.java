@@ -3,13 +3,12 @@ package Achitecture.Lesson6;
 
 import static Achitecture.Lesson6.App.unitOfWork;
 
-public class Client {
+public class Client{
     private String id;
     private String name;
     private String contact;
     private String phoneNumber;
     private double capital;
-
 
     public void markNew() {
 
