@@ -4,10 +4,11 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
+    public  static int[] arr = new int[400];
     public static void main(String[] args) {
 //        На основе программного кода из домашнего задания №1 реализуйте массив на основе существующих примитивных или ссылочных типов данных.
 //        Выполните обращение к массиву и базовые операции класса Arrays.
-        int[] arr = new int[400];
+
         int[] arrCopy;
         String[] arrStrCopy;
         long t1 = System.nanoTime();
